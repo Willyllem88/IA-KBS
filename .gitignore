@@ -1,0 +1,9 @@
+# Directories
+extra\
+
+# Latex temporary files
+*.log
+*.synctex.gz
+*.toc
+*.aux
+*.out
