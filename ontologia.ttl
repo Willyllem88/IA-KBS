@@ -1,67 +1,161 @@
-@prefix : <http://www.semanticweb.org/guill/ontologies/2024/10/untitled-ontology-3/> .
+@prefix : <http://www.semanticweb.org/guill/ontologies/2024/10/ontology/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://www.semanticweb.org/guill/ontologies/2024/10/untitled-ontology-3/> .
+@base <http://www.semanticweb.org/guill/ontologies/2024/10/ontology/> .
 
-<http://www.semanticweb.org/guill/ontologies/2024/10/untitled-ontology-3> rdf:type owl:Ontology .
+<http://www.semanticweb.org/guill/ontologies/2024/10/ontology> rdf:type owl:Ontology ;
+                                                                rdfs:comment "Esta ontologia es sobre la gestion de visitas a museos" .
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#boolean
+xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Dimensiones
+:Dimensiones rdf:type owl:DatatypeProperty ;
+             rdfs:domain [ rdf:type owl:Restriction ;
+                           owl:onProperty owl:topObjectProperty ;
+                           owl:someValuesFrom :ObraDeArte
+                         ] ;
+             rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Nacionalidad
+:Nacionalidad rdf:type owl:DatatypeProperty ;
+              rdfs:domain [ rdf:type owl:Restriction ;
+                            owl:onProperty owl:topObjectProperty ;
+                            owl:someValuesFrom :Artista
+                          ] ;
+              rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#añoCreacion
+:añoCreacion rdf:type owl:DatatypeProperty ;
+             rdfs:domain [ rdf:type owl:Restriction ;
+                           owl:onProperty owl:topObjectProperty ;
+                           owl:someValuesFrom :ObraDeArte
+                         ] ;
+             rdfs:range xsd:nonNegativeInteger .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#duración
+:duración rdf:type owl:DatatypeProperty ;
+          rdfs:domain [ rdf:type owl:Restriction ;
+                        owl:onProperty owl:topObjectProperty ;
+                        owl:someValuesFrom :Visita
+                      ] ;
+          rdfs:range xsd:nonNegativeInteger .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#esFamilia
+:esFamilia rdf:type owl:DatatypeProperty ;
+           rdfs:domain [ rdf:type owl:Restriction ;
+                         owl:onProperty owl:topObjectProperty ;
+                         owl:someValuesFrom :Grupo
+                       ] ;
+           rdfs:range xsd:boolean .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#nDias
+:nDias rdf:type owl:DatatypeProperty ;
+       rdfs:domain [ rdf:type owl:Restriction ;
+                     owl:onProperty owl:topObjectProperty ;
+                     owl:someValuesFrom :Visita
+                   ] ;
+       rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#nPersonas
+:nPersonas rdf:type owl:DatatypeProperty ;
+           rdfs:domain [ rdf:type owl:Restriction ;
+                         owl:onProperty owl:topObjectProperty ;
+                         owl:someValuesFrom :Grupo
+                       ] ;
+           rdfs:range xsd:positiveInteger .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#tipo
+:tipo rdf:type owl:DatatypeProperty ;
+      rdfs:domain [ rdf:type owl:Restriction ;
+                    owl:onProperty owl:topObjectProperty ;
+                    owl:someValuesFrom :Estilo
+                  ] ;
+      rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#época
+:época rdf:type owl:DatatypeProperty ;
+       rdfs:domain [ rdf:type owl:Restriction ;
+                     owl:onProperty owl:topObjectProperty ;
+                     owl:someValuesFrom :ObraDeArte
+                   ] ;
+       rdfs:range xsd:string .
+
 
 #################################################################
 #    Classes
 #################################################################
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/untitled-ontology-3#Artista
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Artista
 :Artista rdf:type owl:Class ;
          rdfs:comment "Clase que representa a una persona cuyo arte está en museos." .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/untitled-ontology-3#Estilo
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Estilo
 :Estilo rdf:type owl:Class ;
         rdfs:comment "Clase que representa un estilo/escuela/corriente/periodo pictórico." .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/untitled-ontology-3#Grupo
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Grupo
 :Grupo rdf:type owl:Class ;
        rdfs:subClassOf :Visita ;
        rdfs:comment "Será un conjunto de personas que vayan a visitar el museo. Puden ser tanto grupos de personas adultas, como famílias." .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/untitled-ontology-3#Museo
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Museo
 :Museo rdf:type owl:Class ;
        rdfs:comment "Clase que representa un museo." .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/untitled-ontology-3#ObraDeArte
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/ObraDeArte
 :ObraDeArte rdf:type owl:Class ;
             rdfs:comment "Clase que representa una obra de arte." .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/untitled-ontology-3#Persona
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Persona
 :Persona rdf:type owl:Class ;
          rdfs:subClassOf :Visita ;
          rdfs:comment "Es un tipo de visitante, este irá al museo sin acompañante." .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/untitled-ontology-3#Sala
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Sala
 :Sala rdf:type owl:Class ;
       rdfs:comment "Clase que representa una sala del museo." .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/untitled-ontology-3#SalaArtista
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/SalaArtista
 :SalaArtista rdf:type owl:Class ;
              rdfs:subClassOf :Sala ;
              rdfs:comment "Subclase que representa esas salas del muso cuyo interés es mostrar las obras de un pintor en concreto." .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/untitled-ontology-3#SalaTematica
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/SalaTematica
 :SalaTematica rdf:type owl:Class ;
               rdfs:subClassOf :Sala ;
               rdfs:comment "Representa una sala del muso cuyo interés es que todas sus obrás serán de la misma temática." .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/untitled-ontology-3#Visita
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Visita
 :Visita rdf:type owl:Class ;
         rdfs:comment "Representa la clase visita, sera qualquier entidad que vaya a visitar el museo." .
 
