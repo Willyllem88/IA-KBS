@@ -21,14 +21,21 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 #    Object Properties
 #################################################################
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#artista_de_estilo
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#preferencia_artista
+:preferencia_artista rdf:type owl:ObjectProperty ,
+                              owl:FunctionalProperty ;
+                     rdfs:domain :Visita ;
+                     rdfs:range :Estilo .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/artista_de_estilo
 :artista_de_estilo rdf:type owl:ObjectProperty ;
                    rdfs:domain :Artista ;
                    rdfs:range :Estilo ;
                    rdfs:comment "Un artista pertenece al estilo en el que ha trabajado y ha sido reconocido" .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#creada_por
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/creada_por
 :creada_por rdf:type owl:ObjectProperty ,
                      owl:FunctionalProperty ;
             rdfs:domain :ObraDeArte ;
@@ -36,7 +43,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
             rdfs:comment "Obra hecha por el artista" .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#es_un
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/es_un
 :es_un rdf:type owl:ObjectProperty ,
                 owl:FunctionalProperty ;
        rdfs:domain :Visita ;
@@ -45,7 +52,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
        rdfs:comment "Una visita puede ser grupal o individual" .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#es_una
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/es_una
 :es_una rdf:type owl:ObjectProperty ,
                  owl:FunctionalProperty ;
         rdfs:domain :Sala ;
@@ -54,21 +61,21 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
         rdfs:comment "Una sala es una SalaTemática o SalaArtista" .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#exhibe_obras_de
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/exhibe_obras_de
 :exhibe_obras_de rdf:type owl:ObjectProperty ;
                  rdfs:domain :SalaArtista ;
                  rdfs:range :Artista ;
                  rdfs:comment "Una SalaArtista está basada en las obras de un artista" .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#expuesta_en
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/expuesta_en
 :expuesta_en rdf:type owl:ObjectProperty ;
              rdfs:domain :ObraDeArte ;
              rdfs:range :Sala ;
              rdfs:comment "Se encuentra ubicado dentro de una sala" .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#obra_de_estilo
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/obra_de_estilo
 :obra_de_estilo rdf:type owl:ObjectProperty ,
                          owl:FunctionalProperty ;
                 rdfs:domain :ObraDeArte ;
@@ -76,7 +83,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
                 rdfs:comment "El estilo al que pertenece una obra" .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#parte_de
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/parte_de
 :parte_de rdf:type owl:ObjectProperty ,
                    owl:FunctionalProperty ;
           rdfs:domain :Sala ;
@@ -84,14 +91,14 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
           rdfs:comment "Una sala forma parte de un museo" .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#preferencia_de_estilo
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/preferencia_de_estilo
 :preferencia_de_estilo rdf:type owl:ObjectProperty ;
                        rdfs:domain :Visita ;
                        rdfs:range :Estilo ;
                        rdfs:comment "Los visitantes estan interesados por un estilo concreto" .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#sala_sobre_estilo
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/sala_sobre_estilo
 :sala_sobre_estilo rdf:type owl:ObjectProperty ,
                             owl:FunctionalProperty ;
                    rdfs:domain :SalaTematica ;
@@ -102,6 +109,31 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 #################################################################
 #    Data properties
 #################################################################
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#conocimiento
+:conocimiento rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Visita ;
+              rdfs:range xsd:nonNegativeInteger .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#tipoGrupo
+:tipoGrupo rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Visita ;
+           rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#épocaInterés
+:épocaInterés rdf:type owl:DatatypeProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain :Visita ;
+              rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#nHoras/Dia
+<http://www.semanticweb.org/guill/ontologies/2024/10/ontology#nHoras/Dia> rdf:type owl:DatatypeProperty ;
+                                                                          rdfs:domain :Visita ;
+                                                                          rdfs:range xsd:nonNegativeInteger .
+
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Dimensiones
 :Dimensiones rdf:type owl:DatatypeProperty ;
@@ -142,7 +174,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/nPersonas
 :nPersonas rdf:type owl:DatatypeProperty ;
            rdfs:domain :Grupo ;
-           rdfs:range xsd:positiveInteger .
+           rdfs:range xsd:string .
 
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/tipo
