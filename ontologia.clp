@@ -1,8 +1,8 @@
 ;;; ---------------------------------------------------------
 ;;; ontologia.clp
 ;;; Translated by owl2clips
-;;; Translated to CLIPS from ontology ontologia.owl
-;;; :Date 27/11/2024 13:08:16
+;;; Translated to CLIPS from ontology ontologia.ttl
+;;; :Date 28/11/2024 14:48:36
 
 (defclass Sala "Clase que representa una sala del museo."
     (is-a USER)
