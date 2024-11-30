@@ -161,7 +161,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/nPersonas
 :nPersonas rdf:type owl:DatatypeProperty ;
            rdfs:domain :Grupo ;
-           rdfs:range xsd:string .
+           rdfs:range xsd:positiveInteger .
 
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/tipo
@@ -251,7 +251,240 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 #    Individuals
 #################################################################
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Anunciación
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Amarillo-Rojo-Azul
+:Amarillo-Rojo-Azul rdf:type owl:NamedIndividual ,
+                             :ObraDeArte ;
+                    :creada_por :WassilyKandinsky ;
+                    :Dimensiones 25400 ;
+                    :añoCreacion 1925 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#ArteModerno
+:ArteModerno rdf:type owl:NamedIndividual ,
+                      :Estilo ;
+             :artista_de_estilo :ArteModerno .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#AutorretratoConOrejaVendada
+:AutorretratoConOrejaVendada rdf:type owl:NamedIndividual ,
+                                      :ObraDeArte ;
+                             :creada_por :VincentVanGogh ;
+                             :Dimensiones 2940 ;
+                             :añoCreacion 1889 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#CampoDeTrigoConCuervos
+:CampoDeTrigoConCuervos rdf:type owl:NamedIndividual ,
+                                 :ObraDeArte ;
+                        :creada_por :VincentVanGogh ;
+                        :añoCreacion 1890 ,
+                                     5201.5 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#CisnesReflejandoElefantes
+:CisnesReflejandoElefantes rdf:type owl:NamedIndividual ,
+                                    :ObraDeArte ;
+                           :creada_por :SalvadorDalí ;
+                           :añoCreacion 1937 ,
+                                        3927 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#ClaudeMonet
+:ClaudeMonet rdf:type owl:NamedIndividual ,
+                      :Artista ;
+             :artista_de_estilo :ArteModerno .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#ComposiciónVII
+:ComposiciónVII rdf:type owl:NamedIndividual ,
+                         :ObraDeArte ;
+                :creada_por :WassilyKandinsky ;
+                :Dimensiones 60000 ;
+                :añoCreacion 1913 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#ComposiciónVIII
+:ComposiciónVIII rdf:type owl:NamedIndividual ,
+                          :ObraDeArte ;
+                 :creada_por :WassilyKandinsky ;
+                 :añoCreacion 1923 ,
+                              28140 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#CristoDeSanJuanDeLaCruz
+:CristoDeSanJuanDeLaCruz rdf:type owl:NamedIndividual ,
+                                  :ObraDeArte ;
+                         :creada_por :SalvadorDalí ;
+                         :añoCreacion 1951 ,
+                                      23780 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#CuadradoConCírculosConcéntricos
+:CuadradoConCírculosConcéntricos rdf:type owl:NamedIndividual ,
+                                          :ObraDeArte ;
+                                 :creada_por :WassilyKandinsky ;
+                                 :Dimensiones 14400 ;
+                                 :añoCreacion 1913 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#ElEstanqueDeNenúfares
+:ElEstanqueDeNenúfares rdf:type owl:NamedIndividual ,
+                                :ObraDeArte ;
+                       :creada_por :ClaudeMonet ;
+                       :Dimensiones 8181 ;
+                       :añoCreacion 1899 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#ElGranMasturbador
+:ElGranMasturbador rdf:type owl:NamedIndividual ,
+                            :ObraDeArte ;
+                   :creada_por :SalvadorDalí ;
+                   :añoCreacion 16500 ,
+                                1929 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#ElGuitarristaViejo
+:ElGuitarristaViejo rdf:type owl:NamedIndividual ,
+                             :ObraDeArte ;
+                    :creada_por :PabloPicasso ;
+                    :Dimensiones 10151.54 ;
+                    :añoCreacion 1904 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Guernica
+:Guernica rdf:type owl:NamedIndividual ,
+                   :ObraDeArte ;
+          :creada_por :PabloPicasso ;
+          :Dimensiones 270824 ;
+          :añoCreacion 1937 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#ImpresiónSolNaciente
+:ImpresiónSolNaciente rdf:type owl:NamedIndividual ,
+                               :ObraDeArte ;
+                      :creada_por :ClaudeMonet ;
+                      :Dimensiones 3024 ;
+                      :añoCreacion 1872 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Improvisación28
+:Improvisación28 rdf:type owl:NamedIndividual ,
+                          :ObraDeArte ;
+                 :creada_por :WassilyKandinsky ;
+                 :añoCreacion 17982 ,
+                              1912 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#LaCatedralDeRuanEfectoDeSol
+:LaCatedralDeRuanEfectoDeSol rdf:type owl:NamedIndividual ,
+                                      :ObraDeArte ;
+                             :creada_por :ClaudeMonet ;
+                             :añoCreacion 1893 ,
+                                          6500 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#LaHabitaciónEnArlés
+:LaHabitaciónEnArlés rdf:type owl:NamedIndividual ,
+                              :ObraDeArte ;
+                     :creada_por :VincentVanGogh ;
+                     :añoCreacion 1888 ,
+                                  6480 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#LaMujerQueLlora
+:LaMujerQueLlora rdf:type owl:NamedIndividual ,
+                          :ObraDeArte ;
+                 :creada_por :PabloPicasso ;
+                 :Dimensiones 2940 ;
+                 :añoCreacion 1937 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#LaNocheEstrellada
+:LaNocheEstrellada rdf:type owl:NamedIndividual ,
+                            :ObraDeArte ;
+                   :creada_por :VincentVanGogh ;
+                   :Dimensiones 6787.77 ;
+                   :añoCreacion 1889 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#LaPersistenciaDeLaMemoria
+:LaPersistenciaDeLaMemoria rdf:type owl:NamedIndividual ,
+                                    :ObraDeArte ;
+                           :creada_por :SalvadorDalí ;
+                           :Dimensiones 792 ;
+                           :añoCreacion 1931 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#LesDemoisellesDAvignon
+:LesDemoisellesDAvignon rdf:type owl:NamedIndividual ,
+                                 :ObraDeArte ;
+                        :creada_por :PabloPicasso ;
+                        :Dimensiones 56999.43 ;
+                        :añoCreacion 1907 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#LosGirasoles
+:LosGirasoles rdf:type owl:NamedIndividual ,
+                       :ObraDeArte ;
+              :creada_por :VincentVanGogh .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#MujerConSombrilla
+:MujerConSombrilla rdf:type owl:NamedIndividual ,
+                            :ObraDeArte ;
+                   :creada_por :ClaudeMonet ;
+                   :añoCreacion 1875 ,
+                                8100 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Nenúfares
+:Nenúfares rdf:type owl:NamedIndividual ,
+                    :ObraDeArte ;
+           :creada_por :ClaudeMonet ;
+           :añoCreacion 1926 ,
+                        255200 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#PabloPicasso
+:PabloPicasso rdf:type owl:NamedIndividual ,
+                       :Artista ;
+              :artista_de_estilo :ArteModerno .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#RetratoDeDoraMaar
+:RetratoDeDoraMaar rdf:type owl:NamedIndividual ;
+                   :creada_por :PabloPicasso ;
+                   :Dimensiones 5980 ;
+                   :añoCreacion 1937 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#SalvadorDalí
+:SalvadorDalí rdf:type owl:NamedIndividual ,
+                       :Artista ;
+              :artista_de_estilo :ArteModerno .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#SueñoCausadoPorElVueloDeUnaAbeja
+:SueñoCausadoPorElVueloDeUnaAbeja rdf:type owl:NamedIndividual ,
+                                           :ObraDeArte ;
+                                  :creada_por :SalvadorDalí ;
+                                  :Dimensiones 2091 ;
+                                  :añoCreacion 1944 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#VincentVanGogh
+:VincentVanGogh rdf:type owl:NamedIndividual ,
+                         :Artista ;
+                :artista_de_estilo :ArteModerno .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#WassilyKandinsky
+:WassilyKandinsky rdf:type owl:NamedIndividual ,
+                           :Artista ;
+                  :artista_de_estilo :ArteModerno .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Anunciación
 :Anunciación rdf:type owl:NamedIndividual ,
                       :ObraDeArte ;
              :creada_por :LeonardoDaVinci ;
@@ -259,7 +492,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
              :añoCreacion 1472 .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#David
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/David
 :David rdf:type owl:NamedIndividual ,
                 :ObraDeArte ;
        :creada_por :MiguelAngel ;
@@ -267,7 +500,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
        :añoCreacion 1501 .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#DavidDonatello
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/DavidDonatello
 :DavidDonatello rdf:type owl:NamedIndividual ,
                          :ObraDeArte ;
                 :creada_por :Donatello ;
@@ -275,13 +508,13 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
                 :añoCreacion 1440 .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Donatello
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Donatello
 :Donatello rdf:type owl:NamedIndividual ,
                     :Artista ;
            :artista_de_estilo :Renacimiento .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#ElFestínDeHerodes
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/ElFestínDeHerodes
 :ElFestínDeHerodes rdf:type owl:NamedIndividual ,
                             :ObraDeArte ;
                    :creada_por :Donatello ;
@@ -289,7 +522,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
                    :añoCreacion 1425 .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#ElHombreDeVitruvio
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/ElHombreDeVitruvio
 :ElHombreDeVitruvio rdf:type owl:NamedIndividual ,
                              :ObraDeArte ;
                     :creada_por :LeonardoDaVinci ;
@@ -297,7 +530,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
                     :añoCreacion 1490 .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#ElJuicioFinal
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/ElJuicioFinal
 :ElJuicioFinal rdf:type owl:NamedIndividual ,
                         :ObraDeArte ;
                :creada_por :MiguelAngel ;
@@ -305,7 +538,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
                :añoCreacion 1536 .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#ElNacimientoDeVenus
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/ElNacimientoDeVenus
 :ElNacimientoDeVenus rdf:type owl:NamedIndividual ,
                               :ObraDeArte ;
                      :creada_por :SandroBotticelli ;
@@ -313,7 +546,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
                      :añoCreacion 1484 .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#ElRetabloDeSantaMaríaDelPopolo
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/ElRetabloDeSantaMaríaDelPopolo
 :ElRetabloDeSantaMaríaDelPopolo rdf:type owl:NamedIndividual ,
                                          :ObraDeArte ;
                                 :creada_por :Rafael ;
@@ -321,7 +554,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
                                 :añoCreacion 1516 .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Habacuc
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Habacuc
 :Habacuc rdf:type owl:NamedIndividual ,
                   :ObraDeArte ;
          :creada_por :Donatello ;
@@ -329,7 +562,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
          :añoCreacion 1423 .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#LaAdoraciónDeLosMagos
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/LaAdoraciónDeLosMagos
 :LaAdoraciónDeLosMagos rdf:type owl:NamedIndividual ,
                                 :ObraDeArte ;
                        :creada_por :SandroBotticelli ;
@@ -337,7 +570,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
                        :añoCreacion 1476 .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#LaCalumniaDeApeles
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/LaCalumniaDeApeles
 :LaCalumniaDeApeles rdf:type owl:NamedIndividual ,
                              :ObraDeArte ;
                     :creada_por :SandroBotticelli ;
@@ -345,7 +578,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
                     :añoCreacion 1495 .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#LaCreaciónDeAdán
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/LaCreaciónDeAdán
 :LaCreaciónDeAdán rdf:type owl:NamedIndividual ,
                            :ObraDeArte ;
                   :creada_por :MiguelAngel ;
@@ -353,7 +586,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
                   :añoCreacion 1512 .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#LaDamaDelArmiño
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/LaDamaDelArmiño
 :LaDamaDelArmiño rdf:type owl:NamedIndividual ,
                           :ObraDeArte ;
                  :creada_por :LeonardoDaVinci ;
@@ -361,7 +594,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
                  :añoCreacion 1489 .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#LaEscuelaDeAtenas
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/LaEscuelaDeAtenas
 :LaEscuelaDeAtenas rdf:type owl:NamedIndividual ,
                             :ObraDeArte ;
                    :creada_por :Rafael ;
@@ -369,7 +602,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
                    :añoCreacion 1510 .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#LaMadonnaDelJilguero
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/LaMadonnaDelJilguero
 :LaMadonnaDelJilguero rdf:type owl:NamedIndividual ,
                                :ObraDeArte ;
                       :creada_por :Rafael ;
@@ -377,94 +610,12 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
                       :añoCreacion 1505 .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#LaMadonnaSixtina
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/LaMadonnaSixtina
 :LaMadonnaSixtina rdf:type owl:NamedIndividual ,
                            :ObraDeArte ;
                   :creada_por :Rafael ;
                   :Dimensiones 51940 ;
                   :añoCreacion 1512 .
-
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#LaPiedad
-:LaPiedad rdf:type owl:NamedIndividual ,
-                   :ObraDeArte ;
-          :creada_por :MiguelAngel ;
-          :Dimensiones 33930 ;
-          :añoCreacion 1498 .
-
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#LaPrimavera
-:LaPrimavera rdf:type owl:NamedIndividual ,
-                      :ObraDeArte ;
-             :creada_por :SandroBotticelli ;
-             :Dimensiones 63742 ;
-             :añoCreacion 1482 .
-
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#LaTransfiguración
-:LaTransfiguración rdf:type owl:NamedIndividual ,
-                            :ObraDeArte ;
-                   :creada_por :Rafael ;
-                   :Dimensiones 114390 ;
-                   :añoCreacion 1516 .
-
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#LaUltimaCena
-:LaUltimaCena rdf:type owl:NamedIndividual ,
-                       :ObraDeArte ;
-              :creada_por :LeonardoDaVinci ;
-              :Dimensiones 404800 ;
-              :añoCreacion 1495 .
-
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#LaVirgenDelLibro
-:LaVirgenDelLibro rdf:type owl:NamedIndividual ,
-                           :ObraDeArte ;
-                  :creada_por :SandroBotticelli ;
-                  :Dimensiones 2262 ;
-                  :añoCreacion 1480 .
-
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#MiguelAngel
-:MiguelAngel rdf:type owl:NamedIndividual ,
-                      :Artista ;
-             :artista_de_estilo :Renacimiento .
-
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Moisés
-:Moisés rdf:type owl:NamedIndividual ,
-                 :ObraDeArte ;
-        :creada_por :MiguelAngel ;
-        :Dimensiones 235 ;
-        :añoCreacion 1513 .
-
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#PenitenteMagdalena
-:PenitenteMagdalena rdf:type owl:NamedIndividual ,
-                             :ObraDeArte ;
-                    :creada_por :Donatello ;
-                    :Dimensiones 188 ;
-                    :añoCreacion 1455 .
-
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Rafael
-:Rafael rdf:type owl:NamedIndividual ,
-                 :Artista ;
-        :artista_de_estilo :Renacimiento .
-
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#SanJorge
-:SanJorge rdf:type owl:NamedIndividual ,
-                   :ObraDeArte ;
-          :creada_por :Donatello ;
-          :Dimensiones 209 ;
-          :añoCreacion 1416 .
-
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#SandroBotticelli
-:SandroBotticelli rdf:type owl:NamedIndividual ,
-                           :Artista ;
-                  :artista_de_estilo :Renacimiento .
 
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/LaMonaLisa
@@ -475,16 +626,98 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
             :añoCreacion 1503 .
 
 
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/LaPiedad
+:LaPiedad rdf:type owl:NamedIndividual ,
+                   :ObraDeArte ;
+          :creada_por :MiguelAngel ;
+          :Dimensiones 33930 ;
+          :añoCreacion 1498 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/LaPrimavera
+:LaPrimavera rdf:type owl:NamedIndividual ,
+                      :ObraDeArte ;
+             :creada_por :SandroBotticelli ;
+             :Dimensiones 63742 ;
+             :añoCreacion 1482 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/LaTransfiguración
+:LaTransfiguración rdf:type owl:NamedIndividual ,
+                            :ObraDeArte ;
+                   :creada_por :Rafael ;
+                   :Dimensiones 114390 ;
+                   :añoCreacion 1516 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/LaUltimaCena
+:LaUltimaCena rdf:type owl:NamedIndividual ,
+                       :ObraDeArte ;
+              :creada_por :LeonardoDaVinci ;
+              :Dimensiones 404800 ;
+              :añoCreacion 1495 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/LaVirgenDelLibro
+:LaVirgenDelLibro rdf:type owl:NamedIndividual ,
+                           :ObraDeArte ;
+                  :creada_por :SandroBotticelli ;
+                  :Dimensiones 2262 ;
+                  :añoCreacion 1480 .
+
+
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/LeonardoDaVinci
 :LeonardoDaVinci rdf:type owl:NamedIndividual ,
                           :Artista ;
                  :artista_de_estilo :Renacimiento .
 
 
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/MiguelAngel
+:MiguelAngel rdf:type owl:NamedIndividual ,
+                      :Artista ;
+             :artista_de_estilo :Renacimiento .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Moisés
+:Moisés rdf:type owl:NamedIndividual ,
+                 :ObraDeArte ;
+        :creada_por :MiguelAngel ;
+        :Dimensiones 235 ;
+        :añoCreacion 1513 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/PenitenteMagdalena
+:PenitenteMagdalena rdf:type owl:NamedIndividual ,
+                             :ObraDeArte ;
+                    :creada_por :Donatello ;
+                    :Dimensiones 188 ;
+                    :añoCreacion 1455 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Rafael
+:Rafael rdf:type owl:NamedIndividual ,
+                 :Artista ;
+        :artista_de_estilo :Renacimiento .
+
+
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Renacimiento
 :Renacimiento rdf:type owl:NamedIndividual ,
                        :Estilo ;
               :artista_de_estilo :Renacimiento .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/SanJorge
+:SanJorge rdf:type owl:NamedIndividual ,
+                   :ObraDeArte ;
+          :creada_por :Donatello ;
+          :Dimensiones 209 ;
+          :añoCreacion 1416 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/SandroBotticelli
+:SandroBotticelli rdf:type owl:NamedIndividual ,
+                           :Artista ;
+                  :artista_de_estilo :Renacimiento .
 
 
 ###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
