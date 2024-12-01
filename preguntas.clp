@@ -190,10 +190,13 @@
     ;; Tipo de grupo, subclase Individual o Grupo y esFamilia
     
     (if (<= ?Personas 1) then
-        (make-instance visita2 of Persona)
+        (make-instance persona1 of Persona
+        		(es_un Visita))
     )
     (if (> ?Personas 1) then
-        (make-instance visita2 of Grupo (nPersonas ?Personas) (esFamilia ?esFamilia))
+        (make-instance grupo1 of Grupo 
+        		(es_un Visita)
+        		(nPersonas ?Personas) (esFamilia ?esFamilia))
     )
 
     
