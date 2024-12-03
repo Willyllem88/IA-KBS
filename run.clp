@@ -1,4 +1,4 @@
-(load "ontologia.clp")  
-;;; (load "reglas.clp")
-;;; (reset)  
-;;; (run)
+(load "ontologia.clp")
+(load "modulos.clp")
+(reset)  
+(run)
