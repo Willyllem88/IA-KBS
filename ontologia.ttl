@@ -119,42 +119,49 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Dimensiones
 :Dimensiones rdf:type owl:DatatypeProperty ;
+                      owl:FunctionalProperty ;
              rdfs:domain :ObraDeArte ;
              rdfs:range xsd:string .
 
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Nacionalidad
 :Nacionalidad rdf:type owl:DatatypeProperty ;
+                       owl:FunctionalProperty ;
               rdfs:domain :Artista ;
               rdfs:range xsd:string .
 
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/añoCreacion
 :añoCreacion rdf:type owl:DatatypeProperty ;
+                      owl:FunctionalProperty ;
              rdfs:domain :ObraDeArte ;
              rdfs:range xsd:nonNegativeInteger .
 
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/conocimiento
 :conocimiento rdf:type owl:DatatypeProperty ;
+                       owl:FunctionalProperty ;
               rdfs:domain :Visita ;
               rdfs:range xsd:nonNegativeInteger .
 
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/duración
 :duración rdf:type owl:DatatypeProperty ;
+                   owl:FunctionalProperty ;
           rdfs:domain :Visita ;
           rdfs:range xsd:nonNegativeInteger .
 
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/esFamilia
 :esFamilia rdf:type owl:DatatypeProperty ;
+                    owl:FunctionalProperty ;
            rdfs:domain :Grupo ;
            rdfs:range xsd:boolean .
 
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/nDias
 :nDias rdf:type owl:DatatypeProperty ;
+                owl:FunctionalProperty ;
        rdfs:domain :Visita ;
        rdfs:range xsd:int .
 
@@ -168,18 +175,21 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/tipo
 :tipo rdf:type owl:DatatypeProperty ;
+               owl:FunctionalProperty ;
       rdfs:domain :Estilo ;
       rdfs:range xsd:string .
 
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/tipoGrupo
 :tipoGrupo rdf:type owl:DatatypeProperty ;
+                    owl:FunctionalProperty ;
            rdfs:domain :Visita ;
            rdfs:range xsd:string .
 
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/época
 :época rdf:type owl:DatatypeProperty ;
+                owl:FunctionalProperty ;
        rdfs:domain :ObraDeArte ;
        rdfs:range xsd:string .
 
@@ -253,10 +263,65 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 #    Individuals
 #################################################################
 
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Sala1
+:Sala1 rdf:type owl:NamedIndividual ,
+                :SalaTematica ;
+       :sala_sobre_estilo :Renacimiento .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Sala2
+:Sala2 rdf:type owl:NamedIndividual ,
+                :SalaTematica ;
+       :sala_sobre_estilo :Barroco .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Sala3
+:Sala3 rdf:type owl:NamedIndividual ,
+                :SalaTematica ;
+       :sala_sobre_estilo :ArteModerno .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Sala4
+:Sala4 rdf:type owl:NamedIndividual ,
+                :SalaArtista ;
+       :exhibe_obras_de :ClaudeMonet .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Sala5
+:Sala5 rdf:type owl:NamedIndividual ,
+                :SalaArtista ;
+       :exhibe_obras_de :WassilyKandinsky .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Sala6
+:Sala6 rdf:type owl:NamedIndividual ,
+                :SalaArtista ;
+       :exhibe_obras_de :ArtemisiaGentileschi .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Sala7
+:Sala7 rdf:type owl:NamedIndividual ,
+                :SalaTematica ;
+       :sala_sobre_estilo :Renacimiento .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Sala8
+:Sala8 rdf:type owl:NamedIndividual ,
+                :SalaTematica ;
+       :sala_sobre_estilo :Renacimiento .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Sala9
+:Sala9 rdf:type owl:NamedIndividual ,
+                :SalaArtista ;
+       :exhibe_obras_de :RembrandtVanRijn .
+
+
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Amarillo-Rojo-Azul
 :Amarillo-Rojo-Azul rdf:type owl:NamedIndividual ,
                              :ObraDeArte ;
                     :creada_por :WassilyKandinsky ;
+                    :expuesta_en :Sala5 ;
                     :obra_de_estilo :ArteModerno ;
                     :Dimensiones 25400 ;
                     :añoCreacion 1925 .
@@ -266,6 +331,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :Anunciación rdf:type owl:NamedIndividual ,
                       :ObraDeArte ;
              :creada_por :LeonardoDaVinci ;
+             :expuesta_en :Sala1 ;
              :obra_de_estilo :Renacimiento ;
              :Dimensiones 21266 ;
              :añoCreacion 1472 .
@@ -287,6 +353,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :AutorretratoComoAlegoríaDeLaPintura rdf:type owl:NamedIndividual ,
                                               :ObraDeArte ;
                                      :creada_por :ArtemisiaGentileschi ;
+                                     :expuesta_en :Sala6 ;
                                      :obra_de_estilo :Barroco ;
                                      :Dimensiones 7415 ;
                                      :añoCreacion 1639 .
@@ -296,6 +363,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :AutorretratoConDosCírculos rdf:type owl:NamedIndividual ,
                                      :ObraDeArte ;
                             :creada_por :RembrandtVanRijn ;
+                            :expuesta_en :Sala9 ;
                             :obra_de_estilo :Barroco ;
                             :Dimensiones 10763 ;
                             :añoCreacion 1669 .
@@ -305,6 +373,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :AutorretratoConOrejaVendada rdf:type owl:NamedIndividual ,
                                       :ObraDeArte ;
                              :creada_por :VincentVanGogh ;
+                             :expuesta_en :Sala3 ;
                              :obra_de_estilo :ArteModerno ;
                              :Dimensiones 2940 ;
                              :añoCreacion 1889 .
@@ -319,6 +388,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :CampoDeTrigoConCuervos rdf:type owl:NamedIndividual ,
                                  :ObraDeArte ;
                         :creada_por :VincentVanGogh ;
+                        :expuesta_en :Sala3 ;
                         :obra_de_estilo :ArteModerno ;
                         :Dimensiones 5201 ;
                         :añoCreacion 1890 .
@@ -334,6 +404,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :CisnesReflejandoElefantes rdf:type owl:NamedIndividual ,
                                     :ObraDeArte ;
                            :creada_por :SalvadorDalí ;
+                           :expuesta_en :Sala3 ;
                            :obra_de_estilo :ArteModerno ;
                            :Dimensiones 3927 ;
                            :añoCreacion 1937 .
@@ -349,6 +420,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :Cleopatra rdf:type owl:NamedIndividual ,
                     :ObraDeArte ;
            :creada_por :ArtemisiaGentileschi ;
+           :expuesta_en :Sala6 ;
            :obra_de_estilo :Barroco ;
            :Dimensiones 20533 ;
            :añoCreacion 1622 .
@@ -358,6 +430,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :ComposiciónVII rdf:type owl:NamedIndividual ,
                          :ObraDeArte ;
                 :creada_por :WassilyKandinsky ;
+                :expuesta_en :Sala5 ;
                 :obra_de_estilo :ArteModerno ;
                 :Dimensiones 60000 ;
                 :añoCreacion 1913 .
@@ -367,6 +440,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :ComposiciónVIII rdf:type owl:NamedIndividual ,
                           :ObraDeArte ;
                  :creada_por :WassilyKandinsky ;
+                 :expuesta_en :Sala5 ;
                  :obra_de_estilo :ArteModerno ;
                  :Dimensiones 28140 ;
                  :añoCreacion 1923 .
@@ -376,6 +450,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :CristoCrucificado rdf:type owl:NamedIndividual ,
                             :ObraDeArte ;
                    :creada_por :DiegoVelázquez ;
+                   :expuesta_en :Sala2 ;
                    :obra_de_estilo :Barroco ;
                    :Dimensiones 41912 ;
                    :añoCreacion 1632 .
@@ -385,6 +460,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :CristoDeSanJuanDeLaCruz rdf:type owl:NamedIndividual ,
                                   :ObraDeArte ;
                          :creada_por :SalvadorDalí ;
+                         :expuesta_en :Sala3 ;
                          :obra_de_estilo :ArteModerno ;
                          :Dimensiones 23780 ;
                          :añoCreacion 1951 .
@@ -394,6 +470,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :CuadradoConCírculosConcéntricos rdf:type owl:NamedIndividual ,
                                           :ObraDeArte ;
                                  :creada_por :WassilyKandinsky ;
+                                 :expuesta_en :Sala5 ;
                                  :obra_de_estilo :ArteModerno ;
                                  :Dimensiones 14400 ;
                                  :añoCreacion 1913 .
@@ -403,6 +480,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :Danae rdf:type owl:NamedIndividual ,
                 :ObraDeArte ;
        :creada_por :RembrandtVanRijn ;
+       :expuesta_en :Sala9 ;
        :obra_de_estilo :Barroco ;
        :Dimensiones 37555 ;
        :añoCreacion 1636 .
@@ -412,6 +490,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :David rdf:type owl:NamedIndividual ,
                 :ObraDeArte ;
        :creada_por :MiguelAngel ;
+       :expuesta_en :Sala1 ;
        :obra_de_estilo :Renacimiento ;
        :Dimensiones 517 ;
        :añoCreacion 1501 .
@@ -421,6 +500,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :DavidConLaCabezaDeGoliat rdf:type owl:NamedIndividual ,
                                    :ObraDeArte ;
                           :creada_por :Caravaggio ;
+                          :expuesta_en :Sala2 ;
                           :obra_de_estilo :Barroco ;
                           :Dimensiones 12625 ;
                           :añoCreacion 1610 .
@@ -430,6 +510,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :DavidDonatello rdf:type owl:NamedIndividual ,
                          :ObraDeArte ;
                 :creada_por :Donatello ;
+                :expuesta_en :Sala8 ;
                 :obra_de_estilo :Renacimiento ;
                 :Dimensiones 158 ;
                 :añoCreacion 1440 .
@@ -451,6 +532,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :ElDescendimientoDeLaCruz rdf:type owl:NamedIndividual ,
                                    :ObraDeArte ;
                           :creada_por :PeterPaulRubens ;
+                          :expuesta_en :Sala2 ;
                           :obra_de_estilo :Barroco ;
                           :Dimensiones 57640 ;
                           :añoCreacion 1614 .
@@ -460,6 +542,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :ElEstanqueDeNenúfares rdf:type owl:NamedIndividual ,
                                 :ObraDeArte ;
                        :creada_por :ClaudeMonet ;
+                       :expuesta_en :Sala4 ;
                        :obra_de_estilo :ArteModerno ;
                        :Dimensiones 8181 ;
                        :añoCreacion 1899 .
@@ -469,6 +552,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :ElFestínDeHerodes rdf:type owl:NamedIndividual ,
                             :ObraDeArte ;
                    :creada_por :Donatello ;
+                   :expuesta_en :Sala8 ;
                    :obra_de_estilo :Renacimiento ;
                    :Dimensiones 3600 ;
                    :añoCreacion 1425 .
@@ -478,6 +562,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :ElGranMasturbador rdf:type owl:NamedIndividual ,
                             :ObraDeArte ;
                    :creada_por :SalvadorDalí ;
+                   :expuesta_en :Sala3 ;
                    :obra_de_estilo :ArteModerno ;
                    :Dimensiones 16500 ;
                    :añoCreacion 1929 .
@@ -487,6 +572,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :ElGuitarristaViejo rdf:type owl:NamedIndividual ,
                              :ObraDeArte ;
                     :creada_por :PabloPicasso ;
+                    :expuesta_en :Sala3 ;
                     :obra_de_estilo :ArteModerno ;
                     :Dimensiones 10151.54 ;
                     :añoCreacion 1904 .
@@ -496,6 +582,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :ElHombreDeVitruvio rdf:type owl:NamedIndividual ,
                              :ObraDeArte ;
                     :creada_por :LeonardoDaVinci ;
+                    :expuesta_en :Sala1 ;
                     :obra_de_estilo :Renacimiento ;
                     :Dimensiones 877 ;
                     :añoCreacion 1490 .
@@ -505,6 +592,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :ElJardínDelAmor rdf:type owl:NamedIndividual ,
                           :ObraDeArte ;
                  :creada_por :PeterPaulRubens ;
+                 :expuesta_en :Sala2 ;
                  :obra_de_estilo :Barroco ;
                  :Dimensiones 56628 ;
                  :añoCreacion 1630 .
@@ -514,6 +602,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :ElJuicioDeParis rdf:type owl:NamedIndividual ,
                           :ObraDeArte ;
                  :creada_por :PeterPaulRubens ;
+                 :expuesta_en :Sala2 ;
                  :obra_de_estilo :Barroco ;
                  :Dimensiones 75819 ;
                  :añoCreacion 1636 .
@@ -523,6 +612,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :ElJuicioFinal rdf:type owl:NamedIndividual ,
                         :ObraDeArte ;
                :creada_por :MiguelAngel ;
+               :expuesta_en :Sala7 ;
                :obra_de_estilo :Renacimiento ;
                :Dimensiones 1644000 ;
                :añoCreacion 1536 .
@@ -532,6 +622,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :ElNacimientoDeVenus rdf:type owl:NamedIndividual ,
                               :ObraDeArte ;
                      :creada_por :SandroBotticelli ;
+                     :expuesta_en :Sala8 ;
                      :obra_de_estilo :Renacimiento ;
                      :Dimensiones 47816 ;
                      :añoCreacion 1484 .
@@ -541,6 +632,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :ElRegresoDelHijopródigo rdf:type owl:NamedIndividual ,
                                   :ObraDeArte ;
                          :creada_por :RembrandtVanRijn ;
+                         :expuesta_en :Sala9 ;
                          :obra_de_estilo :Barroco ;
                          :Dimensiones 53710 ;
                          :añoCreacion 1669 .
@@ -550,6 +642,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :ElRetabloDeSantaMaríaDelPopolo rdf:type owl:NamedIndividual ,
                                          :ObraDeArte ;
                                 :creada_por :Rafael ;
+                                :expuesta_en :Sala1 ;
                                 :obra_de_estilo :Renacimiento ;
                                 :Dimensiones 85000 ;
                                 :añoCreacion 1516 .
@@ -559,6 +652,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :ElTriumfoDeBaco rdf:type owl:NamedIndividual ,
                           :ObraDeArte ;
                  :creada_por :DiegoVelázquez ;
+                 :expuesta_en :Sala2 ;
                  :obra_de_estilo :Barroco ;
                  :Dimensiones 37125 ;
                  :añoCreacion 1629 .
@@ -568,6 +662,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :Guernica rdf:type owl:NamedIndividual ,
                    :ObraDeArte ;
           :creada_por :PabloPicasso ;
+          :expuesta_en :Sala3 ;
           :obra_de_estilo :ArteModerno ;
           :Dimensiones 270824 ;
           :añoCreacion 1937 .
@@ -577,6 +672,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :Habacuc rdf:type owl:NamedIndividual ,
                   :ObraDeArte ;
          :creada_por :Donatello ;
+         :expuesta_en :Sala8 ;
          :obra_de_estilo :Renacimiento ;
          :Dimensiones 195 ;
          :añoCreacion 1423 .
@@ -586,6 +682,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :ImpresiónSolNaciente rdf:type owl:NamedIndividual ,
                                :ObraDeArte ;
                       :creada_por :ClaudeMonet ;
+                      :expuesta_en :Sala4 ;
                       :obra_de_estilo :ArteModerno ;
                       :Dimensiones 3024 ;
                       :añoCreacion 1872 .
@@ -595,6 +692,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :Improvisación28 rdf:type owl:NamedIndividual ,
                           :ObraDeArte ;
                  :creada_por :WassilyKandinsky ;
+                 :expuesta_en :Sala5 ;
                  :obra_de_estilo :ArteModerno ;
                  :Dimensiones 17982 ;
                  :añoCreacion 1912 .
@@ -604,6 +702,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :JudithDecapitandoAHolofernes rdf:type owl:NamedIndividual ,
                                        :ObraDeArte ;
                               :creada_por :Caravaggio ;
+                              :expuesta_en :Sala2 ;
                               :obra_de_estilo :Barroco ;
                               :Dimensiones 28080 ;
                               :añoCreacion 1599 .
@@ -613,6 +712,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :JudithYSuDoncella rdf:type owl:NamedIndividual ,
                             :ObraDeArte ;
                    :creada_por :ArtemisiaGentileschi ;
+                   :expuesta_en :Sala6 ;
                    :obra_de_estilo :Barroco ;
                    :Dimensiones 10659 ;
                    :añoCreacion 1619 .
@@ -622,6 +722,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaAdoraciónDeLosMagos rdf:type owl:NamedIndividual ,
                                 :ObraDeArte ;
                        :creada_por :PeterPaulRubens ;
+                       :expuesta_en :Sala2 ;
                        :obra_de_estilo :Barroco ;
                        :Dimensiones 156064 ;
                        :añoCreacion 1624 .
@@ -631,6 +732,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaCalumniaDeApeles rdf:type owl:NamedIndividual ,
                              :ObraDeArte ;
                     :creada_por :SandroBotticelli ;
+                    :expuesta_en :Sala8 ;
                     :obra_de_estilo :Renacimiento ;
                     :Dimensiones 5642 ;
                     :añoCreacion 1495 .
@@ -640,6 +742,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaCatedralDeRuanEfectoDeSol rdf:type owl:NamedIndividual ,
                                       :ObraDeArte ;
                              :creada_por :ClaudeMonet ;
+                             :expuesta_en :Sala4 ;
                              :obra_de_estilo :ArteModerno ;
                              :Dimensiones 6500 ;
                              :añoCreacion 1893 .
@@ -649,6 +752,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaCenaDeEmaús rdf:type owl:NamedIndividual ,
                         :ObraDeArte ;
                :creada_por :Caravaggio ;
+               :expuesta_en :Sala2 ;
                :obra_de_estilo :Barroco ;
                :Dimensiones 27580 ;
                :añoCreacion 1601 .
@@ -658,6 +762,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaCreaciónDeAdán rdf:type owl:NamedIndividual ,
                            :ObraDeArte ;
                   :creada_por :MiguelAngel ;
+                  :expuesta_en :Sala1 ;
                   :obra_de_estilo :Renacimiento ;
                   :Dimensiones 5600000 ;
                   :añoCreacion 1512 .
@@ -667,6 +772,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaDamaDelArmiño rdf:type owl:NamedIndividual ,
                           :ObraDeArte ;
                  :creada_por :LeonardoDaVinci ;
+                 :expuesta_en :Sala1 ;
                  :obra_de_estilo :Renacimiento ;
                  :Dimensiones 2106 ;
                  :añoCreacion 1489 .
@@ -676,6 +782,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaEscuelaDeAtenas rdf:type owl:NamedIndividual ,
                             :ObraDeArte ;
                    :creada_por :Rafael ;
+                   :expuesta_en :Sala7 ;
                    :obra_de_estilo :Renacimiento ;
                    :Dimensiones 385000 ;
                    :añoCreacion 1510 .
@@ -685,6 +792,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaFraguaDeVulcano rdf:type owl:NamedIndividual ,
                             :ObraDeArte ;
                    :creada_por :DiegoVelázquez ;
+                   :expuesta_en :Sala2 ;
                    :obra_de_estilo :Barroco ;
                    :Dimensiones 64670 ;
                    :añoCreacion 1630 .
@@ -694,6 +802,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaHabitaciónEnArlés rdf:type owl:NamedIndividual ,
                               :ObraDeArte ;
                      :creada_por :VincentVanGogh ;
+                     :expuesta_en :Sala3 ;
                      :obra_de_estilo :ArteModerno ;
                      :Dimensiones 6480 ;
                      :añoCreacion 1888 .
@@ -703,6 +812,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaIncredulidadDeSantoTomás rdf:type owl:NamedIndividual ,
                                      :ObraDeArte ;
                             :creada_por :Caravaggio ;
+                            :expuesta_en :Sala2 ;
                             :obra_de_estilo :Barroco ;
                             :Dimensiones 15622 ;
                             :añoCreacion 1602 .
@@ -712,6 +822,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaLecciónDeAnatomíaDelDr.Tulp rdf:type owl:NamedIndividual ,
                                         :ObraDeArte ;
                                :creada_por :RembrandtVanRijn ;
+                               :expuesta_en :Sala9 ;
                                :obra_de_estilo :Barroco ;
                                :Dimensiones 36697 ;
                                :añoCreacion 1632 .
@@ -721,6 +832,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaMadonnaDelJilguero rdf:type owl:NamedIndividual ,
                                :ObraDeArte ;
                       :creada_por :Rafael ;
+                      :expuesta_en :Sala1 ;
                       :obra_de_estilo :Renacimiento ;
                       :Dimensiones 8239 ;
                       :añoCreacion 1505 .
@@ -730,6 +842,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaMadonnaSixtina rdf:type owl:NamedIndividual ,
                            :ObraDeArte ;
                   :creada_por :Rafael ;
+                  :expuesta_en :Sala1 ;
                   :obra_de_estilo :Renacimiento ;
                   :Dimensiones 51940 ;
                   :añoCreacion 1512 .
@@ -739,6 +852,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaMonaLisa rdf:type owl:NamedIndividual ,
                      :ObraDeArte ;
             :creada_por :LeonardoDaVinci ;
+            :expuesta_en :Sala1 ;
             :obra_de_estilo :Renacimiento ;
             :Dimensiones 4081 ;
             :añoCreacion 1503 .
@@ -748,6 +862,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaMujerQueLlora rdf:type owl:NamedIndividual ,
                           :ObraDeArte ;
                  :creada_por :PabloPicasso ;
+                 :expuesta_en :Sala3 ;
                  :obra_de_estilo :ArteModerno ;
                  :Dimensiones 2940 ;
                  :añoCreacion 1937 .
@@ -757,6 +872,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaNocheEstrellada rdf:type owl:NamedIndividual ,
                             :ObraDeArte ;
                    :creada_por :VincentVanGogh ;
+                   :expuesta_en :Sala3 ;
                    :obra_de_estilo :ArteModerno ;
                    :Dimensiones 6787.77 ;
                    :añoCreacion 1889 .
@@ -766,6 +882,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaPersistenciaDeLaMemoria rdf:type owl:NamedIndividual ,
                                     :ObraDeArte ;
                            :creada_por :SalvadorDalí ;
+                           :expuesta_en :Sala3 ;
                            :obra_de_estilo :ArteModerno ;
                            :Dimensiones 792 ;
                            :añoCreacion 1931 .
@@ -775,6 +892,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaPiedad rdf:type owl:NamedIndividual ,
                    :ObraDeArte ;
           :creada_por :MiguelAngel ;
+          :expuesta_en :Sala1 ;
           :obra_de_estilo :Renacimiento ;
           :Dimensiones 33930 ;
           :añoCreacion 1498 .
@@ -784,6 +902,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaPrimavera rdf:type owl:NamedIndividual ,
                       :ObraDeArte ;
              :creada_por :SandroBotticelli ;
+             :expuesta_en :Sala8 ;
              :obra_de_estilo :Renacimiento ;
              :Dimensiones 63742 ;
              :añoCreacion 1482 .
@@ -793,6 +912,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaRendiciónDeBreda rdf:type owl:NamedIndividual ,
                              :ObraDeArte ;
                     :creada_por :DiegoVelázquez ;
+                    :expuesta_en :Sala2 ;
                     :obra_de_estilo :Barroco ;
                     :Dimensiones 112669 ;
                     :añoCreacion 1635 .
@@ -802,6 +922,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaRondaDeNoche rdf:type owl:NamedIndividual ,
                          :ObraDeArte ;
                 :creada_por :RembrandtVanRijn ;
+                :expuesta_en :Sala9 ;
                 :obra_de_estilo :Barroco ;
                 :Dimensiones 158631 ;
                 :añoCreacion 1642 .
@@ -811,6 +932,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaTransfiguración rdf:type owl:NamedIndividual ,
                             :ObraDeArte ;
                    :creada_por :Rafael ;
+                   :expuesta_en :Sala1 ;
                    :obra_de_estilo :Renacimiento ;
                    :Dimensiones 114390 ;
                    :añoCreacion 1516 .
@@ -820,6 +942,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaUltimaCena rdf:type owl:NamedIndividual ,
                        :ObraDeArte ;
               :creada_por :LeonardoDaVinci ;
+              :expuesta_en :Sala7 ;
               :obra_de_estilo :Renacimiento ;
               :Dimensiones 404800 ;
               :añoCreacion 1495 .
@@ -829,6 +952,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaVirgenDelLibro rdf:type owl:NamedIndividual ,
                            :ObraDeArte ;
                   :creada_por :SandroBotticelli ;
+                  :expuesta_en :Sala8 ;
                   :obra_de_estilo :Renacimiento ;
                   :Dimensiones 2262 ;
                   :añoCreacion 1480 .
@@ -838,6 +962,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LaVocaciónDeSanMateo rdf:type owl:NamedIndividual ,
                                :ObraDeArte ;
                       :creada_por :Caravaggio ;
+                      :expuesta_en :Sala2 ;
                       :obra_de_estilo :Barroco ;
                       :Dimensiones 109480 ;
                       :añoCreacion 1600 .
@@ -847,6 +972,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LasMeninas rdf:type owl:NamedIndividual ,
                      :ObraDeArte ;
             :creada_por :DiegoVelázquez ;
+            :expuesta_en :Sala2 ;
             :obra_de_estilo :Barroco ;
             :Dimensiones 87768 ;
             :añoCreacion 1656 .
@@ -856,6 +982,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LasTresGracias rdf:type owl:NamedIndividual ,
                          :ObraDeArte ;
                 :creada_por :PeterPaulRubens ;
+                :expuesta_en :Sala2 ;
                 :obra_de_estilo :Barroco ;
                 :Dimensiones 40001 ;
                 :añoCreacion 1635 .
@@ -871,6 +998,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LesDemoisellesDAvignon rdf:type owl:NamedIndividual ,
                                  :ObraDeArte ;
                         :creada_por :PabloPicasso ;
+                        :expuesta_en :Sala3 ;
                         :obra_de_estilo :ArteModerno ;
                         :Dimensiones 56999.43 ;
                         :añoCreacion 1907 .
@@ -880,6 +1008,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :LosGirasoles rdf:type owl:NamedIndividual ,
                        :ObraDeArte ;
               :creada_por :VincentVanGogh ;
+              :expuesta_en :Sala3 ;
               :obra_de_estilo :ArteModerno ;
               :Dimensiones 6696 ;
               :añoCreacion 1888 .
@@ -889,6 +1018,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :Lucrecia rdf:type owl:NamedIndividual ,
                    :ObraDeArte ;
           :creada_por :ArtemisiaGentileschi ;
+          :expuesta_en :Sala6 ;
           :obra_de_estilo :Barroco ;
           :Dimensiones 7700 ;
           :añoCreacion 1625 .
@@ -904,6 +1034,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :Moisés rdf:type owl:NamedIndividual ,
                  :ObraDeArte ;
         :creada_por :MiguelAngel ;
+        :expuesta_en :Sala1 ;
         :obra_de_estilo :Renacimiento ;
         :Dimensiones 235 ;
         :añoCreacion 1513 .
@@ -913,6 +1044,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :MujerConSombrilla rdf:type owl:NamedIndividual ,
                             :ObraDeArte ;
                    :creada_por :ClaudeMonet ;
+                   :expuesta_en :Sala4 ;
                    :obra_de_estilo :ArteModerno ;
                    :Dimensiones 8100 ;
                    :añoCreacion 1875 .
@@ -922,6 +1054,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :Nenúfares rdf:type owl:NamedIndividual ,
                     :ObraDeArte ;
            :creada_por :ClaudeMonet ;
+           :expuesta_en :Sala4 ;
            :obra_de_estilo :ArteModerno ;
            :Dimensiones 255200 ;
            :añoCreacion 1926 .
@@ -937,6 +1070,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :PalasYElCentauro rdf:type owl:NamedIndividual ,
                            :ObraDeArte ;
                   :creada_por :SandroBotticelli ;
+                  :expuesta_en :Sala8 ;
                   :obra_de_estilo :Renacimiento ;
                   :Dimensiones 30636 ;
                   :añoCreacion 1482 .
@@ -946,6 +1080,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :PenitenteMagdalena rdf:type owl:NamedIndividual ,
                              :ObraDeArte ;
                     :creada_por :Donatello ;
+                    :expuesta_en :Sala8 ;
                     :obra_de_estilo :Renacimiento ;
                     :Dimensiones 188 ;
                     :añoCreacion 1455 .
@@ -979,6 +1114,8 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :RetratoDeDoraMaar rdf:type owl:NamedIndividual ,
                             :ObraDeArte ;
                    :creada_por :PabloPicasso ;
+                   :expuesta_en :Sala3 ;
+                   :obra_de_estilo :ArteModerno ;
                    :Dimensiones 5980 ;
                    :añoCreacion 1937 .
 
@@ -993,6 +1130,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :SanJorge rdf:type owl:NamedIndividual ,
                    :ObraDeArte ;
           :creada_por :Donatello ;
+          :expuesta_en :Sala8 ;
           :obra_de_estilo :Renacimiento ;
           :Dimensiones 209 ;
           :añoCreacion 1416 .
@@ -1008,6 +1146,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :SueñoCausadoPorElVueloDeUnaAbeja rdf:type owl:NamedIndividual ,
                                            :ObraDeArte ;
                                   :creada_por :SalvadorDalí ;
+                                  :expuesta_en :Sala3 ;
                                   :obra_de_estilo :ArteModerno ;
                                   :Dimensiones 2091 ;
                                   :añoCreacion 1944 .
@@ -1017,6 +1156,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :SusanaYLosAncianos rdf:type owl:NamedIndividual ,
                              :ObraDeArte ;
                     :creada_por :ArtemisiaGentileschi ;
+                    :expuesta_en :Sala6 ;
                     :obra_de_estilo :Barroco ;
                     :Dimensiones 20570 ;
                     :añoCreacion 1610 .
