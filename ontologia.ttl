@@ -974,7 +974,8 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/RetratoDeDoraMaar
-:RetratoDeDoraMaar rdf:type owl:NamedIndividual ;
+:RetratoDeDoraMaar rdf:type owl:NamedIndividual ,
+                                        :ObraDeArte ;
                    :creada_por :PabloPicasso ;
                    :Dimensiones 5980 ;
                    :añoCreacion 1937 .
