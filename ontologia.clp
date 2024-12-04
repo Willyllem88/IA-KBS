@@ -1,8 +1,8 @@
 ;;; ---------------------------------------------------------
 ;;; ontologia.clp
 ;;; Translated by owl2clips
-;;; Translated to CLIPS from ontology ontologia.owl
-;;; :Date 01/12/2024 17:41:50
+;;; Translated to CLIPS from ontology ontologia.ttl
+;;; :Date 04/12/2024 10:43:26
 
 (defclass Sala "Clase que representa una sala del museo."
     (is-a USER)
@@ -53,7 +53,7 @@
     (multislot preferencia_de_estilo
         (type INSTANCE)
         (create-accessor read-write))
-    (multislot nHoras/Dia
+    (slot nHoras/Dia
         (type SYMBOL)
         (create-accessor read-write))
     (multislot conocimiento
@@ -80,7 +80,7 @@
     (multislot esFamilia
         (type SYMBOL)
         (create-accessor read-write))
-    (multislot nPersonas
+    (slot nPersonas
         (type SYMBOL)
         (create-accessor read-write))
 )
@@ -694,6 +694,12 @@
     )
 
     ([Renacimiento] of Estilo
+    )
+
+    ([RetratoDeDoraMaar] of ObraDeArte
+         (creada_por  [PabloPicasso])
+         (Dimensiones  5980)
+         (añoCreacion  1937)
     )
 
     ([SalvadorDalí] of Artista

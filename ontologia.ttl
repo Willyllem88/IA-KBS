@@ -111,7 +111,8 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 #################################################################
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#nHoras/Dia
-<http://www.semanticweb.org/guill/ontologies/2024/10/ontology#nHoras/Dia> rdf:type owl:DatatypeProperty ;
+<http://www.semanticweb.org/guill/ontologies/2024/10/ontology#nHoras/Dia> rdf:type owl:DatatypeProperty ,
+                                                                                   owl:FunctionalProperty ;
                                                                           rdfs:domain :Visita ;
                                                                           rdfs:range xsd:nonNegativeInteger .
 
@@ -159,7 +160,8 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/nPersonas
-:nPersonas rdf:type owl:DatatypeProperty ;
+:nPersonas rdf:type owl:DatatypeProperty ,
+                    owl:FunctionalProperty ;
            rdfs:domain :Grupo ;
            rdfs:range xsd:positiveInteger .
 
@@ -250,15 +252,6 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 #################################################################
 #    Individuals
 #################################################################
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#PalasYElCentauro
-:PalasYElCentauro rdf:type owl:NamedIndividual ,
-                           :ObraDeArte ;
-                  :creada_por :SandroBotticelli ;
-                  :obra_de_estilo :Renacimiento ;
-                  :Dimensiones 30636 ;
-                  :añoCreacion 1482 .
-
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Amarillo-Rojo-Azul
 :Amarillo-Rojo-Azul rdf:type owl:NamedIndividual ,
@@ -940,6 +933,15 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
               :artista_de_estilo :ArteModerno .
 
 
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/PalasYElCentauro
+:PalasYElCentauro rdf:type owl:NamedIndividual ,
+                           :ObraDeArte ;
+                  :creada_por :SandroBotticelli ;
+                  :obra_de_estilo :Renacimiento ;
+                  :Dimensiones 30636 ;
+                  :añoCreacion 1482 .
+
+
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/PenitenteMagdalena
 :PenitenteMagdalena rdf:type owl:NamedIndividual ,
                              :ObraDeArte ;
@@ -975,7 +977,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/RetratoDeDoraMaar
 :RetratoDeDoraMaar rdf:type owl:NamedIndividual ,
-                                        :ObraDeArte ;
+                            :ObraDeArte ;
                    :creada_por :PabloPicasso ;
                    :Dimensiones 5980 ;
                    :añoCreacion 1937 .
