@@ -135,4 +135,12 @@
     ;DEBUG: mostrar datos recopilados (atributos de la instancia)
     (printout t "Datos recopilados (atributos de la instancia):" crlf)
     ;TODO: falta mostrar atributos de la instancia creada
+
+    (focus abstraccion)
 )
+
+(defmodule abstraccion (import MAIN ?ALL)(import recopilacion ?ALL)(export ?ALL))
+
+(defmodule matching (import MAIN ?ALL)(import abstraccion ?ALL)(export ?ALL))
+
+(defmodule refinamiento (import MAIN ?ALL)(import matching ?ALL)(import recopilacion ?ALL)(export ?ALL))
