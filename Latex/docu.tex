@@ -75,64 +75,78 @@
 	
 	En aquest apartat, identifiquem els conceptes principals necessaris per modelar el domini i implementar el sistema:
 	
-	\subsection{Elements del domini (?)}
+	\subsection{Elements del domini}
 	\label{sec:elements_del_domini}
 	
-	Característiques d'una visita
-	
-	
-	Característiques d'un visitant
+	\textbf{Característiques d'una visita}
 	\begin{itemize}
 		\item \texttt{Definició}: Representen les persones que fan una visita al museu.
 		\item \texttt{Atributs}:
 		\begin{itemize}
-			\item \texttt{Tipus}: Individual, família, grup petit, grup gran.
-			\item \texttt{Coneixement}: Qualitatiu (baix, mitjà, alt).
-			\item \texttt{Preferències}: Llista d’interessos (autors, èpoques, estils, temàtiques).
+			\item \texttt{Nombre persones}: Número de persones que formen el grup de visita. Pot ser individual (una persona), o un grup.
+			\item \texttt{Nombre museus visitats}: Nombre de museos visitats l'últim any, d'aquí derivará el càlcul de coneixement de la visita sobre museus.
 			\item \texttt{Durada diària}: Temps disponible per dia (hores).
 			\item \texttt{Dies totals}: Nombre de dies disponibles per a la visita.
+			\item \texttt{Familia}: Hi ha nens al grup.
+			\item \texttt{Preferència d'artista}: Artista d'interès per la visita.
+			\item \texttt{Preferència d'estil}: Estil d'interès per la visita.
 		\end{itemize}
 	\end{itemize}
-	
-	Característiques d'una obra d'art
-	\begin{itemize}
-		\item \texttt{Definició}: Objecte del museu amb unes certes característiques.
-		\item \texttt{Atributs}:
-			\begin{itemize}
-				\item \texttt{Títol}: Nom de l’obra (p. ex., "La Gioconda").
-				\item \texttt{Autor}: Referència a l’autor (p. ex., Leonardo da Vinci).
-				\item \texttt{Any de creació}
-				\item \texttt{Època}: Període històric en què es va crear (p. ex., Renaixement).
-				\item \texttt{Estil/escola/corrent}: Moviment artístic o corrent (p. ex., Barroc).
-				\item \texttt{Sala}: Ubicació al museu (p. ex., "Sala 1").
-				\item \texttt{Temàtica}: Categoria general (p. ex., retrat, paisatge).
-				\item \texttt{Dimensions}
-				\item \texttt{Complexitat}: Calculada a partir de les mides de l'obra.
-				\item \texttt{Rellevància}: Valor qualitatiu (alta, mitjana, baixa).
-			\end{itemize}
-	\end{itemize}
-	
-	Característiques d'un autor
+		
+		
+	\textbf{Característiques d'un autor}
 	\begin{itemize}
 		\item \texttt{Definició}: Artistes creadors de les obres del museu.
 		\item \texttt{Atributs}:
 		\begin{itemize}
 			\item \texttt{Nom}: Identificació de l’artista.
 			\item \texttt{Nacionalitat}
-			\item \texttt{Època}: Interval de temps en què va crear obres.
-			\item \texttt{Estil/escola/període}: Moviments artístics amb què es relaciona.
+			\item \texttt{Estil}: Interval històric de temps en què va crear obres.
+			
 		\end{itemize}
 	\end{itemize}
 	
+	
+	\textbf{Característiques d'una obra d'art}
+	\begin{itemize}
+		\item \texttt{Definició}: Objecte del museu amb unes certes característiques.
+		\item \texttt{Atributs}:
+			\begin{itemize}
+				\item \texttt{Títol}: Nom de l’obra (p. ex., "La Gioconda").
+				\item \texttt{Autor}: Referència a l’autor que ha creat l'obra.
+				\item \texttt{Any de creació}
+				\item \texttt{Estil}: Període històric en què es va crear (p. ex., Renaixement).
+				\item \texttt{Sala}: Ubicació al museu.
+				\item \texttt{Dimensions}
+				\item \texttt{Complexitat}: Calculada a partir de les mides de l'obra.
+			\end{itemize}
+	\end{itemize}
+
+
+	\textbf{Característiques d'una sala d'art}
+	\begin{itemize}
+		\item \texttt{Definició}: Espai on s'exposen un conjunt d'obres d'art.
+		\item \texttt{Atributs}:
+		\begin{itemize}
+			\item \texttt{Museu al que pertany}
+		\end{itemize}
+		\item \texttt{Subclasses}:
+		\begin{itemize}
+			\item \texttt{Sala Artista}: Sala dedicada a exposar les obres d'un artista concret.
+			\item \texttt{Sala Estil}: Sala dedicada a exposar les obres d'un estil concret.
+		\end{itemize}
+	\end{itemize}
+
+	
 	\subsection{Divisió en subproblemes}
 	
-	\subsubsection{Recollir dades de la visita}
+	\subsubsection{Problema concret: Recollir dades de la visita}
 	
 	Abans de començar a buscar una solució pel problema, és necessari recopilar la informació rellevant sobre el perfil dels visitants. Aquesta informació es recull mitjançant un conjunt de preguntes que permeten identificar:
 	\begin{itemize}
 		\item Les característiques generals del grup: tipus (individual, família, grup petit o grup gran) i coneixement d’art (baix, mitjà o alt).
-		\item Les preferències personals dels visitants, com ara èpoques, estils artístics, autors favorits o temàtiques d’interès.
 		\item Les limitacions temporals de la visita, incloent-hi el nombre de dies disponibles i la durada màxima per jornada.
+		\item Les preferències personals dels visitants, com ara estils artístics i autors favorits.
 	\end{itemize}
 	
 	Aquestes dades són essencials per personalitzar l’experiència del visitant i garantir que el pla de visita s’ajusti als seus interessos i necessitats.
@@ -142,18 +156,18 @@
 	\begin{itemize}
 		\item \textbf{Sobre el grup:}
 		\begin{itemize}
-			\item Quin tipus de grup sou? 
+			\item Quantes persones sou? 
 			\begin{itemize}
-				\item Individual
-				\item Família
-				\item Grup petit (2-5 persones)
-				\item Grup gran (més de 5 persones)
+				\item Resposta numèrica
 			\end{itemize}
-			\item Quin coneixement d’art teniu? 
+			\item Hi ha nens al grup? 
 			\begin{itemize}
-				\item Baix
-				\item Mitjà
-				\item Alt
+				\item Sí
+				\item No
+			\end{itemize}
+			\item Quants museus heu visitat l'últim any? 
+			\begin{itemize}
+				\item Resposta numèrica
 			\end{itemize}
 		\end{itemize}
 		
@@ -165,40 +179,40 @@
 		
 		\item \textbf{Sobre les preferències:}
 		\begin{itemize}
-			\item Hi ha alguna època artística que us interessi especialment?
-			\item Quin estil o corrent artístic preferiu?
+			\item Hi ha algun estil/època artística que us interessi especialment?
 			\item Hi ha algun autor que us agradaria veure?
-			\item Us interessa alguna temàtica en particular?
 		\end{itemize}
-		Per aquestes preguntes es mostra el conjunt d'opcions disponible al museu, també una opció per si no es vol marcar preferència
+		Per aquestes preguntes es mostra el conjunt d'opcions disponible al museu, també una opció per si no es vol marcar preferència.
 	\end{itemize}
 
 	
-	\subsubsection{Analitzar els interessos de la visita}
+	\subsubsection{Abstracció: analitzar els interessos de la visita}
 	
-	Un cop recollides les dades, el sistema analitza les preferències i característiques proporcionades pels visitants. Aquesta anàlisi inclou:
+	Un cop recollides les dades, es crea el problema abstracte. El sistema analitza les preferències i característiques proporcionades pels visitants. Aquesta anàlisi inclou:
 	\begin{itemize}
-		\item Comparar les preferències amb les característiques de les obres disponibles al museu.
-		\item Filtrar les obres que compleixin amb els criteris especificats pel visitant, donant prioritat a aquelles amb major rellevància o que s’ajustin millor a les seves preferències.
+		\item Determinar si la visita serà curta o llarga en funció de les hores i dies que l'usuari ha indicat.
+		\item Guardar si la visita serà individual, o d'un grup gran o petit, en funció del nombre de persones que la formen.
+		\item Determinar el grau de coneixement en art de la visita.
+		\item Emmagatzemar les preferències d'estil de la visita.
 	\end{itemize}
 	
-	El resultat d’aquest procés és un conjunt inicial d’obres seleccionades, que servirà com a base per planificar la visita.
+	El resultat d’aquest procés és el problema abstracte i servirà com a base per planificar la visita.
 	
 	
-	\subsubsection{Organitzar la visita}
+	\subsubsection{Associació: Generar una solució abstracte}
 
-	Després de seleccionar les obres adequades, el sistema s’encarrega de trobar un recorregut. Això inclou:
+	Partint del problema abstracte, el sistema s’encarrega de trobar un conjunt d'obres d'art tenint en compte les necessitats trobades. Això inclou:
 	\begin{itemize}
 		\item Seleccionar un conjunt d'obres seguint els interessos dels visitants.
-		\item Estimar el temps necessari per observar cada obra, tenint en compte la seva rellevància, complexitat i les preferències del visitant.
-		\item Dividir les obres en sessions diàries, assegurant que la durada total de cada jornada no superi les hores disponibles.
+		\item Determinar un conjunt d'obres tenint en compte el temps de la visita i estimant el temps necessari per observar cada obra.
 		\item Assignar un ordre lògic a les obres seleccionades, minimitzant els salts innecessaris entre sales.
 	\end{itemize}
 	
 	L’objectiu és proporcionar un recorregut coherent i fàcil de seguir que maximitzi l’aprofitament del temps dels visitants.
 	
-	\subsubsection{Presentar la visita}
+	\subsubsection{Refinament: Creació d'una solució concreta}
 	
+	Adaptem el recorregut trobat i dividim les obres en sessions diàries, assegurant que la durada total de cada jornada no superi les hores disponibles.
 	Finalment, el sistema genera una proposta completa i personalitzada pel visitant, amb una llista d'obres seleccionades amb el temps assignat a cadascuna i l’ordre de visita suggerit, agrupat per sales i sessions diàries.
 
 	
@@ -210,21 +224,19 @@
 		\item \texttt{Tipus de grup}:
 		\begin{itemize}
 			\item Individual
-			\item Família
 			\item Grup petit (2-5 persones)
 			\item Grup gran (més de 5 persones)
 		\end{itemize}
 		\item \texttt{Durada de la visita}:
 		\begin{itemize}
-			\item 1 dia
-			\item 2 dies
-			\item 3 o més dies
+			\item Curta: 5 hores o menys per tota la visita
+			\item Llarga: més de 5 hores
 		\end{itemize}
 		\item \texttt{Coneixement artístic}:
 		\begin{itemize}
-			\item Baix: coneix poques obres o autors.
+			\item Baix: ha visitat pocs museus, per tant, suposem que coneix poques obres o autors.
 			\item Mitjà: coneix algunes èpoques o estils.
-			\item Alt: coneix moltes obres i autors, amb preferències clares.
+			\item Alt: coneix moltes obres i autors, pot visitar obres més complexes
 		\end{itemize}
 	\end{itemize}
 	
