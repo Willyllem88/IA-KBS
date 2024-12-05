@@ -110,37 +110,69 @@
     (printout t "  Artista: " ?artista crlf)
 
     ;Crear la instancia de Visita
-    (if (> ?personas 1) 
-        then
-            (bind ?grupo (make-instance [grupo1] of Grupo
-                (nDias ?dias)
-                (nHoras/Dia ?horas)
-                ;TODO: falta atribut de Visita nMuseos
-                (nPersonas ?personas)
-                (esFamilia (eq ?niños si))
-                )
-            )
-            (assert (preferencia-de-estilo ?estilo))
-            (assert (preferencia-de-artista ?artista))
-        else 
-            (make-instance [persona1] of Persona
-                (nDias ?dias)
-                (nHoras/Dia ?horas)
-                ;TODO: falta atribut de Visita nMuseos
-            )
-            (assert (preferencia-de-estilo ?estilo))
-            (assert (preferencia-de-artista ?artista))
-    )
-
-    ;DEBUG: mostrar datos recopilados (atributos de la instancia)
-    (printout t "Datos recopilados (atributos de la instancia):" crlf)
-    ;TODO: falta mostrar atributos de la instancia creada
+    (make-instance visita1 of Visita
+          (nDias ?dias)
+          (nHoras/Dia ?horas)
+          (nMuseosVisitados ?museos)
+          (esFamilia (eq ?niños si))
+          (nPersonas ?personas)
+     )
+     (assert (preferencia-de-estilo ?estilo))
+     (assert (preferencia-de-artista ?artista))
 
     (focus abstraccion)
 )
 
 (defmodule abstraccion (import MAIN ?ALL)(import recopilacion ?ALL)(export ?ALL))
 
+(defrule abstraccion::abstraccion-problema
+   ?visita <- (object (is-a Visita)(nDias ?dias)(nHoras/Dia ?horas)(nMuseosVisitados ?museos)(nPersonas ?personas))
+   ;;(preferencia-de-estilo ?visita ?preferencia-de-estilo)
+   =>
+    (printout t "HOLAAA" crlf)
+
+   (bind ?coneixement
+      (if (<= ?museos 1) then
+          "bajo"
+      else (if (and (> ?museos 1) (<= ?museos 5)) then
+              "mediano"
+              else "alto")))
+
+   (bind ?duracion-total (* ?dias ?horas))
+   (bind ?duracion
+      (if (<= ?duracion-total 5) then
+          "corta"
+      else "larga"))
+
+
+	(bind ?tipo-grupo
+    	(if (<= ?personas 1) then
+        "individual"
+    	else (if (and (> ?personas 1) (<= ?personas 5)) then
+         "pequeño"
+    	else "grande")))
+
+   (printout t "Clasificación abstracta de la visita:" crlf)
+   (printout t "  Conocimiento: " ?coneixement crlf)
+   (printout t "  Duración de la visita: " ?duracion crlf)
+   (printout t "  Tipo de grupo: " ?tipo-grupo crlf)
+
+    (printout t "DEBUG: Modificant la instància: " ?visita crlf)
+
+   ;; Guardar el problema abstracto
+   ;;(assert (CONOCIMIENTO ?coneixement))
+   (assert (DURACIÓN ?duracion))
+   ;;(assert (ESTILOPREFERIDO ?preferencia-de-estilo));;FALTA
+   (assert (TIPOGRUPO ?tipo-grupo))
+
+    ;;CREC QUE S'HAURIA DE FER AIXO I NO ASSERT PERO NO SÉ COM(modify ?visita (CONOCIMIENTO ?coneixement) (DURACIÓN ?duracion) (TIPOGRUPO ?tipo-grupo))
+
+)
+
+
+
 (defmodule matching (import MAIN ?ALL)(import abstraccion ?ALL)(export ?ALL))
 
 (defmodule refinamiento (import MAIN ?ALL)(import matching ?ALL)(import recopilacion ?ALL)(export ?ALL))
+
+
