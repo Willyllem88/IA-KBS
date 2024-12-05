@@ -34,12 +34,41 @@
 	
 	\subsection{Descripció del problema}
 	
-	\subsection{Característiques del domini}
+	Els museus d’art són una de les principals atraccions turístiques a moltes ciutats, oferint l’oportunitat de gaudir d’obres mestres de diverses èpoques i estils. En el món real, els museus poden ser gegantescos, com per exemple el Museu del Louvre a Paris, el Museu Britànic a Londres, o el Museu del Prado a Madrid. Un dels problemes principals en visitar un museu és la limitació de temps per veure tot el que s’ofereix. Això genera la necessitat de desenvolupar aplicacions que ajudin els visitants a organitzar la seva visita de manera personalitzada. \\
 	
-	Obres d'art, visitants...\\
+	Els museus solen estar dividits en sales organitzades per artistes o per temes. Les obres d’art poden ser seleccionades en funció de diverses característiques, com l’any de creació, l’època, l’estil, l’autor, la sala on es troben, la temàtica, les dimensions, la complexitat o la importància de l’obra. A més, s’han de considerar els tipus de visitants i les seves preferències, com ara el temps disponible, el tipus de grup (individual, família, grup petit o gran) i el nivell de coneixement d’art. \\
+	
+	L’objectiu és crear una eina capaç d’ajustar la visita segons les preferències i característiques dels visitants, tenint en compte restriccions com el temps diari disponible i l’organització lògica de les sales.
 	
 	\subsection{Objectius}
 	
+	Els objectius d’aquest projecte són:
+	\begin{enumerate}
+		\item Analitzar i modelar el domini dels museus per construir una ontologia adequada.
+		\item Desenvolupar un sistema basat en coneixement capaç de proposar rutes de visita personalitzades.
+		\item Implementar una solució en CLIPS que permeti simular visites segons les preferències i el temps disponible.
+		\item Avaluar la solució mitjançant casos de prova representatius que validin la qualitat de les rutes generades.
+	\end{enumerate}
+	Aquests objectius s’assoleixen seguint una metodologia incremental basada en prototipatge, amb èmfasi en la modularització i la justificació de les decisions preses.
+	
+	\subsection{Viabilitat del SBC}
+	
+	Abans de res, cal analitzar si el problema pot ser gestionat de manera òptima per un Sistema Basat en el Coneixement (SBC). Per plantejar-ho, ens fem la següent pregunta: seria possible que una persona experta en art dissenyés rutes personalitzades per a cada perfil de visitant d’un museu? La resposta és clara: sí. De fet, aquest ha estat el mètode tradicional, on les visites guiades han estat dissenyades per persones expertes en art. El nostre objectiu és modularitzar i automatitzar aquest procés, emulant el raonament d’un expert per dissenyar rutes òptimes entre les obres d’art d’un museu. \\
+	
+	A partir del problema plantejat, és evident que podem abstraure coneixement utilitzant una ontologia. Aquesta ontologia ens permetrà representar i relacionar els diferents conceptes clau del domini, com ara les característiques de les obres d’art, les preferències dels visitants i l’organització espacial del museu. A més, mitjançant l’ús de regles basades en aquest coneixement, podrem traçar un camí que ens guiï des del plantejament del problema fins a la seva solució de manera efectiva. \\
+	
+	Podem concloure que aquest enfocament ens permetrà construir un sistema capaç d’assistir els visitants de manera personalitzada i eficient.
+	
+	\subsection{Fonts del Coneixement}
+	
+	Tot el coneixement que integrarà el programa estarà organitzat en tres blocs principals:  
+	\begin{itemize}  
+		\item \textbf{Ontologia}: Aquest bloc ens permetrà relacionar els diferents conceptes de manera estructurada i organitzada. A més, serà fonamental per definir els atributs i les relacions entre aquests conceptes, oferint una base sòlida per al raonament del sistema.  
+		
+		\item \textbf{Instàncies}: Mitjançant CLIPS, es representarà tot aquell coneixement estàtic que es mantindrà invariable per a tots els visitants. Aquestes instàncies inclouran elements com les sales del museu, les obres d'art, els artistes, els estils pictòrics i fins i tot rutes predefinides del museu. Les rutes predefinides es descriuen amb més detall en una secció posterior.  
+		
+		\item \textbf{Visitant}: Per personalitzar l’experiència, el sistema recollirà informació sobre el visitant mitjançant un breu qüestionari. Aquest permetrà identificar les seves característiques i preferències, facilitant així la generació d’una ruta personalitzada que s’ajusti al màxim a les seves necessitats i interessos.  
+	\end{itemize}  
 	
 	
 	\section{Conceptualització}
@@ -47,6 +76,7 @@
 	En aquest apartat, identifiquem els conceptes principals necessaris per modelar el domini i implementar el sistema:
 	
 	\subsection{Elements del domini (?)}
+	\label{sec:elements_del_domini}
 	
 	Característiques d'una visita
 	
