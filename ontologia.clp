@@ -1,60 +1,8 @@
 ;;; ---------------------------------------------------------
 ;;; ontologia.clp
 ;;; Translated by owl2clips
-;;; Translated to CLIPS from ontology ontologia.owl
-;;; :Date 05/12/2024 09:17:24
-
-(defclass Visita "Representa la clase visita, sera qualquier entidad que vaya a visitar el museo."
-    (is-a USER)
-    (role concrete)
-    (pattern-match reactive)
-    (slot preferencia_artista
-        (type INSTANCE)
-        (create-accessor read-write))
-    ;;; Los visitantes estan interesados por un estilo concreto
-    (multislot preferencia_de_estilo
-        (type INSTANCE)
-        (create-accessor read-write))
-    (multislot nMuseosVisitados
-        (type SYMBOL)
-        (create-accessor read-write))
-    (slot nHoras/Dia
-        (type INTEGER)
-        (create-accessor read-write))
-    (slot conocimiento
-        (type SYMBOL)
-        (create-accessor read-write))
-    (slot duración
-        (type SYMBOL)
-        (create-accessor read-write))
-    (slot nDias
-        (type INTEGER)
-        (create-accessor read-write))
-    (slot tipoGrupo
-        (type STRING)
-        (create-accessor read-write))
-    (slot épocaInterés
-        (type STRING)
-        (create-accessor read-write))
-)
-
-(defclass Grupo "Será un conjunto de personas que vayan a visitar el museo. Puden ser tanto grupos de personas adultas, como famílias."
-    (is-a Visita)
-    (role concrete)
-    (pattern-match reactive)
-    (slot esFamilia
-        (type SYMBOL)
-        (create-accessor read-write))
-    (slot nPersonas
-        (type SYMBOL)
-        (create-accessor read-write))
-)
-
-(defclass Persona "Es un tipo de visitante, este irá al museo sin acompañante."
-    (is-a Visita)
-    (role concrete)
-    (pattern-match reactive)
-)
+;;; Translated to CLIPS from ontology ontologia.ttl
+;;; :Date 05/12/2024 14:34:12
 
 (defclass Sala "Clase que representa una sala del museo."
     (is-a USER)
@@ -82,6 +30,15 @@
     (pattern-match reactive)
     ;;; Una sala temática está basada en un estilo concreto
     (slot sala_sobre_estilo
+        (type INSTANCE)
+        (create-accessor read-write))
+)
+
+(defclass Ruta
+    (is-a USER)
+    (role concrete)
+    (pattern-match reactive)
+    (multislot ruta_contiene
         (type INSTANCE)
         (create-accessor read-write))
 )
@@ -141,7 +98,74 @@
         (create-accessor read-write))
 )
 
+(defclass Visita "Representa la clase visita, sera qualquier entidad que vaya a visitar el museo."
+    (is-a USER)
+    (role concrete)
+    (pattern-match reactive)
+    (slot preferencia_artista
+        (type INSTANCE)
+        (create-accessor read-write))
+    ;;; Los visitantes estan interesados por un estilo concreto
+    (multislot preferencia_de_estilo
+        (type INSTANCE)
+        (create-accessor read-write))
+    (slot nHoras/Dia
+        (type SYMBOL)
+        (create-accessor read-write))
+    (slot CONOCIMIENTO
+        (type SYMBOL)
+        (create-accessor read-write))
+    (slot DURACIÓN
+        (type SYMBOL)
+        (create-accessor read-write))
+    (multislot ESTILOPREFERIDO
+        (type STRING)
+        (create-accessor read-write))
+    (slot TIPOGRUPO
+        (type STRING)
+        (create-accessor read-write))
+    (slot esFamilia
+        (type SYMBOL)
+        (create-accessor read-write))
+    (slot nDias
+        (type INTEGER)
+        (create-accessor read-write))
+    (multislot nMuseosVisitados
+        (type SYMBOL)
+        (create-accessor read-write))
+    (slot nPersonas
+        (type SYMBOL)
+        (create-accessor read-write))
+    (slot épocaInterés
+        (type STRING)
+        (create-accessor read-write))
+)
+
 (definstances instances
+    ([Barroca] of Ruta
+         (ruta_contiene  [Cleopatra] [ElJuicioDeParis] [JudithYSuDoncella] [LaAdoraciónDeLosMagos] [LaCenaDeEmaús] [LaFraguaDeVulcano] [LaRendiciónDeBreda] [Lucrecia] [SusanaYLosAncianos])
+    )
+
+    ([Expertos] of Ruta
+         (ruta_contiene  [Amarillo-Rojo-Azul] [ComposiciónVII] [ElDescendimientoDeLaCruz] [ElJuicioFinal] [ElTriumfoDeBaco] [Improvisación28] [LaEscuelaDeAtenas] [LaUltimaCena] [LaVocaciónDeSanMateo])
+    )
+
+    ([General] of Ruta
+         (ruta_contiene  [ElDescendimientoDeLaCruz] [Guernica] [JudithDecapitandoAHolofernes] [LaCreaciónDeAdán] [LaMonaLisa] [LaNocheEstrellada] [LaPersistenciaDeLaMemoria] [LaTransfiguración] [LasMeninas])
+    )
+
+    ([Modernista] of Ruta
+         (ruta_contiene  [Amarillo-Rojo-Azul] [CisnesReflejandoElefantes] [ComposiciónVIII] [CuadradoConCírculosConcéntricos] [ElEstanqueDeNenúfares] [Guernica] [ImpresiónSolNaciente] [LaCatedralDeRuanEfectoDeSol] [LosGirasoles])
+    )
+
+    ([Niños] of Ruta
+         (ruta_contiene  [CisnesReflejandoElefantes] [Cleopatra] [ImpresiónSolNaciente] [JudithYSuDoncella] [LaPersistenciaDeLaMemoria] [LosGirasoles] [MujerConSombrilla] [Nenúfares])
+    )
+
+    ([Renacentista] of Ruta
+         (ruta_contiene  [ElHombreDeVitruvio] [LaCreaciónDeAdán] [LaMadonnaSixtina] [LaMonaLisa] [LaPiedad] [LaTransfiguración] [LaUltimaCena] [Moisés])
+    )
+
     ([Amarillo-Rojo-Azul] of ObraDeArte
          (creada_por  [WassilyKandinsky])
          (expuesta_en  [Sala5])

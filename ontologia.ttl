@@ -21,6 +21,12 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 #    Object Properties
 #################################################################
 
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#ruta_contiene
+:ruta_contiene rdf:type owl:ObjectProperty ;
+               rdfs:domain :Ruta ;
+               rdfs:range :ObraDeArte .
+
+
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/artista_de_estilo
 :artista_de_estilo rdf:type owl:ObjectProperty ;
                    rdfs:domain :Artista ;
@@ -199,6 +205,10 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 #    Classes
 #################################################################
 
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Ruta
+:Ruta rdf:type owl:Class .
+
+
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Artista
 :Artista rdf:type owl:Class ;
          rdfs:comment "Clase que representa a una persona cuyo arte está en museos." .
@@ -244,6 +254,88 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 #################################################################
 #    Individuals
 #################################################################
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Barroca
+:Barroca rdf:type owl:NamedIndividual ,
+                  :Ruta ;
+         :ruta_contiene :Cleopatra ,
+                        :ElJuicioDeParis ,
+                        :JudithYSuDoncella ,
+                        :LaAdoraciónDeLosMagos ,
+                        :LaCenaDeEmaús ,
+                        :LaFraguaDeVulcano ,
+                        :LaRendiciónDeBreda ,
+                        :Lucrecia ,
+                        :SusanaYLosAncianos .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Expertos
+:Expertos rdf:type owl:NamedIndividual ,
+                   :Ruta ;
+          :ruta_contiene :Amarillo-Rojo-Azul ,
+                         :ComposiciónVII ,
+                         :ElDescendimientoDeLaCruz ,
+                         :ElJuicioFinal ,
+                         :ElTriumfoDeBaco ,
+                         :Improvisación28 ,
+                         :LaEscuelaDeAtenas ,
+                         :LaUltimaCena ,
+                         :LaVocaciónDeSanMateo .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#General
+:General rdf:type owl:NamedIndividual ,
+                  :Ruta ;
+         :ruta_contiene :ElDescendimientoDeLaCruz ,
+                        :Guernica ,
+                        :JudithDecapitandoAHolofernes ,
+                        :LaCreaciónDeAdán ,
+                        :LaMonaLisa ,
+                        :LaNocheEstrellada ,
+                        :LaPersistenciaDeLaMemoria ,
+                        :LaTransfiguración ,
+                        :LasMeninas .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Modernista
+:Modernista rdf:type owl:NamedIndividual ,
+                     :Ruta ;
+            :ruta_contiene :Amarillo-Rojo-Azul ,
+                           :CisnesReflejandoElefantes ,
+                           :ComposiciónVIII ,
+                           :CuadradoConCírculosConcéntricos ,
+                           :ElEstanqueDeNenúfares ,
+                           :Guernica ,
+                           :ImpresiónSolNaciente ,
+                           :LaCatedralDeRuanEfectoDeSol ,
+                           :LosGirasoles .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Niños
+:Niños rdf:type owl:NamedIndividual ,
+                :Ruta ;
+       :ruta_contiene :CisnesReflejandoElefantes ,
+                      :Cleopatra ,
+                      :ImpresiónSolNaciente ,
+                      :JudithYSuDoncella ,
+                      :LaPersistenciaDeLaMemoria ,
+                      :LosGirasoles ,
+                      :MujerConSombrilla ,
+                      :Nenúfares .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Renacentista
+:Renacentista rdf:type owl:NamedIndividual ,
+                       :Ruta ;
+              :ruta_contiene :ElHombreDeVitruvio ,
+                             :LaCreaciónDeAdán ,
+                             :LaMadonnaSixtina ,
+                             :LaMonaLisa ,
+                             :LaPiedad ,
+                             :LaTransfiguración ,
+                             :LaUltimaCena ,
+                             :Moisés .
+
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Amarillo-Rojo-Azul
 :Amarillo-Rojo-Azul rdf:type owl:NamedIndividual ,
@@ -357,6 +449,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/ComposiciónVII
 :ComposiciónVII rdf:type owl:NamedIndividual ,
                          :ObraDeArte ;
+                :ruta_contiene :ComposiciónVIII ;
                 :creada_por :WassilyKandinsky ;
                 :expuesta_en :Sala5 ;
                 :obra_de_estilo :ArteModerno ;
