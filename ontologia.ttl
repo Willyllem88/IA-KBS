@@ -36,24 +36,6 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
             rdfs:comment "Obra hecha por el artista" .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/es_un
-:es_un rdf:type owl:ObjectProperty ,
-                owl:FunctionalProperty ;
-       rdfs:domain :Visita ;
-       rdfs:range :Grupo ,
-                  :Persona ;
-       rdfs:comment "Una visita puede ser grupal o individual" .
-
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/es_una
-:es_una rdf:type owl:ObjectProperty ,
-                 owl:FunctionalProperty ;
-        rdfs:domain :Sala ;
-        rdfs:range :SalaArtista ,
-                   :SalaTematica ;
-        rdfs:comment "Una sala es una SalaTemática o SalaArtista" .
-
-
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/exhibe_obras_de
 :exhibe_obras_de rdf:type owl:ObjectProperty ;
                  rdfs:domain :SalaArtista ;
@@ -109,6 +91,12 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 #################################################################
 #    Data properties
 #################################################################
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#nMuseosVisitados
+:nMuseosVisitados rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Visita ;
+                  rdfs:range xsd:nonNegativeInteger .
+
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#nHoras/Dia
 <http://www.semanticweb.org/guill/ontologies/2024/10/ontology#nHoras/Dia> rdf:type owl:DatatypeProperty ,
@@ -262,60 +250,6 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 #################################################################
 #    Individuals
 #################################################################
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Sala1
-:Sala1 rdf:type owl:NamedIndividual ,
-                :SalaTematica ;
-       :sala_sobre_estilo :Renacimiento .
-
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Sala2
-:Sala2 rdf:type owl:NamedIndividual ,
-                :SalaTematica ;
-       :sala_sobre_estilo :Barroco .
-
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Sala3
-:Sala3 rdf:type owl:NamedIndividual ,
-                :SalaTematica ;
-       :sala_sobre_estilo :ArteModerno .
-
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Sala4
-:Sala4 rdf:type owl:NamedIndividual ,
-                :SalaArtista ;
-       :exhibe_obras_de :ClaudeMonet .
-
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Sala5
-:Sala5 rdf:type owl:NamedIndividual ,
-                :SalaArtista ;
-       :exhibe_obras_de :WassilyKandinsky .
-
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Sala6
-:Sala6 rdf:type owl:NamedIndividual ,
-                :SalaArtista ;
-       :exhibe_obras_de :ArtemisiaGentileschi .
-
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Sala7
-:Sala7 rdf:type owl:NamedIndividual ,
-                :SalaTematica ;
-       :sala_sobre_estilo :Renacimiento .
-
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Sala8
-:Sala8 rdf:type owl:NamedIndividual ,
-                :SalaTematica ;
-       :sala_sobre_estilo :Renacimiento .
-
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#Sala9
-:Sala9 rdf:type owl:NamedIndividual ,
-                :SalaArtista ;
-       :exhibe_obras_de :RembrandtVanRijn .
-
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Amarillo-Rojo-Azul
 :Amarillo-Rojo-Azul rdf:type owl:NamedIndividual ,
@@ -1118,6 +1052,60 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
                    :obra_de_estilo :ArteModerno ;
                    :Dimensiones 5980 ;
                    :añoCreacion 1937 .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Sala1
+:Sala1 rdf:type owl:NamedIndividual ,
+                :SalaTematica ;
+       :sala_sobre_estilo :Renacimiento .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Sala2
+:Sala2 rdf:type owl:NamedIndividual ,
+                :SalaTematica ;
+       :sala_sobre_estilo :Barroco .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Sala3
+:Sala3 rdf:type owl:NamedIndividual ,
+                :SalaTematica ;
+       :sala_sobre_estilo :ArteModerno .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Sala4
+:Sala4 rdf:type owl:NamedIndividual ,
+                :SalaArtista ;
+       :exhibe_obras_de :ClaudeMonet .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Sala5
+:Sala5 rdf:type owl:NamedIndividual ,
+                :SalaArtista ;
+       :exhibe_obras_de :WassilyKandinsky .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Sala6
+:Sala6 rdf:type owl:NamedIndividual ,
+                :SalaArtista ;
+       :exhibe_obras_de :ArtemisiaGentileschi .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Sala7
+:Sala7 rdf:type owl:NamedIndividual ,
+                :SalaTematica ;
+       :sala_sobre_estilo :Renacimiento .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Sala8
+:Sala8 rdf:type owl:NamedIndividual ,
+                :SalaTematica ;
+       :sala_sobre_estilo :Renacimiento .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Sala9
+:Sala9 rdf:type owl:NamedIndividual ,
+                :SalaArtista ;
+       :exhibe_obras_de :RembrandtVanRijn .
 
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/SalvadorDalí

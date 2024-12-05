@@ -1,17 +1,65 @@
 ;;; ---------------------------------------------------------
 ;;; ontologia.clp
 ;;; Translated by owl2clips
-;;; Translated to CLIPS from ontology ontologia.ttl
-;;; :Date 04/12/2024 10:43:26
+;;; Translated to CLIPS from ontology ontologia.owl
+;;; :Date 05/12/2024 09:17:24
+
+(defclass Visita "Representa la clase visita, sera qualquier entidad que vaya a visitar el museo."
+    (is-a USER)
+    (role concrete)
+    (pattern-match reactive)
+    (slot preferencia_artista
+        (type INSTANCE)
+        (create-accessor read-write))
+    ;;; Los visitantes estan interesados por un estilo concreto
+    (multislot preferencia_de_estilo
+        (type INSTANCE)
+        (create-accessor read-write))
+    (multislot nMuseosVisitados
+        (type SYMBOL)
+        (create-accessor read-write))
+    (slot nHoras/Dia
+        (type INTEGER)
+        (create-accessor read-write))
+    (slot conocimiento
+        (type SYMBOL)
+        (create-accessor read-write))
+    (slot duración
+        (type SYMBOL)
+        (create-accessor read-write))
+    (slot nDias
+        (type INTEGER)
+        (create-accessor read-write))
+    (slot tipoGrupo
+        (type STRING)
+        (create-accessor read-write))
+    (slot épocaInterés
+        (type STRING)
+        (create-accessor read-write))
+)
+
+(defclass Grupo "Será un conjunto de personas que vayan a visitar el museo. Puden ser tanto grupos de personas adultas, como famílias."
+    (is-a Visita)
+    (role concrete)
+    (pattern-match reactive)
+    (slot esFamilia
+        (type SYMBOL)
+        (create-accessor read-write))
+    (slot nPersonas
+        (type SYMBOL)
+        (create-accessor read-write))
+)
+
+(defclass Persona "Es un tipo de visitante, este irá al museo sin acompañante."
+    (is-a Visita)
+    (role concrete)
+    (pattern-match reactive)
+)
 
 (defclass Sala "Clase que representa una sala del museo."
     (is-a USER)
     (role concrete)
     (pattern-match reactive)
-    ;;; Una sala es una SalaTemática o SalaArtista
-    (slot es_una
-        (type INSTANCE)
-        (create-accessor read-write))
     ;;; Una sala forma parte de un museo
     (slot parte_de
         (type INSTANCE)
@@ -38,59 +86,6 @@
         (create-accessor read-write))
 )
 
-(defclass Visita "Representa la clase visita, sera qualquier entidad que vaya a visitar el museo."
-    (is-a USER)
-    (role concrete)
-    (pattern-match reactive)
-    ;;; Una visita puede ser grupal o individual
-    (slot es_un
-        (type INSTANCE)
-        (create-accessor read-write))
-    (slot preferencia_artista
-        (type INSTANCE)
-        (create-accessor read-write))
-    ;;; Los visitantes estan interesados por un estilo concreto
-    (multislot preferencia_de_estilo
-        (type INSTANCE)
-        (create-accessor read-write))
-    (slot nHoras/Dia
-        (type SYMBOL)
-        (create-accessor read-write))
-    (multislot conocimiento
-        (type SYMBOL)
-        (create-accessor read-write))
-    (multislot duración
-        (type SYMBOL)
-        (create-accessor read-write))
-    (multislot nDias
-        (type INTEGER)
-        (create-accessor read-write))
-    (multislot tipoGrupo
-        (type STRING)
-        (create-accessor read-write))
-    (slot épocaInterés
-        (type STRING)
-        (create-accessor read-write))
-)
-
-(defclass Grupo "Será un conjunto de personas que vayan a visitar el museo. Puden ser tanto grupos de personas adultas, como famílias."
-    (is-a Visita)
-    (role concrete)
-    (pattern-match reactive)
-    (multislot esFamilia
-        (type SYMBOL)
-        (create-accessor read-write))
-    (slot nPersonas
-        (type SYMBOL)
-        (create-accessor read-write))
-)
-
-(defclass Persona "Es un tipo de visitante, este irá al museo sin acompañante."
-    (is-a Visita)
-    (role concrete)
-    (pattern-match reactive)
-)
-
 (defclass Artista "Clase que representa a una persona cuyo arte está en museos."
     (is-a USER)
     (role concrete)
@@ -99,7 +94,7 @@
     (multislot artista_de_estilo
         (type INSTANCE)
         (create-accessor read-write))
-    (multislot Nacionalidad
+    (slot Nacionalidad
         (type STRING)
         (create-accessor read-write))
 )
@@ -108,7 +103,7 @@
     (is-a USER)
     (role concrete)
     (pattern-match reactive)
-    (multislot tipo
+    (slot tipo
         (type STRING)
         (create-accessor read-write))
 )
@@ -135,13 +130,13 @@
     (slot obra_de_estilo
         (type INSTANCE)
         (create-accessor read-write))
-    (multislot Dimensiones
+    (slot Dimensiones
         (type STRING)
         (create-accessor read-write))
-    (multislot añoCreacion
+    (slot añoCreacion
         (type SYMBOL)
         (create-accessor read-write))
-    (multislot época
+    (slot época
         (type STRING)
         (create-accessor read-write))
 )
@@ -149,6 +144,7 @@
 (definstances instances
     ([Amarillo-Rojo-Azul] of ObraDeArte
          (creada_por  [WassilyKandinsky])
+         (expuesta_en  [Sala5])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  25400)
          (añoCreacion  1925)
@@ -156,6 +152,7 @@
 
     ([Anunciación] of ObraDeArte
          (creada_por  [LeonardoDaVinci])
+         (expuesta_en  [Sala1])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  21266)
          (añoCreacion  1472)
@@ -169,6 +166,7 @@
 
     ([AutorretratoComoAlegoríaDeLaPintura] of ObraDeArte
          (creada_por  [ArtemisiaGentileschi])
+         (expuesta_en  [Sala6])
          (obra_de_estilo  [Barroco])
          (Dimensiones  7415)
          (añoCreacion  1639)
@@ -176,6 +174,7 @@
 
     ([AutorretratoConDosCírculos] of ObraDeArte
          (creada_por  [RembrandtVanRijn])
+         (expuesta_en  [Sala9])
          (obra_de_estilo  [Barroco])
          (Dimensiones  10763)
          (añoCreacion  1669)
@@ -183,6 +182,7 @@
 
     ([AutorretratoConOrejaVendada] of ObraDeArte
          (creada_por  [VincentVanGogh])
+         (expuesta_en  [Sala3])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  2940)
          (añoCreacion  1889)
@@ -193,6 +193,7 @@
 
     ([CampoDeTrigoConCuervos] of ObraDeArte
          (creada_por  [VincentVanGogh])
+         (expuesta_en  [Sala3])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  5201)
          (añoCreacion  1890)
@@ -204,6 +205,7 @@
 
     ([CisnesReflejandoElefantes] of ObraDeArte
          (creada_por  [SalvadorDalí])
+         (expuesta_en  [Sala3])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  3927)
          (añoCreacion  1937)
@@ -215,6 +217,7 @@
 
     ([Cleopatra] of ObraDeArte
          (creada_por  [ArtemisiaGentileschi])
+         (expuesta_en  [Sala6])
          (obra_de_estilo  [Barroco])
          (Dimensiones  20533)
          (añoCreacion  1622)
@@ -222,6 +225,7 @@
 
     ([ComposiciónVII] of ObraDeArte
          (creada_por  [WassilyKandinsky])
+         (expuesta_en  [Sala5])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  60000)
          (añoCreacion  1913)
@@ -229,6 +233,7 @@
 
     ([ComposiciónVIII] of ObraDeArte
          (creada_por  [WassilyKandinsky])
+         (expuesta_en  [Sala5])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  28140)
          (añoCreacion  1923)
@@ -236,6 +241,7 @@
 
     ([CristoCrucificado] of ObraDeArte
          (creada_por  [DiegoVelázquez])
+         (expuesta_en  [Sala2])
          (obra_de_estilo  [Barroco])
          (Dimensiones  41912)
          (añoCreacion  1632)
@@ -243,6 +249,7 @@
 
     ([CristoDeSanJuanDeLaCruz] of ObraDeArte
          (creada_por  [SalvadorDalí])
+         (expuesta_en  [Sala3])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  23780)
          (añoCreacion  1951)
@@ -250,6 +257,7 @@
 
     ([CuadradoConCírculosConcéntricos] of ObraDeArte
          (creada_por  [WassilyKandinsky])
+         (expuesta_en  [Sala5])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  14400)
          (añoCreacion  1913)
@@ -257,6 +265,7 @@
 
     ([Danae] of ObraDeArte
          (creada_por  [RembrandtVanRijn])
+         (expuesta_en  [Sala9])
          (obra_de_estilo  [Barroco])
          (Dimensiones  37555)
          (añoCreacion  1636)
@@ -264,6 +273,7 @@
 
     ([David] of ObraDeArte
          (creada_por  [MiguelAngel])
+         (expuesta_en  [Sala1])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  517)
          (añoCreacion  1501)
@@ -271,6 +281,7 @@
 
     ([DavidConLaCabezaDeGoliat] of ObraDeArte
          (creada_por  [Caravaggio])
+         (expuesta_en  [Sala2])
          (obra_de_estilo  [Barroco])
          (Dimensiones  12625)
          (añoCreacion  1610)
@@ -278,6 +289,7 @@
 
     ([DavidDonatello] of ObraDeArte
          (creada_por  [Donatello])
+         (expuesta_en  [Sala8])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  158)
          (añoCreacion  1440)
@@ -293,6 +305,7 @@
 
     ([ElDescendimientoDeLaCruz] of ObraDeArte
          (creada_por  [PeterPaulRubens])
+         (expuesta_en  [Sala2])
          (obra_de_estilo  [Barroco])
          (Dimensiones  57640)
          (añoCreacion  1614)
@@ -300,6 +313,7 @@
 
     ([ElEstanqueDeNenúfares] of ObraDeArte
          (creada_por  [ClaudeMonet])
+         (expuesta_en  [Sala4])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  8181)
          (añoCreacion  1899)
@@ -307,6 +321,7 @@
 
     ([ElFestínDeHerodes] of ObraDeArte
          (creada_por  [Donatello])
+         (expuesta_en  [Sala8])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  3600)
          (añoCreacion  1425)
@@ -314,6 +329,7 @@
 
     ([ElGranMasturbador] of ObraDeArte
          (creada_por  [SalvadorDalí])
+         (expuesta_en  [Sala3])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  16500)
          (añoCreacion  1929)
@@ -321,6 +337,7 @@
 
     ([ElGuitarristaViejo] of ObraDeArte
          (creada_por  [PabloPicasso])
+         (expuesta_en  [Sala3])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  10151.54)
          (añoCreacion  1904)
@@ -328,6 +345,7 @@
 
     ([ElHombreDeVitruvio] of ObraDeArte
          (creada_por  [LeonardoDaVinci])
+         (expuesta_en  [Sala1])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  877)
          (añoCreacion  1490)
@@ -335,6 +353,7 @@
 
     ([ElJardínDelAmor] of ObraDeArte
          (creada_por  [PeterPaulRubens])
+         (expuesta_en  [Sala2])
          (obra_de_estilo  [Barroco])
          (Dimensiones  56628)
          (añoCreacion  1630)
@@ -342,6 +361,7 @@
 
     ([ElJuicioDeParis] of ObraDeArte
          (creada_por  [PeterPaulRubens])
+         (expuesta_en  [Sala2])
          (obra_de_estilo  [Barroco])
          (Dimensiones  75819)
          (añoCreacion  1636)
@@ -349,6 +369,7 @@
 
     ([ElJuicioFinal] of ObraDeArte
          (creada_por  [MiguelAngel])
+         (expuesta_en  [Sala7])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  1644000)
          (añoCreacion  1536)
@@ -356,6 +377,7 @@
 
     ([ElNacimientoDeVenus] of ObraDeArte
          (creada_por  [SandroBotticelli])
+         (expuesta_en  [Sala8])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  47816)
          (añoCreacion  1484)
@@ -363,6 +385,7 @@
 
     ([ElRegresoDelHijopródigo] of ObraDeArte
          (creada_por  [RembrandtVanRijn])
+         (expuesta_en  [Sala9])
          (obra_de_estilo  [Barroco])
          (Dimensiones  53710)
          (añoCreacion  1669)
@@ -370,6 +393,7 @@
 
     ([ElRetabloDeSantaMaríaDelPopolo] of ObraDeArte
          (creada_por  [Rafael])
+         (expuesta_en  [Sala1])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  85000)
          (añoCreacion  1516)
@@ -377,6 +401,7 @@
 
     ([ElTriumfoDeBaco] of ObraDeArte
          (creada_por  [DiegoVelázquez])
+         (expuesta_en  [Sala2])
          (obra_de_estilo  [Barroco])
          (Dimensiones  37125)
          (añoCreacion  1629)
@@ -384,6 +409,7 @@
 
     ([Guernica] of ObraDeArte
          (creada_por  [PabloPicasso])
+         (expuesta_en  [Sala3])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  270824)
          (añoCreacion  1937)
@@ -391,6 +417,7 @@
 
     ([Habacuc] of ObraDeArte
          (creada_por  [Donatello])
+         (expuesta_en  [Sala8])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  195)
          (añoCreacion  1423)
@@ -398,6 +425,7 @@
 
     ([ImpresiónSolNaciente] of ObraDeArte
          (creada_por  [ClaudeMonet])
+         (expuesta_en  [Sala4])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  3024)
          (añoCreacion  1872)
@@ -405,6 +433,7 @@
 
     ([Improvisación28] of ObraDeArte
          (creada_por  [WassilyKandinsky])
+         (expuesta_en  [Sala5])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  17982)
          (añoCreacion  1912)
@@ -412,6 +441,7 @@
 
     ([JudithDecapitandoAHolofernes] of ObraDeArte
          (creada_por  [Caravaggio])
+         (expuesta_en  [Sala2])
          (obra_de_estilo  [Barroco])
          (Dimensiones  28080)
          (añoCreacion  1599)
@@ -419,6 +449,7 @@
 
     ([JudithYSuDoncella] of ObraDeArte
          (creada_por  [ArtemisiaGentileschi])
+         (expuesta_en  [Sala6])
          (obra_de_estilo  [Barroco])
          (Dimensiones  10659)
          (añoCreacion  1619)
@@ -426,6 +457,7 @@
 
     ([LaAdoraciónDeLosMagos] of ObraDeArte
          (creada_por  [PeterPaulRubens])
+         (expuesta_en  [Sala2])
          (obra_de_estilo  [Barroco])
          (Dimensiones  156064)
          (añoCreacion  1624)
@@ -433,6 +465,7 @@
 
     ([LaCalumniaDeApeles] of ObraDeArte
          (creada_por  [SandroBotticelli])
+         (expuesta_en  [Sala8])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  5642)
          (añoCreacion  1495)
@@ -440,6 +473,7 @@
 
     ([LaCatedralDeRuanEfectoDeSol] of ObraDeArte
          (creada_por  [ClaudeMonet])
+         (expuesta_en  [Sala4])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  6500)
          (añoCreacion  1893)
@@ -447,6 +481,7 @@
 
     ([LaCenaDeEmaús] of ObraDeArte
          (creada_por  [Caravaggio])
+         (expuesta_en  [Sala2])
          (obra_de_estilo  [Barroco])
          (Dimensiones  27580)
          (añoCreacion  1601)
@@ -454,6 +489,7 @@
 
     ([LaCreaciónDeAdán] of ObraDeArte
          (creada_por  [MiguelAngel])
+         (expuesta_en  [Sala1])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  5600000)
          (añoCreacion  1512)
@@ -461,6 +497,7 @@
 
     ([LaDamaDelArmiño] of ObraDeArte
          (creada_por  [LeonardoDaVinci])
+         (expuesta_en  [Sala1])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  2106)
          (añoCreacion  1489)
@@ -468,6 +505,7 @@
 
     ([LaEscuelaDeAtenas] of ObraDeArte
          (creada_por  [Rafael])
+         (expuesta_en  [Sala7])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  385000)
          (añoCreacion  1510)
@@ -475,6 +513,7 @@
 
     ([LaFraguaDeVulcano] of ObraDeArte
          (creada_por  [DiegoVelázquez])
+         (expuesta_en  [Sala2])
          (obra_de_estilo  [Barroco])
          (Dimensiones  64670)
          (añoCreacion  1630)
@@ -482,6 +521,7 @@
 
     ([LaHabitaciónEnArlés] of ObraDeArte
          (creada_por  [VincentVanGogh])
+         (expuesta_en  [Sala3])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  6480)
          (añoCreacion  1888)
@@ -489,6 +529,7 @@
 
     ([LaIncredulidadDeSantoTomás] of ObraDeArte
          (creada_por  [Caravaggio])
+         (expuesta_en  [Sala2])
          (obra_de_estilo  [Barroco])
          (Dimensiones  15622)
          (añoCreacion  1602)
@@ -496,6 +537,7 @@
 
     ([LaLecciónDeAnatomíaDelDr.Tulp] of ObraDeArte
          (creada_por  [RembrandtVanRijn])
+         (expuesta_en  [Sala9])
          (obra_de_estilo  [Barroco])
          (Dimensiones  36697)
          (añoCreacion  1632)
@@ -503,6 +545,7 @@
 
     ([LaMadonnaDelJilguero] of ObraDeArte
          (creada_por  [Rafael])
+         (expuesta_en  [Sala1])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  8239)
          (añoCreacion  1505)
@@ -510,6 +553,7 @@
 
     ([LaMadonnaSixtina] of ObraDeArte
          (creada_por  [Rafael])
+         (expuesta_en  [Sala1])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  51940)
          (añoCreacion  1512)
@@ -517,6 +561,7 @@
 
     ([LaMonaLisa] of ObraDeArte
          (creada_por  [LeonardoDaVinci])
+         (expuesta_en  [Sala1])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  4081)
          (añoCreacion  1503)
@@ -524,6 +569,7 @@
 
     ([LaMujerQueLlora] of ObraDeArte
          (creada_por  [PabloPicasso])
+         (expuesta_en  [Sala3])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  2940)
          (añoCreacion  1937)
@@ -531,6 +577,7 @@
 
     ([LaNocheEstrellada] of ObraDeArte
          (creada_por  [VincentVanGogh])
+         (expuesta_en  [Sala3])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  6787.77)
          (añoCreacion  1889)
@@ -538,6 +585,7 @@
 
     ([LaPersistenciaDeLaMemoria] of ObraDeArte
          (creada_por  [SalvadorDalí])
+         (expuesta_en  [Sala3])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  792)
          (añoCreacion  1931)
@@ -545,6 +593,7 @@
 
     ([LaPiedad] of ObraDeArte
          (creada_por  [MiguelAngel])
+         (expuesta_en  [Sala1])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  33930)
          (añoCreacion  1498)
@@ -552,6 +601,7 @@
 
     ([LaPrimavera] of ObraDeArte
          (creada_por  [SandroBotticelli])
+         (expuesta_en  [Sala8])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  63742)
          (añoCreacion  1482)
@@ -559,6 +609,7 @@
 
     ([LaRendiciónDeBreda] of ObraDeArte
          (creada_por  [DiegoVelázquez])
+         (expuesta_en  [Sala2])
          (obra_de_estilo  [Barroco])
          (Dimensiones  112669)
          (añoCreacion  1635)
@@ -566,6 +617,7 @@
 
     ([LaRondaDeNoche] of ObraDeArte
          (creada_por  [RembrandtVanRijn])
+         (expuesta_en  [Sala9])
          (obra_de_estilo  [Barroco])
          (Dimensiones  158631)
          (añoCreacion  1642)
@@ -573,6 +625,7 @@
 
     ([LaTransfiguración] of ObraDeArte
          (creada_por  [Rafael])
+         (expuesta_en  [Sala1])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  114390)
          (añoCreacion  1516)
@@ -580,6 +633,7 @@
 
     ([LaUltimaCena] of ObraDeArte
          (creada_por  [LeonardoDaVinci])
+         (expuesta_en  [Sala7])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  404800)
          (añoCreacion  1495)
@@ -587,6 +641,7 @@
 
     ([LaVirgenDelLibro] of ObraDeArte
          (creada_por  [SandroBotticelli])
+         (expuesta_en  [Sala8])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  2262)
          (añoCreacion  1480)
@@ -594,6 +649,7 @@
 
     ([LaVocaciónDeSanMateo] of ObraDeArte
          (creada_por  [Caravaggio])
+         (expuesta_en  [Sala2])
          (obra_de_estilo  [Barroco])
          (Dimensiones  109480)
          (añoCreacion  1600)
@@ -601,6 +657,7 @@
 
     ([LasMeninas] of ObraDeArte
          (creada_por  [DiegoVelázquez])
+         (expuesta_en  [Sala2])
          (obra_de_estilo  [Barroco])
          (Dimensiones  87768)
          (añoCreacion  1656)
@@ -608,6 +665,7 @@
 
     ([LasTresGracias] of ObraDeArte
          (creada_por  [PeterPaulRubens])
+         (expuesta_en  [Sala2])
          (obra_de_estilo  [Barroco])
          (Dimensiones  40001)
          (añoCreacion  1635)
@@ -619,6 +677,7 @@
 
     ([LesDemoisellesDAvignon] of ObraDeArte
          (creada_por  [PabloPicasso])
+         (expuesta_en  [Sala3])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  56999.43)
          (añoCreacion  1907)
@@ -626,6 +685,7 @@
 
     ([LosGirasoles] of ObraDeArte
          (creada_por  [VincentVanGogh])
+         (expuesta_en  [Sala3])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  6696)
          (añoCreacion  1888)
@@ -633,6 +693,7 @@
 
     ([Lucrecia] of ObraDeArte
          (creada_por  [ArtemisiaGentileschi])
+         (expuesta_en  [Sala6])
          (obra_de_estilo  [Barroco])
          (Dimensiones  7700)
          (añoCreacion  1625)
@@ -644,6 +705,7 @@
 
     ([Moisés] of ObraDeArte
          (creada_por  [MiguelAngel])
+         (expuesta_en  [Sala1])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  235)
          (añoCreacion  1513)
@@ -651,6 +713,7 @@
 
     ([MujerConSombrilla] of ObraDeArte
          (creada_por  [ClaudeMonet])
+         (expuesta_en  [Sala4])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  8100)
          (añoCreacion  1875)
@@ -658,6 +721,7 @@
 
     ([Nenúfares] of ObraDeArte
          (creada_por  [ClaudeMonet])
+         (expuesta_en  [Sala4])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  255200)
          (añoCreacion  1926)
@@ -669,6 +733,7 @@
 
     ([PalasYElCentauro] of ObraDeArte
          (creada_por  [SandroBotticelli])
+         (expuesta_en  [Sala8])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  30636)
          (añoCreacion  1482)
@@ -676,6 +741,7 @@
 
     ([PenitenteMagdalena] of ObraDeArte
          (creada_por  [Donatello])
+         (expuesta_en  [Sala8])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  188)
          (añoCreacion  1455)
@@ -698,8 +764,46 @@
 
     ([RetratoDeDoraMaar] of ObraDeArte
          (creada_por  [PabloPicasso])
+         (expuesta_en  [Sala3])
+         (obra_de_estilo  [ArteModerno])
          (Dimensiones  5980)
          (añoCreacion  1937)
+    )
+
+    ([Sala1] of SalaTematica
+         (sala_sobre_estilo  [Renacimiento])
+    )
+
+    ([Sala2] of SalaTematica
+         (sala_sobre_estilo  [Barroco])
+    )
+
+    ([Sala3] of SalaTematica
+         (sala_sobre_estilo  [ArteModerno])
+    )
+
+    ([Sala4] of SalaArtista
+         (exhibe_obras_de  [ClaudeMonet])
+    )
+
+    ([Sala5] of SalaArtista
+         (exhibe_obras_de  [WassilyKandinsky])
+    )
+
+    ([Sala6] of SalaArtista
+         (exhibe_obras_de  [ArtemisiaGentileschi])
+    )
+
+    ([Sala7] of SalaTematica
+         (sala_sobre_estilo  [Renacimiento])
+    )
+
+    ([Sala8] of SalaTematica
+         (sala_sobre_estilo  [Renacimiento])
+    )
+
+    ([Sala9] of SalaArtista
+         (exhibe_obras_de  [RembrandtVanRijn])
     )
 
     ([SalvadorDalí] of Artista
@@ -708,6 +812,7 @@
 
     ([SanJorge] of ObraDeArte
          (creada_por  [Donatello])
+         (expuesta_en  [Sala8])
          (obra_de_estilo  [Renacimiento])
          (Dimensiones  209)
          (añoCreacion  1416)
@@ -719,6 +824,7 @@
 
     ([SueñoCausadoPorElVueloDeUnaAbeja] of ObraDeArte
          (creada_por  [SalvadorDalí])
+         (expuesta_en  [Sala3])
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  2091)
          (añoCreacion  1944)
@@ -726,6 +832,7 @@
 
     ([SusanaYLosAncianos] of ObraDeArte
          (creada_por  [ArtemisiaGentileschi])
+         (expuesta_en  [Sala6])
          (obra_de_estilo  [Barroco])
          (Dimensiones  20570)
          (añoCreacion  1610)
