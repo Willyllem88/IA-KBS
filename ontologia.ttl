@@ -109,14 +109,14 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :CONOCIMIENTO rdf:type owl:DatatypeProperty ,
                        owl:FunctionalProperty ;
               rdfs:domain :Visita ;
-              rdfs:range xsd:nonNegativeInteger .
+              rdfs:range xsd:string .
 
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/DURACIÓN
 :DURACIÓN rdf:type owl:DatatypeProperty ,
                    owl:FunctionalProperty ;
           rdfs:domain :Visita ;
-          rdfs:range xsd:nonNegativeInteger .
+          rdfs:range xsd:int .
 
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Dimensiones
@@ -150,7 +150,7 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 :añoCreacion rdf:type owl:DatatypeProperty ,
                       owl:FunctionalProperty ;
              rdfs:domain :ObraDeArte ;
-             rdfs:range xsd:nonNegativeInteger .
+             rdfs:range xsd:int .
 
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/esFamilia
@@ -170,14 +170,14 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/nMuseosVisitados
 :nMuseosVisitados rdf:type owl:DatatypeProperty ;
                   rdfs:domain :Visita ;
-                  rdfs:range xsd:nonNegativeInteger .
+                  rdfs:range xsd:int .
 
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/nPersonas
 :nPersonas rdf:type owl:DatatypeProperty ,
                     owl:FunctionalProperty ;
            rdfs:domain :Visita ;
-           rdfs:range xsd:positiveInteger .
+           rdfs:range xsd:int .
 
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/tipo

@@ -1,8 +1,8 @@
 ;;; ---------------------------------------------------------
 ;;; ontologia.clp
 ;;; Translated by owl2clips
-;;; Translated to CLIPS from ontology ontologia.ttl
-;;; :Date 05/12/2024 14:34:12
+;;; Translated to CLIPS from ontology ontologia.owl
+;;; :Date 05/12/2024 14:58:43
 
 (defclass Sala "Clase que representa una sala del museo."
     (is-a USER)
@@ -30,15 +30,6 @@
     (pattern-match reactive)
     ;;; Una sala temática está basada en un estilo concreto
     (slot sala_sobre_estilo
-        (type INSTANCE)
-        (create-accessor read-write))
-)
-
-(defclass Ruta
-    (is-a USER)
-    (role concrete)
-    (pattern-match reactive)
-    (multislot ruta_contiene
         (type INSTANCE)
         (create-accessor read-write))
 )
@@ -91,10 +82,19 @@
         (type STRING)
         (create-accessor read-write))
     (slot añoCreacion
-        (type SYMBOL)
+        (type INTEGER)
         (create-accessor read-write))
     (slot época
         (type STRING)
+        (create-accessor read-write))
+)
+
+(defclass Ruta
+    (is-a USER)
+    (role concrete)
+    (pattern-match reactive)
+    (multislot ruta_contiene
+        (type INSTANCE)
         (create-accessor read-write))
 )
 
@@ -110,13 +110,13 @@
         (type INSTANCE)
         (create-accessor read-write))
     (slot nHoras/Dia
-        (type SYMBOL)
+        (type INTEGER)
         (create-accessor read-write))
     (slot CONOCIMIENTO
-        (type SYMBOL)
+        (type STRING)
         (create-accessor read-write))
     (slot DURACIÓN
-        (type SYMBOL)
+        (type INTEGER)
         (create-accessor read-write))
     (multislot ESTILOPREFERIDO
         (type STRING)
@@ -131,10 +131,10 @@
         (type INTEGER)
         (create-accessor read-write))
     (multislot nMuseosVisitados
-        (type SYMBOL)
+        (type INTEGER)
         (create-accessor read-write))
     (slot nPersonas
-        (type SYMBOL)
+        (type INTEGER)
         (create-accessor read-write))
     (slot épocaInterés
         (type STRING)
@@ -142,30 +142,6 @@
 )
 
 (definstances instances
-    ([Barroca] of Ruta
-         (ruta_contiene  [Cleopatra] [ElJuicioDeParis] [JudithYSuDoncella] [LaAdoraciónDeLosMagos] [LaCenaDeEmaús] [LaFraguaDeVulcano] [LaRendiciónDeBreda] [Lucrecia] [SusanaYLosAncianos])
-    )
-
-    ([Expertos] of Ruta
-         (ruta_contiene  [Amarillo-Rojo-Azul] [ComposiciónVII] [ElDescendimientoDeLaCruz] [ElJuicioFinal] [ElTriumfoDeBaco] [Improvisación28] [LaEscuelaDeAtenas] [LaUltimaCena] [LaVocaciónDeSanMateo])
-    )
-
-    ([General] of Ruta
-         (ruta_contiene  [ElDescendimientoDeLaCruz] [Guernica] [JudithDecapitandoAHolofernes] [LaCreaciónDeAdán] [LaMonaLisa] [LaNocheEstrellada] [LaPersistenciaDeLaMemoria] [LaTransfiguración] [LasMeninas])
-    )
-
-    ([Modernista] of Ruta
-         (ruta_contiene  [Amarillo-Rojo-Azul] [CisnesReflejandoElefantes] [ComposiciónVIII] [CuadradoConCírculosConcéntricos] [ElEstanqueDeNenúfares] [Guernica] [ImpresiónSolNaciente] [LaCatedralDeRuanEfectoDeSol] [LosGirasoles])
-    )
-
-    ([Niños] of Ruta
-         (ruta_contiene  [CisnesReflejandoElefantes] [Cleopatra] [ImpresiónSolNaciente] [JudithYSuDoncella] [LaPersistenciaDeLaMemoria] [LosGirasoles] [MujerConSombrilla] [Nenúfares])
-    )
-
-    ([Renacentista] of Ruta
-         (ruta_contiene  [ElHombreDeVitruvio] [LaCreaciónDeAdán] [LaMadonnaSixtina] [LaMonaLisa] [LaPiedad] [LaTransfiguración] [LaUltimaCena] [Moisés])
-    )
-
     ([Amarillo-Rojo-Azul] of ObraDeArte
          (creada_por  [WassilyKandinsky])
          (expuesta_en  [Sala5])
@@ -210,6 +186,10 @@
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  2940)
          (añoCreacion  1889)
+    )
+
+    ([Barroca] of Ruta
+         (ruta_contiene  [Cleopatra] [ElJuicioDeParis] [JudithYSuDoncella] [LaAdoraciónDeLosMagos] [LaCenaDeEmaús] [LaFraguaDeVulcano] [LaRendiciónDeBreda] [Lucrecia] [SusanaYLosAncianos])
     )
 
     ([Barroco] of Estilo
@@ -429,6 +409,14 @@
          (obra_de_estilo  [Barroco])
          (Dimensiones  37125)
          (añoCreacion  1629)
+    )
+
+    ([Expertos] of Ruta
+         (ruta_contiene  [Amarillo-Rojo-Azul] [ComposiciónVII] [ElDescendimientoDeLaCruz] [ElJuicioFinal] [ElTriumfoDeBaco] [Improvisación28] [LaEscuelaDeAtenas] [LaUltimaCena] [LaVocaciónDeSanMateo])
+    )
+
+    ([General] of Ruta
+         (ruta_contiene  [ElDescendimientoDeLaCruz] [Guernica] [JudithDecapitandoAHolofernes] [LaCreaciónDeAdán] [LaMonaLisa] [LaNocheEstrellada] [LaPersistenciaDeLaMemoria] [LaTransfiguración] [LasMeninas])
     )
 
     ([Guernica] of ObraDeArte
@@ -727,6 +715,10 @@
          (artista_de_estilo  [Renacimiento])
     )
 
+    ([Modernista] of Ruta
+         (ruta_contiene  [Amarillo-Rojo-Azul] [CisnesReflejandoElefantes] [ComposiciónVIII] [CuadradoConCírculosConcéntricos] [ElEstanqueDeNenúfares] [Guernica] [ImpresiónSolNaciente] [LaCatedralDeRuanEfectoDeSol] [LosGirasoles])
+    )
+
     ([Moisés] of ObraDeArte
          (creada_por  [MiguelAngel])
          (expuesta_en  [Sala1])
@@ -749,6 +741,10 @@
          (obra_de_estilo  [ArteModerno])
          (Dimensiones  255200)
          (añoCreacion  1926)
+    )
+
+    ([Niños] of Ruta
+         (ruta_contiene  [CisnesReflejandoElefantes] [Cleopatra] [ImpresiónSolNaciente] [JudithYSuDoncella] [LaPersistenciaDeLaMemoria] [LosGirasoles] [MujerConSombrilla] [Nenúfares])
     )
 
     ([PabloPicasso] of Artista
@@ -781,6 +777,10 @@
 
     ([RembrandtVanRijn] of Artista
          (artista_de_estilo  [Barroco])
+    )
+
+    ([Renacentista] of Ruta
+         (ruta_contiene  [ElHombreDeVitruvio] [LaCreaciónDeAdán] [LaMadonnaSixtina] [LaMonaLisa] [LaPiedad] [LaTransfiguración] [LaUltimaCena] [Moisés])
     )
 
     ([Renacimiento] of Estilo
