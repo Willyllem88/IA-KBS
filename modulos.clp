@@ -127,9 +127,8 @@
 
 (defrule abstraccion::abstraccion-problema
    ?visita <- (object (is-a Visita)(nDias ?dias)(nHoras/Dia ?horas)(nMuseosVisitados ?museos)(nPersonas ?personas))
-   ;;(preferencia-de-estilo ?visita ?preferencia-de-estilo)
+   (preferencia-de-estilo ?preferencia-de-estilo)
    =>
-    (printout t "HOLAAA" crlf)
 
    (bind ?coneixement
       (if (<= ?museos 1) then
@@ -156,18 +155,17 @@
    (printout t "  Conocimiento: " ?coneixement crlf)
    (printout t "  Duración de la visita: " ?duracion crlf)
    (printout t "  Tipo de grupo: " ?tipo-grupo crlf)
-
-    (printout t "DEBUG: Modificant la instància: " ?visita crlf)
+    (printout t "  Preferencia estilo: " ?preferencia-de-estilo crlf)
 
    ;; Guardar el problema abstracto
    ;;(assert (CONOCIMIENTO ?coneixement))
    (assert (DURACIÓN ?duracion))
-   ;;(assert (ESTILOPREFERIDO ?preferencia-de-estilo));;FALTA
+   (assert (ESTILOPREFERIDO ?preferencia-de-estilo))
    (assert (TIPOGRUPO ?tipo-grupo))
 
+    (printout t "DEBUG: Modificant la instància: " ?visita crlf)
     ;;CREC QUE S'HAURIA DE FER AIXO I NO ASSERT PERO NO SÉ COM(modify ?visita (CONOCIMIENTO ?coneixement) (DURACIÓN ?duracion) (TIPOGRUPO ?tipo-grupo))
 
-    
    (focus matching)
    (run)
 
