@@ -92,17 +92,25 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 #    Data properties
 #################################################################
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#nMuseosVisitados
-:nMuseosVisitados rdf:type owl:DatatypeProperty ;
-                  rdfs:domain :Visita ;
-                  rdfs:range xsd:nonNegativeInteger .
-
-
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology#nHoras/Dia
 <http://www.semanticweb.org/guill/ontologies/2024/10/ontology#nHoras/Dia> rdf:type owl:DatatypeProperty ,
                                                                                    owl:FunctionalProperty ;
                                                                           rdfs:domain :Visita ;
                                                                           rdfs:range xsd:nonNegativeInteger .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/CONOCIMIENTO
+:CONOCIMIENTO rdf:type owl:DatatypeProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain :Visita ;
+              rdfs:range xsd:nonNegativeInteger .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/DURACIÓN
+:DURACIÓN rdf:type owl:DatatypeProperty ,
+                   owl:FunctionalProperty ;
+          rdfs:domain :Visita ;
+          rdfs:range xsd:nonNegativeInteger .
 
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Dimensiones
@@ -112,11 +120,24 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
              rdfs:range xsd:string .
 
 
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/ESTILOPREFERIDO
+:ESTILOPREFERIDO rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Visita ;
+                 rdfs:range xsd:string .
+
+
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Nacionalidad
 :Nacionalidad rdf:type owl:DatatypeProperty ,
                        owl:FunctionalProperty ;
               rdfs:domain :Artista ;
               rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/TIPOGRUPO
+:TIPOGRUPO rdf:type owl:DatatypeProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain :Visita ;
+           rdfs:range xsd:string .
 
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/añoCreacion
@@ -126,24 +147,10 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
              rdfs:range xsd:nonNegativeInteger .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/conocimiento
-:conocimiento rdf:type owl:DatatypeProperty ,
-                       owl:FunctionalProperty ;
-              rdfs:domain :Visita ;
-              rdfs:range xsd:nonNegativeInteger .
-
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/duración
-:duración rdf:type owl:DatatypeProperty ,
-                   owl:FunctionalProperty ;
-          rdfs:domain :Visita ;
-          rdfs:range xsd:nonNegativeInteger .
-
-
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/esFamilia
 :esFamilia rdf:type owl:DatatypeProperty ,
                     owl:FunctionalProperty ;
-           rdfs:domain :Grupo ;
+           rdfs:domain :Visita ;
            rdfs:range xsd:boolean .
 
 
@@ -154,10 +161,16 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
        rdfs:range xsd:int .
 
 
+###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/nMuseosVisitados
+:nMuseosVisitados rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Visita ;
+                  rdfs:range xsd:nonNegativeInteger .
+
+
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/nPersonas
 :nPersonas rdf:type owl:DatatypeProperty ,
                     owl:FunctionalProperty ;
-           rdfs:domain :Grupo ;
+           rdfs:domain :Visita ;
            rdfs:range xsd:positiveInteger .
 
 
@@ -166,13 +179,6 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
                owl:FunctionalProperty ;
       rdfs:domain :Estilo ;
       rdfs:range xsd:string .
-
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/tipoGrupo
-:tipoGrupo rdf:type owl:DatatypeProperty ,
-                    owl:FunctionalProperty ;
-           rdfs:domain :Visita ;
-           rdfs:range xsd:string .
 
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/época
@@ -203,12 +209,6 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
         rdfs:comment "Clase que representa un estilo/escuela/corriente/periodo pictórico." .
 
 
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Grupo
-:Grupo rdf:type owl:Class ;
-       rdfs:subClassOf :Visita ;
-       rdfs:comment "Será un conjunto de personas que vayan a visitar el museo. Puden ser tanto grupos de personas adultas, como famílias." .
-
-
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Museo
 :Museo rdf:type owl:Class ;
        rdfs:comment "Clase que representa un museo." .
@@ -217,12 +217,6 @@ xsd:boolean rdfs:comment "Indica si el grupo es una  familia" .
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/ObraDeArte
 :ObraDeArte rdf:type owl:Class ;
             rdfs:comment "Clase que representa una obra de arte." .
-
-
-###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Persona
-:Persona rdf:type owl:Class ;
-         rdfs:subClassOf :Visita ;
-         rdfs:comment "Es un tipo de visitante, este irá al museo sin acompañante." .
 
 
 ###  http://www.semanticweb.org/guill/ontologies/2024/10/ontology/Sala
