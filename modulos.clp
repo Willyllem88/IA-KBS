@@ -119,7 +119,7 @@
      )
      (assert (preferencia-de-estilo ?estilo))
      (assert (preferencia-de-artista ?artista))
-     (assert (esFamilia ?niños))  ;hecho para saber si tenemos niños
+    ; (assert (esFamilia ?niños))  ya no hace falta
 
     (focus abstraccion)
 )
@@ -158,14 +158,19 @@
    (printout t "  Tipo de grupo: " ?tipo-grupo crlf)
     (printout t "  Preferencia estilo: " ?preferencia-de-estilo crlf)
 
-   ;; Guardar el problema abstracto en hechos para después
-   (assert (conocimiento ?coneixement))
-   (assert (duracion ?duracion))
-   (assert (estilopreferido ?preferencia-de-estilo))
-   (assert (tipogrupo ?tipo-grupo))
+   ;; Guardar el problema abstracto en hechos para después -> YA NO HACE FALTA - AHORA CON ATRIBUTOS DE LA CLASE VISITA
+  ; (assert (conocimiento ?coneixement))
+   ;(assert (duracion ?duracion))
+   ;(assert (estilopreferido ?preferencia-de-estilo))
+   ;(assert (tipogrupo ?tipo-grupo))
 
-  ; (printout t "DEBUG: Modificant la instància: " ?visita crlf)
-    ;; Modificar la instancia de Visita
+   (printout t "DEBUG: Modificant la instància: " ?visita crlf)
+    ; Modificar la instancia de Visita
+    (send [visita1] put-CONOCIMIENTO ?coneixement)
+    (send [visita1] put-DURACIÓN ?duracion)
+    (send [visita1] put-TIPOGRUPO ?tipo-grupo)
+    (send [visita1] put-ESTILOPREFERIDO ?preferencia-de-estilo) 
+
    ;(modify ?visita
     ;       (CONOCIMIENTO ?coneixement) 
      ;      (DURACIÓN ?duracion) 
@@ -175,16 +180,16 @@
     ;ya no hace falta igual
     (printout t "DEBUG: Instancia modificada con éxito: " [visita1] crlf)
 
-    ;; Verificar que los atributos se han modificado de la instancia visita 
-   ;(printout t "DEBUG: Comprobación de atributos modificados:" crlf)
-   ;(printout t "  CONOCIMIENTO: " (send [visita1] get-CONOCIMIENTO) crlf)
-   ;(printout t "  DURACIÓN: " (send [visita1] get-DURACIÓN) crlf)
-   ;(printout t "  TIPOGRUPO: " (send [visita1] get-TIPOGRUPO) crlf)
-   ;(printout t "  ESTILOPREFERIDO: " (send [visita1] get-ESTILOPREFERIDO) crlf)
-
+    ;; Verificar que los atributos se han modificado de la instancia visita -> QUITAR CUANDO SE REVISE
+   (printout t "DEBUG: Comprobación de atributos modificados:" crlf)
+   (printout t "  CONOCIMIENTO: " (send [visita1] get-CONOCIMIENTO) crlf)
+   (printout t "  DURACIÓN: " (send [visita1] get-DURACIÓN) crlf)
+   (printout t "  TIPOGRUPO: " (send [visita1] get-TIPOGRUPO) crlf)
+   (printout t "  ESTILOPREFERIDO: " (send [visita1] get-ESTILOPREFERIDO) crlf)
+   (printout t "  esFamilia: " (send [visita1] get-esFamilia) crlf)
 
     
-    ;;CREC QUE S'HAURIA DE FER AIXO I NO ASSERT PERO NO SÉ COM(modify ?visita (CONOCIMIENTO ?coneixement) (DURACIÓN ?duracion) (TIPOGRUPO ?tipo-grupo))
+    ;;CREC QUE S'HAURIA DE FER AIXO I NO ASSERT PERO NO SÉ COM(modify ?visita (CONOCIMIENTO ?coneixement) (DURACIÓN ?duracion) (TIPOGRUPO ?tipo-grupo)) -> NO CAL JA 
 
    (focus matching)
    (run)
@@ -206,12 +211,19 @@
 
 ;asignamos el tipo de grupo según su nivel de conocimiento, si es familia y si tiene alguna preferencia de estilo
 (defrule matching::asignar-tipo-grupo
-   (conocimiento ?conocimiento)
-   (esFamilia ?hay_ninos)
-   (estilopreferido ?preferencia-de-estilo)
-   
+   ;(conocimiento ?conocimiento)
+   ;(esFamilia ?hay_ninos)
+   ;(estilopreferido ?preferencia-de-estilo)
+    ?visita <- (object(is-a Visita)(CONOCIMIENTO ?conocimiento)(esFamilia ?esFamilia)(ESTILOPREFERIDO ?preferencia-de-estilo))
+    
    =>
 
+   ;obtener atributos de la clase visita para asignar tipo de grupo en funcion de sus valores
+   ;(bind ?conocimiento (send [visita1] get-CONOCIMIENTO)) 
+   ;(bind ?esFamilia (send [visita1] get-esFamilia)) 
+   ;(bind ?preferencia-de-estilo (send [visita1] get-ESTILOPREFERIDO)) 
+
+   
    (if (and (eq ?preferencia-de-estilo [Barroco]) (or (eq ?conocimiento "alto") (eq ?conocimiento "medio"))) then
        (assert (grupo BARROCO )) ; Grupo con preferencia de estilo para el barroco y un minimo de conocimiento
 
@@ -224,7 +236,7 @@
    else (if (eq ?conocimiento "alto") then
        (assert (grupo EXPERTO )) ; Grupo con conocimientos elevados 
 
-   else (if (eq esFamilia si) then
+   else (if (eq ?esFamilia TRUE) then
        (assert (grupo NIÑOS )) ; Grupo de familia con niños y sin conocimientos elevados
 
    else 
@@ -238,7 +250,7 @@
 
    => 
     ; Segun el grupo asignado se recomienda una ruta inicial u otra
-   (printout t crlf "Recomendación inicial: " 
+   (printout t crlf "[Recomendación inicial] " 
       (if (eq ?grupo BARROCO) then 
         (printout t "Ruta Barroca: Ideal para quienes disfrutan de la grandiosidad y el dramatismo. Disfrutarás de obras maestras de gran impacto visual del barroco." crlf)
          (bind ?ruta-inicial (send [Barroca] get-ruta_contiene))
