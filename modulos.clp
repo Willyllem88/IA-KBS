@@ -119,6 +119,7 @@
      )
      (assert (preferencia-de-estilo ?estilo))
      (assert (preferencia-de-artista ?artista))
+     (assert (esFamilia ?niños))  ;hecho para saber si tenemos niños
 
     (focus abstraccion)
 )
@@ -126,7 +127,7 @@
 (defmodule abstraccion (import MAIN ?ALL)(import recopilacion ?ALL)(export ?ALL))
 
 (defrule abstraccion::abstraccion-problema
-   ?visita <- (object (is-a Visita)(nDias ?dias)(nHoras/Dia ?horas)(nMuseosVisitados ?museos)(nPersonas ?personas))
+   ?visita <- (object(is-a Visita) (nDias ?dias)(nHoras/Dia ?horas)(nMuseosVisitados ?museos)(nPersonas ?personas))
    (preferencia-de-estilo ?preferencia-de-estilo)
    =>
 
@@ -157,13 +158,32 @@
    (printout t "  Tipo de grupo: " ?tipo-grupo crlf)
     (printout t "  Preferencia estilo: " ?preferencia-de-estilo crlf)
 
-   ;; Guardar el problema abstracto
-   ;;(assert (CONOCIMIENTO ?coneixement))
-   (assert (DURACIÓN ?duracion))
-   (assert (ESTILOPREFERIDO ?preferencia-de-estilo))
-   (assert (TIPOGRUPO ?tipo-grupo))
+   ;; Guardar el problema abstracto en hechos para después
+   (assert (conocimiento ?coneixement))
+   (assert (duracion ?duracion))
+   (assert (estilopreferido ?preferencia-de-estilo))
+   (assert (tipogrupo ?tipo-grupo))
 
-    (printout t "DEBUG: Modificant la instància: " ?visita crlf)
+  ; (printout t "DEBUG: Modificant la instància: " ?visita crlf)
+    ;; Modificar la instancia de Visita
+   ;(modify ?visita
+    ;       (CONOCIMIENTO ?coneixement) 
+     ;      (DURACIÓN ?duracion) 
+      ;     (TIPOGRUPO ?tipo-grupo) 
+    ;       (ESTILOPREFERIDO ?preferencia-de-estilo))
+           
+    ;ya no hace falta igual
+    (printout t "DEBUG: Instancia modificada con éxito: " [visita1] crlf)
+
+    ;; Verificar que los atributos se han modificado de la instancia visita 
+   ;(printout t "DEBUG: Comprobación de atributos modificados:" crlf)
+   ;(printout t "  CONOCIMIENTO: " (send [visita1] get-CONOCIMIENTO) crlf)
+   ;(printout t "  DURACIÓN: " (send [visita1] get-DURACIÓN) crlf)
+   ;(printout t "  TIPOGRUPO: " (send [visita1] get-TIPOGRUPO) crlf)
+   ;(printout t "  ESTILOPREFERIDO: " (send [visita1] get-ESTILOPREFERIDO) crlf)
+
+
+    
     ;;CREC QUE S'HAURIA DE FER AIXO I NO ASSERT PERO NO SÉ COM(modify ?visita (CONOCIMIENTO ?coneixement) (DURACIÓN ?duracion) (TIPOGRUPO ?tipo-grupo))
 
    (focus matching)
@@ -188,22 +208,23 @@
 (defrule matching::asignar-tipo-grupo
    (conocimiento ?conocimiento)
    (esFamilia ?hay_ninos)
-   (preferencia-de-estilo ?preferencia-de-estilo)
+   (estilopreferido ?preferencia-de-estilo)
+   
    =>
 
-   (if (and (eq preferencia_de_estilo [Barroco]) (or (eq ?conocimiento "alto") (eq ?conocimiento "medio"))) then
+   (if (and (eq ?preferencia-de-estilo [Barroco]) (or (eq ?conocimiento "alto") (eq ?conocimiento "medio"))) then
        (assert (grupo BARROCO )) ; Grupo con preferencia de estilo para el barroco y un minimo de conocimiento
 
-   else (if (and (eq preferencia_de_estilo [ArteModerno]) (or (eq ?conocimiento "alto") (eq ?conocimiento "medio"))) then
+   else (if (and (eq ?preferencia-de-estilo [ArteModerno]) (or (eq ?conocimiento "alto") (eq ?conocimiento "medio"))) then
        (assert (grupo MODERNISTA)) ; Grupo con preferencia de estilo para el arte moderno y un minimo de conocimiento
 
-   else (if (and (eq preferencia_de_estilo [Renacimiento]) (or (eq ?conocimiento "alto") (eq ?conocimiento "medio"))) then
+   else (if (and (eq ?preferencia-de-estilo [Renacimiento]) (or (eq ?conocimiento "alto") (eq ?conocimiento "medio"))) then
        (assert (grupo RENACENTISTA )) ; Grupo con preferencia de estilo para el renacimiento y un minimo de conocimiento
 
    else (if (eq ?conocimiento "alto") then
        (assert (grupo EXPERTO )) ; Grupo con conocimientos elevados 
 
-   else (if (eq esFamilia TRUE) then
+   else (if (eq esFamilia si) then
        (assert (grupo NIÑOS )) ; Grupo de familia con niños y sin conocimientos elevados
 
    else 
@@ -215,8 +236,8 @@
 (defrule matching::recomendar-asignar-ruta-grupo
    (grupo ?grupo)
 
-   =>
-
+   => 
+    ; Segun el grupo asignado se recomienda una ruta inicial u otra
    (printout t crlf "Recomendación inicial: " 
       (if (eq ?grupo BARROCO) then 
         (printout t "Ruta Barroca: Ideal para quienes disfrutan de la grandiosidad y el dramatismo. Disfrutarás de obras maestras de gran impacto visual del barroco." crlf)
@@ -250,7 +271,7 @@
 
       )))))))
     
-    ; Guardamos la ruta inicial asignada.
+    ; Guardamos la ruta inicial asignada para despues el refinamiento.
     (assert (ruta-inicial ?ruta-inicial))
     
     (focus refinamiento)
