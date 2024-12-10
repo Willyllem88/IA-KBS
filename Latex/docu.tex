@@ -30,7 +30,7 @@
 	\tableofcontents
 	\clearpage
 	
-	\section{Introducció}
+	\section{Identificació}
 	
 	\subsection{Descripció del problema}
 	
@@ -39,17 +39,6 @@
 	Els museus solen estar dividits en sales organitzades per artistes o per temes. Les obres d’art poden ser seleccionades en funció de diverses característiques, com l’any de creació, l’època, l’estil, l’autor, la sala on es troben, la temàtica, les dimensions, la complexitat o la importància de l’obra. A més, s’han de considerar els tipus de visitants i les seves preferències, com ara el temps disponible, el tipus de grup (individual, família, grup petit o gran) i el nivell de coneixement d’art. \\
 	
 	L’objectiu és crear una eina capaç d’ajustar la visita segons les preferències i característiques dels visitants, tenint en compte restriccions com el temps diari disponible i l’organització lògica de les sales.
-	
-	\subsection{Objectius}
-	
-	Els objectius d’aquest projecte són:
-	\begin{enumerate}
-		\item Analitzar i modelar el domini dels museus per construir una ontologia adequada.
-		\item Desenvolupar un sistema basat en coneixement capaç de proposar rutes de visita personalitzades.
-		\item Implementar una solució en CLIPS que permeti simular visites segons les preferències i el temps disponible.
-		\item Avaluar la solució mitjançant casos de prova representatius que validin la qualitat de les rutes generades.
-	\end{enumerate}
-	Aquests objectius s’assoleixen seguint una metodologia incremental basada en prototipatge, amb èmfasi en la modularització i la justificació de les decisions preses.
 	
 	\subsection{Viabilitat del SBC}
 	
@@ -68,17 +57,50 @@
 		\item \textbf{Instàncies}: Mitjançant CLIPS, es representarà tot aquell coneixement estàtic que es mantindrà invariable per a tots els visitants. Aquestes instàncies inclouran elements com les sales del museu, les obres d'art, els artistes, els estils pictòrics i fins i tot rutes predefinides del museu. Les rutes predefinides es descriuen amb més detall en una secció posterior.  
 		
 		\item \textbf{Visitant}: Per personalitzar l’experiència, el sistema recollirà informació sobre el visitant mitjançant un breu qüestionari. Aquest permetrà identificar les seves característiques i preferències, facilitant així la generació d’una ruta personalitzada que s’ajusti al màxim a les seves necessitats i interessos.  
-	\end{itemize}  
+	\end{itemize}
 	
+	\subsection{Objectius}
 	
+	Els objectius d’aquest projecte són:
+	\begin{enumerate}
+		\item Analitzar i modelar el domini dels museus per construir una ontologia adequada.
+		\item Desenvolupar un sistema basat en coneixement capaç de proposar rutes de visita personalitzades.
+		\item Implementar una solució en CLIPS que permeti simular visites segons les preferències i el temps disponible.
+		\item Avaluar la solució mitjançant casos de prova representatius que validin la qualitat de les rutes generades.
+	\end{enumerate}
+	Aquests objectius s’assoleixen seguint una metodologia incremental basada en prototipatge, amb èmfasi en la modularització i la justificació de les decisions preses.
+	
+	\subsection{Resultats Esperats}
+	
+	En finalitzar aquest projecte, s’espera obtenir els següents resultats:
+	
+	\begin{itemize}
+		\item \textbf{Sistema Basat en Coneixement (SBC) operatiu}: Un sistema capaç de generar rutes personalitzades per als visitants del museu, tenint en compte les seves preferències i el temps disponible.
+		
+		\item \textbf{Ontologia del domini dels museus}: Una representació formal dels conceptes i les relacions del domini, que permeti al sistema raonar de manera eficient.
+		
+		\item \textbf{Generació automàtica de rutes personalitzades}: Un procés automatitzat que utilitzi les preferències del visitant per crear una ruta òptima que maximitzi l'experiència de la visita.
+		
+		\item \textbf{Avaluació mitjançant casos de prova}: La validació del sistema es durà a terme mitjançant proves representatives que permetin avaluar l'eficàcia i l'eficiència de les rutes generades.
+	\end{itemize}
+	
+	Tot i que aquest projecte ha estat dissenyat com a part d'una tasca universitària, l'objectiu principal és aprendre a implementar Sistemes Basats en Coneixement (SBC). Encara que el projecte no es lliurarà a cap museu perquè en faci ús, ens agradaria que servís com a fonament per a futurs projectes viables en la vida real, amb l'objectiu de personalitzar rutes de visita en museus.
+	
+	\newpage
 	\section{Conceptualització}
 	
-	En aquest apartat, identifiquem els conceptes principals necessaris per modelar el domini i implementar el sistema:
+	La conceptualització d'aquest projecte es basa en la identificació, definició i descripció dels elements fonamentals que conformen el domini. Aquesta etapa és clau, ja que permet establir les bases conceptuals necessàries per al desenvolupament del sistema, garantint així una implementació coherent amb els objectius inicials. \\
 	
+	La interrelació entre aquests elements és fonamental, ja que el sistema ha de ser capaç de generar recomanacions personalitzades de rutes de visita tenint en compte les preferències dels visitants, les característiques de les obres d'art i la distribució de les sales. Per assolir aquest objectiu, s'han definit atributs específics per cada element que permeten capturar informació rellevant, com la complexitat d'una obra, la durada disponible de la visita o la preferència per certs estils artístics. Aquesta informació es recull de forma automàtica a través d'un conjunt de preguntes inicials, que pretenen conèixer el perfil del visitant i els seus interessos. \\
+	
+	Mitjançant la definició clara i precisa dels conceptes del domini, es redueixen les possibles ambigüitats del disseny i es faciliten els mecanismes de personalització de les rutes. \\
+		
 	\subsection{Elements del domini}
 	\label{sec:elements_del_domini}
 	
-	\textbf{Característiques d'una visita}
+	Els elements del domini fonamenten el SBC. Cada element té una funció específica i es defineix mitjançant atributs que en descriuen les seves propietats rellevants. Aquesta classificació permet organitzar la informació de forma estructurada i facilitar les relacions entre ells. \\
+	
+	\noindent \textbf{Característiques d'una visita}
 	\begin{itemize}
 		\item \texttt{Definició}: Representen les persones que fan una visita al museu.
 		\item \texttt{Atributs}:
@@ -94,7 +116,7 @@
 	\end{itemize}
 		
 		
-	\textbf{Característiques d'un autor}
+	\noindent \textbf{Característiques d'un autor}
 	\begin{itemize}
 		\item \texttt{Definició}: Artistes creadors de les obres del museu.
 		\item \texttt{Atributs}:
@@ -107,7 +129,7 @@
 	\end{itemize}
 	
 	
-	\textbf{Característiques d'una obra d'art}
+	\noindent \textbf{Característiques d'una obra d'art}
 	\begin{itemize}
 		\item \texttt{Definició}: Objecte del museu amb unes certes característiques.
 		\item \texttt{Atributs}:
@@ -123,7 +145,7 @@
 	\end{itemize}
 
 
-	\textbf{Característiques d'una sala d'art}
+	\noindent \textbf{Característiques d'una sala d'art}
 	\begin{itemize}
 		\item \texttt{Definició}: Espai on s'exposen un conjunt d'obres d'art.
 		\item \texttt{Atributs}:
@@ -136,7 +158,14 @@
 			\item \texttt{Sala Estil}: Sala dedicada a exposar les obres d'un estil concret.
 		\end{itemize}
 	\end{itemize}
-
+	
+	\subsubsection{Selecció d'obres}
+	
+	Tot i que aquest projecte no representa un museu real, tampoc la seva representació al sistema ho serà. Aquesta decisió es va prendre pel fet que la complexitat de seleccionar un gran nombre d'obres d'un museu, com el Prado o el Louvre, era massa elevada, especialment considerant que no estem davant d'un problema de la vida real. Si haguéssim considerat necessari utilitzar un conjunt més ampli d'obres, hauríem pogut implementar un \textit{scraper} en \textit{Python} per obtenir un fitxer amb totes les instàncies necessàries i inserir-les a l'ontologia. No obstant això, vam decidir optar per una solució més senzilla que s'ajustés millor als objectius del projecte.\\
+	
+	El nostre museu estarà compost per un nombre limitat d'estils artístics. Concretament, hem seleccionat tres estils principals: Barroc, Contemporani i Renaixentista. Tant les obres com els autors que s'exposaran al museu pertanyen a aquests estils. Com que cap membre del grup és expert en art, vam optar per fer ús d'una eina externa per facilitar la selecció. Concretament, vam utilitzar \textit{ChatGPT} per obtenir una llista de 5 artistes rellevants de cada període i, per a cadascun d'ells, una selecció de 5 de les seves obres més representatives.\\
+	
+	Un cop rebuda la llista suggerida, la vam revisar per identificar possibles errors i adaptar-la a les nostres necessitats. Com a resultat, vam obtenir una configuració final composta per $3$ estils, $15$ autors ($3 \times 5$) i $75$ obres ($3 \times 5 \times 5$). Aquesta selecció ens permet treballar amb un conjunt de dades manejable però suficientment representatiu per als nostres objectius de prova i validació del sistema.
 	
 	\subsection{Divisió en subproblemes}
 	
@@ -251,5 +280,30 @@
 	\end{itemize}
 	
 	\subsubsection{Quadres}
+	
+	\newpage
+	\section{Formalització}
+	
+	\subsection{Desenvolupament de la ontologia}
+	
+	\subsubsection*{Artista}
+	
+	\subsubsection*{Museu}
+	
+	\subsubsection*{Obra d'Art}
+	
+	\subsubsection*{Ruta}
+	
+	\subsubsection*{Sala}
+	
+	\subsubsection*{Visita}
+	
+	\subsection{Justificació de la metodologia de resolució}
+	
+	\newpage
+	\section{Implementació}
+	
+	\newpage
+	\section{Jocs de Prova}
 	
 \end{document}
