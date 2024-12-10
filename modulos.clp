@@ -192,44 +192,30 @@
         (printout t "Error: El argumento proporcionado no es una instancia válida de Ruta." crlf))
 )
 
-(defrule matching::grupo-barroco
-    ?visita <- (object (is-a Visita) (CONOCIMIENTO ?conocimiento) (ESTILOPREFERIDO [Barroco]))
-    (test (or (eq ?conocimiento "alto") (eq ?conocimiento "medio")))
-    =>
-    (assert (grupo BARROCO))
-)
+;asignamos el tipo de grupo según su nivel de conocimiento, si es familia y si tiene alguna preferencia de estilo
+(defrule matching::asignar-tipo-grupo
+    ?visita <- (object(is-a Visita)(CONOCIMIENTO ?conocimiento)(esFamilia ?esFamilia)(ESTILOPREFERIDO ?preferencia-de-estilo))
+    
+   =>
 
-(defrule matching::grupo-modernista
-    ?visita <- (object (is-a Visita) (CONOCIMIENTO ?conocimiento) (ESTILOPREFERIDO [ArteModerno]))
-    (test (or (eq ?conocimiento "alto") (eq ?conocimiento "medio")))
-    =>
-    (assert (grupo MODERNISTA))
-)
+   (if (and (eq ?preferencia-de-estilo [Barroco]) (or (eq ?conocimiento "alto") (eq ?conocimiento "medio"))) then
+       (assert (grupo BARROCO )) ; Grupo con preferencia de estilo para el barroco y un minimo de conocimiento
 
-(defrule matching::grupo-renacentista
-    ?visita <- (object (is-a Visita) (CONOCIMIENTO ?conocimiento) (ESTILOPREFERIDO [Renacimiento]))
-    (test (or (eq ?conocimiento "alto") (eq ?conocimiento "medio")))
-    =>
-    (assert (grupo RENACENTISTA))
-)
+   else (if (and (eq ?preferencia-de-estilo [ArteModerno]) (or (eq ?conocimiento "alto") (eq ?conocimiento "medio"))) then
+       (assert (grupo MODERNISTA)) ; Grupo con preferencia de estilo para el arte moderno y un minimo de conocimiento
 
-(defrule matching::grupo-experto
-    ?visita <- (object (is-a Visita) (CONOCIMIENTO "alto"))
-    =>
-    (assert (grupo EXPERTO))
-)
+   else (if (and (eq ?preferencia-de-estilo [Renacimiento]) (or (eq ?conocimiento "alto") (eq ?conocimiento "medio"))) then
+       (assert (grupo RENACENTISTA )) ; Grupo con preferencia de estilo para el renacimiento y un minimo de conocimiento
 
-(defrule matching::grupo-ninos
-    ?visita <- (object (is-a Visita) (esFamilia TRUE))
-    =>
-    (assert (grupo NIÑOS))
-)
+   else (if (eq ?conocimiento "alto") then
+       (assert (grupo EXPERTO )) ; Grupo con conocimientos elevados 
 
-(defrule matching::grupo-general
-    ?visita <- (object (is-a Visita) (CONOCIMIENTO ?conocimiento) (esFamilia FALSE))
-    (test (not (eq ?conocimiento "alto")))
-    =>
-    (assert (grupo GENERAL))
+   else (if (eq ?esFamilia TRUE) then
+       (assert (grupo NIÑOS )) ; Grupo de familia con niños y sin conocimientos elevados
+
+   else 
+       (assert (grupo GENERAL )) ; Grupo sin preferencias claras, conocimientos medio/bajo y sin niños
+   )))))
 )
 
 ;mostramos recomendaciones específicas según el grupo asignado y le asignamos una ruta predefinida que se imprime
@@ -241,45 +227,67 @@
    (printout t crlf "[Recomendación inicial] " 
       (if (eq ?grupo BARROCO) then 
         (printout t "Ruta Barroca: Ideal para quienes disfrutan de la grandiosidad y el dramatismo. Disfrutarás de obras maestras de gran impacto visual del barroco." crlf)
-         (bind ?ruta-inicial (send [Barroca] get-ruta_contiene))
-         (pintar-ruta [Barroca])
+         (bind ?ruta-inicial [Barroca])
 
       else(if (eq ?grupo EXPERTO) then
         (printout t "Ruta para Expertos: Explora obras exclusivas y con más complejidad con análisis detallado y obras menos conocidas para profundizar en cada pieza." crlf)
-        (bind ?ruta-inicial (send [Expertos] get-ruta_contiene)) 
-        (pintar-ruta [Expertos])
+        (bind ?ruta-inicial [Expertos]) 
 
       else (if (eq ?grupo GENERAL) then 
         (printout t "Ruta General: Recorre las exposiciones más destacadas para un paseo relajado y variado en estilos y autores, ideal para todos los niveles de conocimiento." crlf)
-        (bind ?ruta-inicial (send [General] get-ruta_contiene))
-        (pintar-ruta [General])
+        (bind ?ruta-inicial [General])
 
       else (if (eq ?grupo MODERNISTA) then 
         (printout t "Ruta Modernista: Enfocada en obras innovadoras y vanguardistas, ideal para amantes del arte contemporáneo con interés en la experimentación." crlf)
-        (bind ?ruta-inicial (send [Modernista] get-ruta_contiene))      
-        (pintar-ruta [Modernista])
+        (bind ?ruta-inicial [Modernista])      
 
        else (if (eq ?grupo NIÑOS) then 
         (printout t "Ruta para Niños: Perfecta para familias con actividades interactivas y obras accesibles para los más pequeños, sin tanta complejidad." crlf)
-        (bind ?ruta-inicial (send [Niños] get-ruta_contiene))
-        (pintar-ruta [Niños])
+        (bind ?ruta-inicial [Niños])
 
         else (if (eq ?grupo RENACENTISTA) then 
         (printout t "Ruta Renacentista: Adéntrate en la precisión artística del Renacimiento, ideal para admiradores del equilibrio y la belleza clásica." crlf)
-        (bind ?ruta-inicial (send [Renacentista] get-ruta_contiene))
-        (pintar-ruta [Renacentista])
+        (bind ?ruta-inicial [Renacentista])
 
       )))))))
     
     ; Guardamos la ruta inicial asignada para despues el refinamiento.
+    ;(pintar-ruta ?ruta-inicial)
     (assert (ruta-inicial ?ruta-inicial))
     
     (focus refinamiento)
-    (run)
 )
 
 
-
 (defmodule refinamiento (import MAIN ?ALL)(import matching ?ALL)(import recopilacion ?ALL)(export ?ALL))
+
+(defrule refinamiento::añadir-preferencia-artista
+    (preferencia-de-artista ?artista)
+    (ruta-inicial ?ruta-inicial) ; Cambiado de $?ruta-inicial a ?ruta-inicial
+    =>
+
+    (bind ?lista-autor (create$))
+
+    (bind ?lista-autor (send ?ruta-inicial get-ruta_contiene))
+
+    ;Inserir obras del artista preferido a la ruta inicial
+    (foreach ?obra (find-all-instances ((?obra ObraDeArte)) (eq ?obra:creada_por ?artista))
+        (if (not (member$ ?obra ?lista-autor)) then
+            (bind ?lista-autor (insert$ ?lista-autor 1 ?obra))
+        )
+    )
+
+    (printout t "DEBUG: lista inicial mezclada con obras del artista preferido:" crlf)
+    (foreach ?obra ?lista-autor
+        (printout t "  === " ?obra crlf)
+    )
+
+    ; Crea una nueva ruta con la mezcla de la ruta inicial y las obras del artista preferido
+    (assert (lista-refinada1 ?lista-autor))
+)
+
+(defrule refinamiento:añadir-preferencia-estilo
+    
+)
 
 
