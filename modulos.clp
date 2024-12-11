@@ -261,6 +261,7 @@
 
 (defmodule refinamiento (import MAIN ?ALL)(import matching ?ALL)(import recopilacion ?ALL)(export ?ALL))
 
+; Añadir las obras del artista preferido a la ruta inicial, si el visitante tiene una preferencia de artista
 (defrule refinamiento::añadir-preferencia-artista
     (preferencia-de-artista ?artista)
     (ruta-inicial ?ruta-inicial) ; Cambiado de $?ruta-inicial a ?ruta-inicial
@@ -277,17 +278,43 @@
         )
     )
 
-    (printout t "DEBUG: lista inicial mezclada con obras del artista preferido:" crlf)
-    (foreach ?obra ?lista-autor
-        (printout t "  === " ?obra crlf)
-    )
-
     ; Crea una nueva ruta con la mezcla de la ruta inicial y las obras del artista preferido
     (assert (lista-refinada1 ?lista-autor))
 )
 
+; Añadir las obras del estilo preferido a la lista refinada, si el visitante tiene una preferencia de estilo
 (defrule refinamiento:añadir-preferencia-estilo
-    
+    (preferencia-de-estilo ?estilo)
+    (lista-refinada1 $?lista-refinada1)
+    =>
+
+    (bind ?lista-estilo (create$))
+
+    (bind ?lista-estilo ?lista-refinada1 get-ruta_contiene)
+
+    ;Inserir obras del estilo preferido a la lista refinada
+    (foreach ?obra (find-all-instances ((?obra ObraDeArte)) (eq ?obra:obra_de_estilo ?estilo))
+        (if (not (member$ ?obra ?lista-estilo)) then
+            (bind ?lista-estilo (insert$ ?lista-estilo 1 ?obra))
+        )
+    )
+
+    (printout t "DEBUG: lista refinada mezclada con obras del estilo preferido:" crlf)
+    (foreach ?obra ?lista-estilo
+        (printout t "  === " ?obra crlf)
+    )
+
+    ; Crea una nueva ruta con la mezcla de la lista refinada y las obras del estilo preferido
+    (assert (lista-refinada2 ?lista-estilo))
 )
 
-
+; Queremos si falta tiempo para llegar al tiempo de la visita total, añadir más obras a la ruta
+; Si sobra tiempo, eliminar obras de la ruta (ordenar por complejidada, eliminar las más 
+;   complejas o menos complejas dependiendo del tipo de visitante)
+(defrule refinamiento:ajustar_tiempo
+    (lista-refinada2 $?lista-refinada2)
+    ?visita <- (object(is-a Visita)(nDias ?dias)(nHoras/Dia ?horas))
+    =>
+    
+    (printout t "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" crlf)
+)
