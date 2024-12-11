@@ -192,30 +192,48 @@
         (printout t "Error: El argumento proporcionado no es una instancia válida de Ruta." crlf))
 )
 
-;asignamos el tipo de grupo según su nivel de conocimiento, si es familia y si tiene alguna preferencia de estilo
-(defrule matching::asignar-tipo-grupo
-    ?visita <- (object(is-a Visita)(CONOCIMIENTO ?conocimiento)(esFamilia ?esFamilia)(ESTILOPREFERIDO ?preferencia-de-estilo))
-    
-   =>
+(defrule matching::grupo-barroco
+    ?visita <- (object (is-a Visita) (CONOCIMIENTO ?conocimiento) (ESTILOPREFERIDO ?estilopreferido))
+    (test (or (eq ?conocimiento "alto") (eq ?conocimiento "medio")))
+    (test (eq ?estilopreferido [Barroco]))
+    =>
+    (assert (grupo BARROCO))
+)
 
-   (if (and (eq ?preferencia-de-estilo [Barroco]) (or (eq ?conocimiento "alto") (eq ?conocimiento "medio"))) then
-       (assert (grupo BARROCO )) ; Grupo con preferencia de estilo para el barroco y un minimo de conocimiento
+(defrule matching::grupo-modernista
+    ?visita <- (object (is-a Visita) (CONOCIMIENTO ?conocimiento) (ESTILOPREFERIDO ?estilopreferido))
+    (test (or (eq ?conocimiento "alto") (eq ?conocimiento "medio")))
+    (test (eq ?estilopreferido [ArteModerno]))
+    =>
+    (assert (grupo MODERNISTA))
+)
 
-   else (if (and (eq ?preferencia-de-estilo [ArteModerno]) (or (eq ?conocimiento "alto") (eq ?conocimiento "medio"))) then
-       (assert (grupo MODERNISTA)) ; Grupo con preferencia de estilo para el arte moderno y un minimo de conocimiento
+(defrule matching::grupo-renacentista
+    ?visita <- (object (is-a Visita) (CONOCIMIENTO ?conocimiento) (ESTILOPREFERIDO ?estilopreferido))
+    (test (or (eq ?conocimiento "alto") (eq ?conocimiento "medio")))
+    (test (eq ?estilopreferido [Renacimiento]))
+    =>
+    (assert (grupo RENACENTISTA))
+)
 
-   else (if (and (eq ?preferencia-de-estilo [Renacimiento]) (or (eq ?conocimiento "alto") (eq ?conocimiento "medio"))) then
-       (assert (grupo RENACENTISTA )) ; Grupo con preferencia de estilo para el renacimiento y un minimo de conocimiento
+(defrule matching::grupo-experto
+    ?visita <- (object (is-a Visita) (CONOCIMIENTO "alto")(ESTILOPREFERIDO ?estilopreferido))
+    (test (and (and (not (eq ?estilopreferido [Renacimiento])) (not (eq ?estilopreferido [ArteModerno]))) (not (eq ?estilopreferido [Barroco]))))
+    =>
+    (assert (grupo EXPERTO))
+)
 
-   else (if (eq ?conocimiento "alto") then
-       (assert (grupo EXPERTO )) ; Grupo con conocimientos elevados 
+(defrule matching::grupo-ninos
+    ?visita <- (object (is-a Visita) (esFamilia TRUE))
+    =>
+    (assert (grupo NIÑOS))
+)
 
-   else (if (eq ?esFamilia TRUE) then
-       (assert (grupo NIÑOS )) ; Grupo de familia con niños y sin conocimientos elevados
-
-   else 
-       (assert (grupo GENERAL )) ; Grupo sin preferencias claras, conocimientos medio/bajo y sin niños
-   )))))
+(defrule matching::grupo-general
+    ?visita <- (object (is-a Visita) (CONOCIMIENTO ?conocimiento) (esFamilia FALSE))
+    (test (not (eq ?conocimiento "alto")))
+    =>
+    (assert (grupo GENERAL))
 )
 
 ;mostramos recomendaciones específicas según el grupo asignado y le asignamos una ruta predefinida que se imprime
