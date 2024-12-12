@@ -11,6 +11,7 @@
 ;módulo para recopilar datos del usuario
 (defmodule recopilacion (import MAIN ?ALL)(export ?ALL))
 
+; Método para preguntar al usuario y comprobar que la respuesta sea un número entero
 (deffunction recopilacion::pregunta-comprobar-int(?mensaje)
     (printout t ?mensaje crlf)
     (bind ?respuesta (read))
@@ -21,6 +22,7 @@
     (return ?respuesta)
 )
 
+; Método para preguntar al usuario y comprobar que la respuesta sea 'si' o 'no'
 (deffunction recopilacion::pregunta-comprobar-boolean(?mensaje)
     (printout t ?mensaje crlf)
     (bind ?respuesta (read))
@@ -41,7 +43,9 @@
 ; TODO: utilitzar un mètode que recopili tota la informació en un sol mètode defrule recopilacion::preguntar-datos
 (defrule recopilacion::preguntar-datos
     "Ronda de preguntas para recopilar datos del usuario"
+
     =>
+
     (bind ?personas (pregunta-comprobar-int "¿Cuántas personas sois?"))
     (bind ?niños (if (> ?personas 1) then (pregunta-comprobar-boolean "¿Hay niños en el grupo? (si/no)") else "no"))
     (bind ?dias (pregunta-comprobar-int "¿Cuántos días durará vuestra visita?"))
@@ -100,14 +104,14 @@
     )
 
     ;DEBUG: mostrar datos recopilados (variables)
-    (printout t "Datos recopilados (variables):" crlf)
-    (printout t "  Personas: " ?personas crlf)
-    (printout t "  Niños: " ?niños crlf)
-    (printout t "  Días: " ?dias crlf)
-    (printout t "  Horas: " ?horas crlf)
-    (printout t "  Museos: " ?museos crlf)
-    (printout t "  Estilo: " ?estilo crlf)
-    (printout t "  Artista: " ?artista crlf)
+    ;(printout t "Datos recopilados (variables):" crlf)
+    ;(printout t "  Personas: " ?personas crlf)
+    ;(printout t "  Niños: " ?niños crlf)
+    ;(printout t "  Días: " ?dias crlf)
+    ;(printout t "  Horas: " ?horas crlf)
+    ;(printout t "  Museos: " ?museos crlf)
+    ;(printout t "  Estilo: " ?estilo crlf)
+    ;(printout t "  Artista: " ?artista crlf)
 
     ;Crear la instancia de Visita
     (make-instance visita1 of Visita
@@ -117,48 +121,50 @@
           (esFamilia (eq ?niños si))
           (nPersonas ?personas)
      )
-     (assert (preferencia-de-estilo ?estilo))
-     (assert (preferencia-de-artista ?artista))
-    ; (assert (esFamilia ?niños))  ya no hace falta
+    (assert (preferencia-de-estilo ?estilo))
+    (assert (preferencia-de-artista ?artista))
 
     (focus abstraccion)
 )
 
+; Modulo de abstracción, se encarga de clasificar la visita según el conocimiento, la duración y el tipo de grupo
 (defmodule abstraccion (import MAIN ?ALL)(import recopilacion ?ALL)(export ?ALL))
 
+; Regla de abstracción que clasifica la visita según el conocimiento, la duración y el tipo de grupo
 (defrule abstraccion::abstraccion-problema
    ?visita <- (object(is-a Visita) (nDias ?dias)(nHoras/Dia ?horas)(nMuseosVisitados ?museos)(nPersonas ?personas))
    (preferencia-de-estilo ?preferencia-de-estilo)
+
    =>
 
-   (bind ?coneixement
-      (if (<= ?museos 1) then
-          "bajo"
-      else (if (and (> ?museos 1) (<= ?museos 5)) then
-              "mediano"
-              else "alto")))
+    (bind ?coneixement
+        (if (<= ?museos 1) then
+            "bajo"
+        else (if (and (> ?museos 1) (<= ?museos 5)) then
+                "mediano"
+                else "alto")))
 
-   (bind ?duracion-total (* ?dias ?horas))
-   (bind ?duracion
-      (if (<= ?duracion-total 5) then
-          "corta"
-      else "larga"))
+    (bind ?duracion-total (* ?dias ?horas))
+    (bind ?duracion
+        (if (<= ?duracion-total 5) then
+            "corta"
+        else "larga"))
 
 
 	(bind ?tipo-grupo
     	(if (<= ?personas 1) then
-        "individual"
+            "individual"
     	else (if (and (> ?personas 1) (<= ?personas 5)) then
-         "pequeño"
+            "pequeño"
     	else "grande")))
 
-   (printout t "Clasificación abstracta de la visita:" crlf)
-   (printout t "  Conocimiento: " ?coneixement crlf)
-   (printout t "  Duración de la visita: " ?duracion crlf)
-   (printout t "  Tipo de grupo: " ?tipo-grupo crlf)
+    (printout t "Clasificación abstracta de la visita:" crlf)
+    (printout t "  Conocimiento: " ?coneixement crlf)
+    (printout t "  Duración de la visita: " ?duracion crlf)
+    (printout t "  Tipo de grupo: " ?tipo-grupo crlf)
     (printout t "  Preferencia estilo: " ?preferencia-de-estilo crlf)
 
-   (printout t "DEBUG: Modificant la instància: " ?visita crlf)
+    (printout t "DEBUG: Modificant la instància: " ?visita crlf)
     ; Modificar la instancia de Visita
     (send [visita1] put-CONOCIMIENTO ?coneixement)
     (send [visita1] put-DURACIÓN ?duracion)
@@ -166,22 +172,22 @@
     (send [visita1] put-ESTILOPREFERIDO ?preferencia-de-estilo) 
 
     ;; Verificar que los atributos se han modificado de la instancia visita -> QUITAR CUANDO SE REVISE
-   (printout t "DEBUG: Comprobación de atributos modificados:" crlf)
-   (printout t "  CONOCIMIENTO: " (send [visita1] get-CONOCIMIENTO) crlf)
-   (printout t "  DURACIÓN: " (send [visita1] get-DURACIÓN) crlf)
-   (printout t "  TIPOGRUPO: " (send [visita1] get-TIPOGRUPO) crlf)
-   (printout t "  ESTILOPREFERIDO: " (send [visita1] get-ESTILOPREFERIDO) crlf)
-   (printout t "  esFamilia: " (send [visita1] get-esFamilia) crlf)
-
+    (printout t "DEBUG: Comprobación de atributos modificados:" crlf)
+    (printout t "  CONOCIMIENTO: " (send [visita1] get-CONOCIMIENTO) crlf)
+    (printout t "  DURACIÓN: " (send [visita1] get-DURACIÓN) crlf)
+    (printout t "  TIPOGRUPO: " (send [visita1] get-TIPOGRUPO) crlf)
+    (printout t "  ESTILOPREFERIDO: " (send [visita1] get-ESTILOPREFERIDO) crlf)
+    (printout t "  esFamilia: " (send [visita1] get-esFamilia) crlf)
     
-   (focus matching)
-   (run)
+    (focus matching)
+    (run)
 
 )
 
-
+; Modulo de matching, se encarga de asignar un grupo al visitante según sus preferencias
 (defmodule matching (import MAIN ?ALL)(import abstraccion ?ALL)(export ?ALL))
 
+; Pintar las obras de una ruta
 (deffunction matching::pintar-ruta (?ruta)
     (if (instancep ?ruta) then
         (bind ?obras (send ?ruta get-ruta_contiene))
@@ -192,47 +198,65 @@
         (printout t "Error: El argumento proporcionado no es una instancia válida de Ruta." crlf))
 )
 
+; Grupo para visitantes que prefieren el estilo barroco
 (defrule matching::grupo-barroco
     ?visita <- (object (is-a Visita) (CONOCIMIENTO ?conocimiento) (ESTILOPREFERIDO ?estilopreferido))
     (test (or (eq ?conocimiento "alto") (eq ?conocimiento "medio")))
     (test (eq ?estilopreferido [Barroco]))
+
     =>
+
     (assert (grupo BARROCO))
 )
 
+; Grupo para amantes del arte moderno
 (defrule matching::grupo-modernista
     ?visita <- (object (is-a Visita) (CONOCIMIENTO ?conocimiento) (ESTILOPREFERIDO ?estilopreferido))
     (test (or (eq ?conocimiento "alto") (eq ?conocimiento "medio")))
     (test (eq ?estilopreferido [ArteModerno]))
+
     =>
+
     (assert (grupo MODERNISTA))
 )
 
+; Grupo para visitantes que prefieren el Renacimiento
 (defrule matching::grupo-renacentista
     ?visita <- (object (is-a Visita) (CONOCIMIENTO ?conocimiento) (ESTILOPREFERIDO ?estilopreferido))
     (test (or (eq ?conocimiento "alto") (eq ?conocimiento "medio")))
     (test (eq ?estilopreferido [Renacimiento]))
+
     =>
+
     (assert (grupo RENACENTISTA))
 )
 
+; Grupo para expertos en arte
 (defrule matching::grupo-experto
     ?visita <- (object (is-a Visita) (CONOCIMIENTO "alto")(ESTILOPREFERIDO ?estilopreferido))
     (test (and (and (not (eq ?estilopreferido [Renacimiento])) (not (eq ?estilopreferido [ArteModerno]))) (not (eq ?estilopreferido [Barroco]))))
+
     =>
+
     (assert (grupo EXPERTO))
 )
 
+; Grupo para familias con niños
 (defrule matching::grupo-ninos
     ?visita <- (object (is-a Visita) (esFamilia TRUE))
+
     =>
+
     (assert (grupo NIÑOS))
 )
 
+; Grupo general para visitantes con conocimiento bajo o medio
 (defrule matching::grupo-general
     ?visita <- (object (is-a Visita) (CONOCIMIENTO ?conocimiento) (esFamilia FALSE))
     (test (not (eq ?conocimiento "alto")))
+
     =>
+
     (assert (grupo GENERAL))
 )
 
@@ -241,49 +265,61 @@
    (grupo ?grupo)
 
    => 
+
+    ; Clear console
+    (printout t crlf)
+    (printout t crlf)
+    (printout t crlf)
+    (printout t crlf)
+    (printout t crlf)
+    (printout t " =!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= " crlf)
+    (printout t "               RECOMENDACIONES DE RUTAS POR EL MUSEO                     " crlf)
+    (printout t " =!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= " crlf)
+    (printout t crlf)
+
     ; Segun el grupo asignado se recomienda una ruta inicial u otra
-   (printout t crlf "[Recomendación inicial] " 
-      (if (eq ?grupo BARROCO) then 
-        (printout t "Ruta Barroca: Ideal para quienes disfrutan de la grandiosidad y el dramatismo. Disfrutarás de obras maestras de gran impacto visual del barroco." crlf)
+    (if (eq ?grupo BARROCO) then
+        (printout t "RUTA BARROCA: Ideal para quienes disfrutan de la grandiosidad y el dramatismo. Disfrutarás de obras maestras de gran impacto visual del barroco." crlf)
          (bind ?ruta-inicial [Barroca])
 
-      else(if (eq ?grupo EXPERTO) then
-        (printout t "Ruta para Expertos: Explora obras exclusivas y con más complejidad con análisis detallado y obras menos conocidas para profundizar en cada pieza." crlf)
+    else (if (eq ?grupo EXPERTO) then
+        (printout t "RUTA PARA EXPERTOS: Explora obras exclusivas y con más complejidad con análisis detallado y obras menos conocidas para profundizar en cada pieza." crlf)
         (bind ?ruta-inicial [Expertos]) 
 
-      else (if (eq ?grupo GENERAL) then 
-        (printout t "Ruta General: Recorre las exposiciones más destacadas para un paseo relajado y variado en estilos y autores, ideal para todos los niveles de conocimiento." crlf)
+    else (if (eq ?grupo GENERAL) then 
+        (printout t "RUTA GENERAL: Recorre las exposiciones más destacadas para un paseo relajado y variado en estilos y autores, ideal para todos los niveles de conocimiento." crlf)
         (bind ?ruta-inicial [General])
 
-      else (if (eq ?grupo MODERNISTA) then 
-        (printout t "Ruta Modernista: Enfocada en obras innovadoras y vanguardistas, ideal para amantes del arte contemporáneo con interés en la experimentación." crlf)
+    else (if (eq ?grupo MODERNISTA) then 
+        (printout t "RUTA MODERNISTA: Enfocada en obras innovadoras y vanguardistas, ideal para amantes del arte contemporáneo con interés en la experimentación." crlf)
         (bind ?ruta-inicial [Modernista])      
 
-       else (if (eq ?grupo NIÑOS) then 
-        (printout t "Ruta para Niños: Perfecta para familias con actividades interactivas y obras accesibles para los más pequeños, sin tanta complejidad." crlf)
+    else (if (eq ?grupo NIÑOS) then 
+        (printout t "RUTA PARA NIÑOS: Perfecta para familias con actividades interactivas y obras accesibles para los más pequeños, sin tanta complejidad." crlf)
         (bind ?ruta-inicial [Niños])
 
-        else (if (eq ?grupo RENACENTISTA) then 
-        (printout t "Ruta Renacentista: Adéntrate en la precisión artística del Renacimiento, ideal para admiradores del equilibrio y la belleza clásica." crlf)
+    else (if (eq ?grupo RENACENTISTA) then 
+        (printout t "RUTA RENACENTISTA: Adéntrate en la precisión artística del Renacimiento, ideal para admiradores del equilibrio y la belleza clásica." crlf)
         (bind ?ruta-inicial [Renacentista])
 
-      )))))))
+    ))))))
     
     ; Guardamos la ruta inicial asignada para despues el refinamiento.
-    ;(pintar-ruta ?ruta-inicial)
     (assert (ruta-inicial ?ruta-inicial))
     
     (focus refinamiento)
 )
 
-
+; Modulo de refinamiento, se encarga de ajustar la ruta inicial según las preferencias del visitante
 (defmodule refinamiento (import MAIN ?ALL)(import matching ?ALL)(import recopilacion ?ALL)(export ?ALL))
 
+; Pintar las obras de una ruta por sala
 (deffunction refinamiento::pintar-obras-por-sala(?ruta)
     (if (> (length$ ?ruta) 0) then
        
         (bind ?sales (find-all-instances ((?sala Sala)) TRUE))
 
+        ; Iterar sobre todas las salas, y para cada sala, imprimir las obras de la ruta que están expuestas en ella
         (foreach ?sal ?sales
             (bind ?obras-por-sala (find-all-instances ((?obra ObraDeArte))
                 (and 
@@ -307,6 +343,7 @@
 (defrule refinamiento::añadir-preferencia-artista
     (preferencia-de-artista ?artista)
     (ruta-inicial ?ruta-inicial) ; Cambiado de $?ruta-inicial a ?ruta-inicial
+
     =>
 
     (bind ?lista-autor (create$))
@@ -325,13 +362,13 @@
 )
 
 ; Añadir las obras del estilo preferido a la lista refinada, si el visitante tiene una preferencia de estilo
-(defrule refinamiento:añadir-preferencia-estilo
+(defrule refinamiento::añadir-preferencia-estilo
     (preferencia-de-estilo ?estilo)
     (lista-refinada1 $?lista-refinada1)
+    
     =>
 
     (bind ?lista-estilo (create$))
-
     (bind ?lista-estilo ?lista-refinada1)
 
     ;Inserir obras del estilo preferido a la lista refinada
@@ -341,22 +378,99 @@
         )
     )
 
-    (printout t "DEBUG: lista refinada mezclada con obras del estilo preferido:" crlf)
-    (foreach ?obra ?lista-estilo
-        (printout t "  === " ?obra crlf)
-    )
-
     ; Crea una nueva ruta con la mezcla de la lista refinada y las obras del estilo preferido
     (assert (lista-refinada2 ?lista-estilo))
 )
 
-; Queremos si falta tiempo para llegar al tiempo de la visita total, añadir más obras a la ruta
-; Si sobra tiempo, eliminar obras de la ruta (ordenar por complejidada, eliminar las más 
-;   complejas o menos complejas dependiendo del tipo de visitante)
-(defrule refinamiento:ajustar_tiempo
+; Devuelve la obra más compleja de la lista
+(deffunction refinamiento::obra-mas-compleja (?lista)
+    (bind ?obra-mas-compleja (nth$ 1 ?lista))
+
+    ; Itera sobre todas las obras de la lista y compara sus dimensiones
+    (foreach ?obra ?lista
+        (if (> (send ?obra get-Dimensiones) (send ?obra-mas-compleja get-Dimensiones)) then
+            (bind ?obra-mas-compleja ?obra)
+        )
+    )
+
+    (return ?obra-mas-compleja)
+)
+
+; Devuelve la obra menos compleja de una lista de obras
+(deffunction refinamiento::obra-menos-compleja (?lista)
+    (bind ?obra-menos-compleja (nth$ 1 ?lista))
+
+    ; Itera sobre todas las obras de la lista y compara sus dimensiones
+    (foreach ?obra ?lista
+        (if (< (send ?obra get-Dimensiones) (send ?obra-menos-compleja get-Dimensiones)) then
+            (bind ?obra-menos-compleja ?obra)
+        )
+    )
+
+    (return ?obra-menos-compleja)
+)
+
+; Ajustar la duración de la ruta eliminando obras si es necesario, se eliminan las obras más complejas o menos complejas dependiendo del tipo de visitante. O se insertan obras si sobra tiempo.
+(defrule refinamiento::ajustar_tiempo
     (lista-refinada2 $?lista-refinada2)
-    ?visita <- (object(is-a Visita)(nDias ?dias)(nHoras/Dia ?horas))
+    ?visita <- (object(is-a Visita)(nDias ?dias)(nHoras/Dia ?horas)(CONOCIMIENTO ?conocimiento))
+
     =>
-    (pintar-obras-por-sala ?lista-refinada2)
-    (printout t "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" crlf)
+
+    (bind ?lista-tiempo (create$))
+    (bind ?lista-tiempo ?lista-refinada2)
+
+    (bind ?duracion-total (* ?dias ?horas 60))
+    (bind ?duracion-ruta (* (length$ ?lista-tiempo) 15)); 15 minutos por obra
+
+    ; Si sobra tiempo, elimnamos tantas obras como sea necesario
+    (if (> ?duracion-ruta ?duracion-total) then
+        (bind ?diferencia (- ?duracion-ruta ?duracion-total))
+        (while (> ?diferencia 0) do
+
+            ; Eliminar la obra más compleja o menos compleja dependiendo del tipo de visitante
+            (if (eq ?conocimiento "bajo") then
+                (bind ?obra-a-eliminar (obra-mas-compleja ?lista-tiempo))
+            else
+                (bind ?obra-a-eliminar (obra-menos-compleja ?lista-tiempo))
+            )
+            (bind ?lista-tiempo (delete-member$ ?lista-tiempo ?obra-a-eliminar))
+            (bind ?diferencia (- ?diferencia 15))
+        )
+        (bind ?duracion-ruta (* (length$ ?lista-tiempo) 15)); 15 minutos por obra
+
+    ; Si falta tiempo, añadimos tantas obras como sea necesario
+    else
+        (bind ?diferencia (- ?duracion-total ?duracion-ruta))
+        (bind ?obras (find-all-instances ((?obra ObraDeArte)) TRUE))
+        (while (> ?diferencia 0) do
+            ; Añadir la obra más compleja o menos compleja dependiendo del tipo de visitante
+            (if (eq ?conocimiento "bajo") then
+                (bind ?obra (obra-menos-compleja ?obras))
+            else
+                (bind ?obra (obra-mas-compleja ?obras))
+            )
+
+            ; Añadir la obra a la lista refinada, si no está ya
+            (if (not (member$ ?obra ?lista-tiempo)) then
+                (bind ?lista-tiempo (insert$ ?lista-tiempo 1 ?obra))
+                (bind ?diferencia (- ?diferencia 15))
+            )
+            (bind ?obras (delete-member$ ?obras ?obra))
+        )
+    )
+
+    (assert (lista-final ?lista-tiempo))
+)
+
+; Pintar la ruta final
+(defrule refinamiento::pintar-ruta-final
+    (lista-final $?lista-final)
+
+    =>
+
+    (printout t crlf)
+    (printout t "Ya hemos calculado cuál es la ruta que más se adaptará a usted. Verá a continuación una lista de salas con las obras que le recomendamos visitar en cada una de ellas. Esperamos que le guste la selección. Véala a continuación:" crlf)
+    (printout t crlf)
+    (pintar-obras-por-sala ?lista-final)
 )
