@@ -168,6 +168,7 @@
 	Un cop rebuda la llista suggerida, la vam revisar per identificar possibles errors i adaptar-la a les nostres necessitats. Com a resultat, vam obtenir una configuració final composta per $3$ estils, $15$ autors ($3 \times 5$) i $75$ obres ($3 \times 5 \times 5$). Aquesta selecció ens permet treballar amb un conjunt de dades manejable però suficientment representatiu per als nostres objectius de prova i validació del sistema.
 	
 	\subsection{Divisió en subproblemes}
+	\label{sec:Subproblemes}
 	
 	\subsubsection{Problema concret: Recollir dades de la visita}
 	
@@ -269,17 +270,29 @@
 		\end{itemize}
 	\end{itemize}
 	
-	\subsubsection{Sales del museu}
-	El museu està organitzat en diferents sales que agrupen les obres segons criteris específics. Algunes de les sales disponibles són:
+	\subsubsection{Disseny del museu}
+	El museu tracta principalment sobre tres èpoques clau de la història de l'art: {Renaixement, Barroc i Art Modern}. De cadascuna d'aquestes èpoques comptem amb un gran ventall d'artistes que han estat representatius. És per això que aquest està organitzat en diferents sales que agrupen totes les obres artístiques segons criteris específics.
+	
+	Tenim sales dedicades a cadascuna d'aquestes èpoques. A més, també hi ha sales dedicades a alguns dels artistes més importants d'aquests grans moments històrics. Algunes de les sales disponibles són:
+	
 	\begin{itemize}
-		\item \texttt{Sala 1: } 
+		\item \texttt{Sales Temàtiques: } 
 		\begin{itemize}
-			\item Obres destacades:
-			\item Autors:
+			\item Renaixement
+			\item Barroc
+			\item Art Modern
 		\end{itemize}
 	\end{itemize}
 	
-	\subsubsection{Quadres}
+	\begin{itemize}
+		\item \texttt{Sales sobre artistes: } 
+		\begin{itemize}
+			\item Claude Monet: Artista d'Art Modern
+			\item Wassily Kandinsky: Artista d'Art Modern
+			\item ArtemisiaGentileschi: Artista del Barroc
+			\item Rembrandt Van Rijn: Artista del Barroc
+		\end{itemize}
+	\end{itemize}
 	
 	\newpage
 	\section{Formalització}
@@ -300,8 +313,85 @@
 	
 	\subsection{Justificació de la metodologia de resolució}
 	
+	La metodologia utilitzada per resoldre el problema es basa en una divisió clara del sistema en diferents mòduls independents. Aquesta elecció es justifica per les següents raons:
+	
+	\begin{itemize}
+		\item \texttt{Estructura modular:} El problema de generar rutes personalitzades per als visitants d’un museu es compon de diverses parts:
+		\begin{itemize}
+			\item Recopilació de dades dels visitants.
+			\item Abstracció i classificació de la visita.
+			\item Associació d’obres i sales en funció de les preferències i limitacions.
+			\item Refinament i optimització final de les rutes.
+		\end{itemize}
+		Aquesta divisió permet abordar cada part de forma independent, reduint la complexitat del desenvolupament i assegurant que cada component funcioni correctament abans d’integrar-lo al sistema complet.
+		
+		\item \texttt{Flexibilitat i manteniment:} L'ús de mòduls clarament definits facilita la modificació i ampliació del sistema en el futur. Per exemple, es poden afegir nous estils d’art, obres o criteris de personalització sense afectar altres parts del sistema.
+		
+		\item \texttt{Evolució incremental:} El sistema construeix la solució de manera progressiva, començant per la recopilació de dades, seguint amb l’anàlisi i generació d’una ruta inicial, i acabant amb el refinament i l’optimització. Aquest enfocament escalonat garanteix que cada pas afegeixi un nivell de detall fins a obtenir una solució ajustada a les necessitats del visitant.
+		
+	\end{itemize}
+	
+	En conjunt, aquesta metodologia assegura que el sistema sigui escalable i fàcil de gestionar, de la mateixa forma que, en un futur, permet aplicar nous canvis en els criteris seleccionats.
+
+	
 	\newpage
 	\section{Implementació}
+	
+	La implementació del sistema s'ha estructurat en diverses fases, cadascuna centrada en una part específica del desenvolupament. A continuació, es detallen les principals etapes i les tasques realitzades en cadascuna:
+	
+	\subsection{Creació de l’ontologia i instàncies}
+	
+	L’ontologia ha estat dissenyada per representar de forma estructurada els conceptes clau del domini: les classes i els atributs per modelar el museu. Un cop definida aquesta amb Protegé, incloent els elements del domini explicats en apartats anteriors, s'han creat les instàncies estàtiques del museu, buscant un conjunt representatiu de: sales obres d'art, artistes i èpoques.
+	
+	\subsection{MAIN}
+	\begin{itemize}
+		\item Mòdul principal que actua com a punt d’entrada.
+		\item Activa la seqüència de preguntes per al visitant i inicialitza el flux d’execució del sistema.
+	\end{itemize}
+	
+	
+	\subsection{Mòdul "recopilacion": recopilació de dades}
+	
+	Aquest mòdul inclou regles i funcions encarregades d'obtenir informació inicial dels visitants a través de preguntes interactives. Les dades recollides inclouen:
+	\begin{itemize}
+		\item Característiques del grup: Nombre de persones, presència de nens i experiència prèvia (nombre de museus visitats).
+		\item Duració de la visita: Dies disponibles i hores per dia.
+		\item Preferències: Estils artístics i artistes favorits.
+	\end{itemize}
+	Les respostes es processen i s'emmagatzemen com a fets per a l'ús posterior del sistema.
+	
+	
+	\subsection{Mòdul "abstraccion": d’abstracció}
+	
+	Un cop recollides les dades, aquest mòdul transforma la informació inicial en un problema abstracte. Les tasques realitzades inclouen:
+	\begin{itemize}
+		\item Classificació del grup: Individual, grup petit o grup gran.
+		\item Determinació del coneixement artístic: Baix, mitjà o alt, basat en el nombre de museus visitats.
+		\item Càlcul de la durada de la visita: Curta o llarga, segons els dies i hores disponibles.
+	\end{itemize}
+	Aquestes classificacions serveixen com a base per a la generació de rutes.
+	
+	\subsection{Mòdul de matching}
+	
+	Aquest mòdul genera una primera ruta pel visitant basada en les seves preferències i característiques, és a dir, en el seu interès en art i en el seu coneixement. \\
+	
+	Aquest mòdul prioritza les obres i sales més rellevants per al visitant.
+	
+	\subsection{Mòdul de refinament}
+	
+	Aquest mòdul ajusta la ruta inicial per adaptar-la millor a les necessitats del visitant:
+	\begin{itemize}
+		\item Afegir obres d'artistes i estils preferits no inclosos inicialment.
+		\item Afegir o treure obres en funció del temps disponible i el seu coneixement.
+	\end{itemize}
+	El resultat és una ruta final personalitzada i agrupada de forma lògica.
+	
+	\subsection{Resultats generats}
+	
+	Un cop completats tots els passos, el sistema presenta al visitant una ruta final amb les obres seleccionades, ordenades per sales i sessions diàries. \\
+	
+	Aquest resultat intenta ajustar-se al perfil del visitant i maximitzar l’aprofitament del temps.
+	
 	
 	\newpage
 	\section{Jocs de Prova}
