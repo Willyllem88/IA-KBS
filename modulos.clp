@@ -279,6 +279,30 @@
 
 (defmodule refinamiento (import MAIN ?ALL)(import matching ?ALL)(import recopilacion ?ALL)(export ?ALL))
 
+(deffunction refinamiento::pintar-obras-por-sala(?ruta)
+    (if (> (length$ ?ruta) 0) then
+       
+        (bind ?sales (find-all-instances ((?sala Sala)) TRUE))
+
+        (foreach ?sal ?sales
+            (bind ?obras-por-sala (find-all-instances ((?obra ObraDeArte))
+                (and 
+                    (member$ ?obra ?ruta)
+                    (eq (send ?obra get-expuesta_en) ?sal)
+                )
+                )
+            )
+            ;Imprimir solo si hay obras de esa sala
+            (if (> (length$ ?obras-por-sala) 0) then
+                    (printout t ?sal ":" crlf)
+                (foreach ?obrasala ?obras-por-sala
+                      (printout t "  - " ?obrasala crlf)
+                )
+            )
+        )
+    )
+)
+
 ; Añadir las obras del artista preferido a la ruta inicial, si el visitante tiene una preferencia de artista
 (defrule refinamiento::añadir-preferencia-artista
     (preferencia-de-artista ?artista)
@@ -308,7 +332,7 @@
 
     (bind ?lista-estilo (create$))
 
-    (bind ?lista-estilo ?lista-refinada1 get-ruta_contiene)
+    (bind ?lista-estilo ?lista-refinada1)
 
     ;Inserir obras del estilo preferido a la lista refinada
     (foreach ?obra (find-all-instances ((?obra ObraDeArte)) (eq ?obra:obra_de_estilo ?estilo))
@@ -333,6 +357,6 @@
     (lista-refinada2 $?lista-refinada2)
     ?visita <- (object(is-a Visita)(nDias ?dias)(nHoras/Dia ?horas))
     =>
-    
+    (pintar-obras-por-sala ?lista-refinada2)
     (printout t "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" crlf)
 )

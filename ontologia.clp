@@ -71,7 +71,7 @@
         (type INSTANCE)
         (create-accessor read-write))
     ;;; Se encuentra ubicado dentro de una sala
-    (multislot expuesta_en
+    (slot expuesta_en
         (type INSTANCE)
         (create-accessor read-write))
     ;;; El estilo al que pertenece una obra
