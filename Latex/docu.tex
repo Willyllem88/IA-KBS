@@ -312,17 +312,88 @@
 	
 	\subsection{Desenvolupament de la ontologia}
 	
+	Per a resoldre el problema plantejat de recomanació de rutes en un museu utilitzant sistemes basats en el coneixement, hem desenvolupat una ontologia que descriu els elements que hem considerat clau d’aquest entorn i com es relacionen, com ara artistes, obres d’art, estil, sales, museus i visites. Inicialment, aquesta ontologia es va implementar en Protégé, una eina àmpliament utilitzada per a la creació d’ontologies en el llenguatge OWL (Web Ontology Language). Aquesta fase ens ha permès estructurar els conceptes i relacions de manera formal i estandarditzada. \\
+	
+	Posteriorment, hem convertit l’ontologia juntament amb les instàncies pertinents escollides a format CLIPS per poder integrar-la en un sistema basat en regles, que facilita la inferència automàtica de recomanacions. En aquest sistema, l’ontologia funciona com a base de coneixement, mentre que un conjunt de regles defineixen la lògica de recomanació per personalitzar les rutes en funció de les preferències dels visitants, les característiques de les sales i la disponibilitat d’obres. \\
+	
+	Aquest enfocament ens permet aprofitar els beneficis d’una representació formal del coneixement combinada amb la capacitat de raonament d’un sistema expert. A continuació, es descriuen les classes principals de l’ontologia, els seus atributs, les seves funcions dins del sistema i com es relacionen. \\
+	
 	\subsubsection*{Artista}
+	Representa el concepte d'artista dins del sistema, el creador de les obres d'art que estan exhibides al museu. Aquesta classe inclou informació rellevant sobre cada artista, com ara el seu nom i les seves obres destacades que té exposades al museu. Els artistes estan connectats amb les seves obres a través de relacions específiques i tenen associats estils d'art.
+	
+	Atributs de la classe:
+	\begin{itemize}
+		\item \texttt{artista\_de\_estilo}: Estils artístics associats a l’artista, amb els quals crea les obres.
+	\end{itemize}
+	
 	
 	\subsubsection*{Museu}
+	És l'entitat central de l'ontologia i de tot el problema, que encapsula totes les altres classes. Un museu està conformat per una o múltiples Sales, cadascuna amb una funció específica (temàtica o basada en artistes). En cada sala hi ha exposades totes les diferents obres dels artistes que poseeix el museu per a que puguin ser admirades i observades pels visitants durant la seva visita al museu recorrent la ruta recomanada pel nostre sistema.
 	
 	\subsubsection*{Obra d'Art}
-	
+	Representa cada peça exhibida al museu, les quals seran observades durant el recorregut de la ruta pel museu dels visitants. Inclou atributs com el títol, l'artista associat que l'ha creada, l'any de creació. Les obres estan vinculades amb els artistes que les han creat, les sales on s'exhibeixen i l'estil amb el qual han estat elaborades.\\
+	Atributs de la classe:
+	\begin{itemize}
+		\item \texttt{creada\_por}: Artista que va crear l’obra.
+		\item \texttt{expuesta\_en}: Sala on es troba exposada.
+		\item \texttt{obra\_de\_estilo}: Estil artístic de l’obra.
+		\item \texttt{Dimensiones}: Dimensions físiques de l’obra.
+		\item \texttt{añoCreacion}: Any en què es va crear l’obra.
+	\end{itemize}
+		
 	\subsubsection*{Ruta}
+	Defineix recorreguts optimitzats i predefinits ja per als visitants. Cada ruta pot estar basada en criteris com preferències artístiques, limitacions de temps, temàtiques d'interès o grau de coneixement en art. Per exemple, una ruta pot connectar les sales dedicades a un estil artístic o incloure només obres més complexes per als experts.\\
+	Atributs de la classe:
+	\begin{itemize}
+		\item \texttt{ruta\_contiene}: Llista d'obres d'art incloses en la ruta per a que les puguin observar els visitants en ordre.
+	\end{itemize}
 	
 	\subsubsection*{Sala}
+	Representa els espais on estan exposades les obres dins del museu.
+	Atributs de la classe:
+	\begin{itemize}
+		\item \texttt{parte\_de}: Indica el museu al qual pertany la sala.
+	\end{itemize}
+	 Aquesta classe té dues subclasses que són les següents:
 	
+	\begin{itemize}
+		\item \textbf{SalaArtista}: Dedicada a un artista específic, on totes les obres exhibides són del mateix autor.\\
+		Atributs de la subclasse:
+			\begin{itemize}
+				\item \texttt{exhibe\_obras\_de}: Artista al que està dedicat la sala i on totes les obres són seves.
+			\end{itemize}
+	\item \textbf{SalaTemàtica}: Sala amb un estil i amb obres d'una mateix estil artístic. Les sales poden tenir atributs com el nom i estar vinculades a un estil concret.\\
+		Atributs de la subclasse:
+		\begin{itemize}
+			\item \texttt{sala\_sobre\_estilo}: Estil artístic de la sala i en conseqüència de les obres exhibides, les obres poden ser de diferents artistes.
+		\end{itemize}
+	\end{itemize}
+		
 	\subsubsection*{Visita}
+	Representa una instància d'interacció d'un visitant o grup amb el museu. Aquesta classe emmagatzema les dades que caracteritzen a la entitat visita que ve a visitar el museu, i també les seves preferències, permetent així personalitzar l'experiència al màxim perquè puguin aprofitar la visita al museu en base a les dades recopilades. Els atributs (dades dels visitants) en minúscules s'extreuen a la part de recopilació mitjançant preguntes i els atributs en majúscules es deriven dels altres atributs.\\
+	Atributs de la classe:
+	\begin{itemize}
+		\item \texttt{preferencia\_artista}: Preferències del visitant sobre algun artista del museu, si és que en té.
+	 	\item \texttt{preferencia\_de\_estilo}: Estil preferit del visitant dels que hi ha al museu, si és que en té.
+		\item \texttt{nHoras/Dia}: Nombre d’hores que el visitant pot dedicar al museu per dia.
+		\item \texttt{CONOCIMIENTO}: Grau de coneixement sobre art del visitant.
+		\item \texttt{DURACIÓN}: Durada total de la visita.
+		\item \texttt{ESTILOPREFERIDO}: Estil artístic favorit del visitant.
+		\item \texttt{TIPOGRUPO}: Tipus de grup i la seva mida, si es individual, petit o gran.
+		\item \texttt{esFamilia}: Indica si la visita és d’un grup familiar i té nens si no es individual el grup.
+		\item \texttt{nDias}: Nombre de dies dedicats a la visita.
+		\item \texttt{nMuseosVisitados}: Nombre de museus visitats pel grup o individu durant l'últim any. Ens serveix per saber quant de coneixement en art té el grup.
+	 	\item \texttt{nPersonas}: Nombre total de persones al grup. Per determinar el tipus de grup.
+	\end{itemize}
+
+	
+	\subsubsection*{Estil}
+	Defineix els estils artístics representats al museu que poden definir una obra d'art, un artista o també una sala temàtica.\\
+	Atributs de la classe:
+	\begin{itemize}
+		\item \texttt{tipo}: Tipus específic d’estil artístic. (barroc, renaixement, modernisme, etc.).
+	\end{itemize}
+	
 	
 	\subsection{Justificació de la metodologia de resolució}
 	

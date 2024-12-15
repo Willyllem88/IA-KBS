@@ -413,18 +413,35 @@
 ; Ajustar la duración de la ruta eliminando obras si es necesario, se eliminan las obras más complejas o menos complejas dependiendo del tipo de visitante. O se insertan obras si sobra tiempo.
 (defrule refinamiento::ajustar_tiempo
     (lista-refinada2 $?lista-refinada2)
-    ?visita <- (object(is-a Visita)(nDias ?dias)(nHoras/Dia ?horas)(CONOCIMIENTO ?conocimiento))
+    ?visita <- (object(is-a Visita)(nDias ?dias)(nHoras/Dia ?horas)(CONOCIMIENTO ?conocimiento)(TIPOGRUPO ?tipogrupo)(esFamilia ?ninos))
 
     =>
 
     (bind ?lista-tiempo (create$))
     (bind ?lista-tiempo ?lista-refinada2)
 
-    (bind ?duracion-total (* ?dias ?horas 60))
-    (bind ?duracion-ruta (* (length$ ?lista-tiempo) 15)); 15 minutos por obra
+    ;dependiendo del tamaño del grupo y de si hay niños asignamos un tiempo por obra en minutos
+    (bind ?tiempo-por-obra 
+        (if (eq ?tipogrupo "individual") then
+            2
+        else (if  (and (eq ?tipogrupo "pequeño") (eq ?ninos FALSE))then
+            5
+        else (if (or (and (eq ?tipogrupo "pequeño") (eq ?ninos TRUE)) (and (eq ?tipogrupo "grande") (eq ?ninos FALSE))) then 
+            10
+        else (if (and (eq ?tipogrupo "grande") (eq ?ninos TRUE)) then
+            15
+        )))))
 
-    ; Si sobra tiempo, elimnamos tantas obras como sea necesario
-    (if (> ?duracion-ruta ?duracion-total) then
+   
+    (bind ?duracion-total (* ?dias ?horas 60)) ; en minutos
+   ; (bind ?duracion-ruta (* (length$ ?lista-tiempo) 15)); 15 minutos por obra
+    (bind ?duracion-ruta (* (length$ ?lista-tiempo) ?tiempo-por-obra));
+
+    (bind ?duracion-museo-max (* ?tiempo-por-obra 75)) ; tiempo total para ver todas las 75 obras del museo
+
+    
+
+     (if (> ?duracion-ruta ?duracion-total) then             ; Si sobra tiempo, elimnamos tantas obras como sea necesario
         (bind ?diferencia (- ?duracion-ruta ?duracion-total))
         (while (> ?diferencia 0) do
 
@@ -435,9 +452,9 @@
                 (bind ?obra-a-eliminar (obra-menos-compleja ?lista-tiempo))
             )
             (bind ?lista-tiempo (delete-member$ ?lista-tiempo ?obra-a-eliminar))
-            (bind ?diferencia (- ?diferencia 15))
+            (bind ?diferencia (- ?diferencia ?tiempo-por-obra)) ; tiempo-por-obra -> 15 
         )
-        (bind ?duracion-ruta (* (length$ ?lista-tiempo) 15)); 15 minutos por obra
+        (bind ?duracion-ruta (* (length$ ?lista-tiempo) ?tiempo-por-obra)); tiempo-por-obra -> 15 minutos por obra
 
     ; Si falta tiempo, añadimos tantas obras como sea necesario
     else
@@ -454,11 +471,16 @@
             ; Añadir la obra a la lista refinada, si no está ya
             (if (not (member$ ?obra ?lista-tiempo)) then
                 (bind ?lista-tiempo (insert$ ?lista-tiempo 1 ?obra))
-                (bind ?diferencia (- ?diferencia 15))
+                (bind ?diferencia (- ?diferencia ?tiempo-por-obra)); tiempo-por-obra -> 15 minutos por obra
+
             )
             (bind ?obras (delete-member$ ?obras ?obra))
+            (if (eq (length$ ?obras) 0) then    ; El tiempo disponible para su visita es superior al de visitar todo el museo, visitan todas las obras
+                (break)
+            )
         )
     )
+    
 
     (assert (lista-final ?lista-tiempo))
 )
