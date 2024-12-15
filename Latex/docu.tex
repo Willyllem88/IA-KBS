@@ -409,4 +409,135 @@
 	\newpage
 	\section{Jocs de Prova}
 	
+	Per validar la funcionalitat i robustesa del sistema de personalització de visites al museu, hem dissenyat sis jocs de prova que cobreixen diferents escenaris. Cada cas està pensat per posar a prova aspectes específics del sistema, tenint en compte variables com el tipus de visitant, el temps disponible, el coneixement sobre art i les preferències temàtiques. En aquest apartat es descriu cada prova detalladament, es justifica el seu objectiu i es presenta la sortida esperada de forma genèrica.
+	
+	\subsection{Prova 1: Visita Familiar amb Nens}
+	
+	\paragraph{Objectiu:} 
+	Aquest joc de prova està dissenyat per avaluar si el sistema és capaç de recomanar una ruta adequada per a una família amb nens, prioritzant obres fàcils d’entendre i visuals. També es verifica que el sistema maximitzi l’ús del temps disponible sense sobrecarregar la visita.
+	
+	\paragraph{Descripció del cas:} 
+	
+	\begin{itemize}
+		\item \textbf{Nombre de persones:} 5.
+		\item \textbf{Hi ha nens?} Sí.
+		\item \textbf{Hi ha més nens que adults?} Sí.
+		\item \textbf{Durada de la visita:} 1 dia de 3 hores.
+		\item \textbf{Coneixement d’art:} Baix (1 museu visitat).
+		\item \textbf{Preferències:} Sense preferències específiques.
+	\end{itemize}
+	
+	\paragraph{Sortida esperada:}
+	El sistema hauria de seleccionar una ruta que inclogui obres i sales adequades per a nens, és a dir, obres simples, de poca compexitat. També s’hauria de garantir que les obres siguin variades (diferents èpoques) i que el recorregut proposat estigui ben ordenat per sales. A més, com és un grup petit i amb nens, i està pensat que es dediquin uns 10 minuts per obra en aquest cas, s'espera un recorregut d'unes 18 obres.
+	
+	\paragraph{Sortida obtinguda:}
+	En general, els resultats són els esperats pel cas plantejat. Primer de tot, veiem que el nombre d'obres es correspon al que esperàvem: 18. Per altra banda, també veiem que les obres no són de gran complexitat i que la ruta està ben estructurada pel que fa al recorregut per sales \\
+	
+	Per últim, destacar que els estils són variats, com s'esperava tenint en compte que no havíem marcat cap preferència en concret, tot i que és cert que predominen més les obres del Renaixement.
+	
+	\subsection{Prova 2: Grup Gran d’Adults}
+	
+	\paragraph{Objectiu:} 
+	Aquest joc de prova pretén verificar com el sistema gestiona un grup gran d’adults sense preferències específiques, amb un nivell de coneixement mitjà i un interès general per l’art. Es comprova que el sistema proposi obres rellevants i representatives del museu, distribuint el temps de manera equilibrada.
+	
+	\paragraph{Descripció del cas:} 
+	
+	\begin{itemize}
+		\item \textbf{Nombre de persones:} 15.
+		\item \textbf{Hi ha nens menors de 16 anys?} No.
+		\item \textbf{Durada de la visita:} 2 dies de 3 hores.
+		\item \textbf{Coneixement d’art:} Mig (3 museus visitats).
+		\item \textbf{Preferències:} Sense preferències específiques.
+	\end{itemize}
+	
+	\paragraph{Sortida esperada:}
+	El sistema hauria de recomanar una ruta que cobreixi obres importants del museu, distribuint el temps en diferents sales, de diferents autors i èpoques. Sent un grup gran, que requereix un major temps per visitar cada obra, s'espera que en total tinguin unes 12 obres proposades per cadascun dels dies. També s’espera que l’itinerari eviti moviments innecessaris entre sales.
+	
+	\paragraph{Sortida obtinguda:} FALTAAAAA
+	
+	
+	\subsection{Prova 3: Visita Grupal amb Preferències Barroques}
+	
+	\paragraph{Objectiu:} 
+	Aquest cas pretén analitzar com el sistema adapta les recomanacions d'un grup gran amb un alt nivell de coneixement artístic i una preferència clara per l’estil barroc. Es posa a prova la capacitat del sistema per prioritzar obres més complexes i menys conegudes, però dins de l’àmbit seleccionat. A més, com la visita és prou llarga, si no hi ha obres suficients pels interessos registrats, haurà de fer unes altres propostes.
+	
+	\paragraph{Descripció del cas:} 
+	
+	\begin{itemize}
+		\item \textbf{Nombre de persones:} 10.
+		\item \textbf{Hi ha nens menors de 16 anys?} No.
+		\item \textbf{Durada de la visita:} 2 dies de 3 hores cadascun.
+		\item \textbf{Coneixement d’art:} Alt (7 museus visitats).
+		\item \textbf{Preferències:} Barroc, cap preferència d'autor.
+	\end{itemize}
+	
+	\paragraph{Sortida esperada:}
+	El sistema hauria de proposar una ruta que inclogui sales específiques del període barroc, seleccionant obres complexes que s’ajustin al nivell de coneixement del visitant. Com la visita és llarga, també s'espera que es proposin altres obres d'altres estils, però sempre prioritzant les del seu interès.
+	
+	\paragraph{Sortida obtinguda:}
+	La ruta obtinguda inclou totes les obres de l'època demanada i, com encara hi ha temps per visitar més obres, s'inclou un recull d'altres èpoques. El recorregut és l'esperat perquè inclou obres d'una correcta complexitat, la quantitat es correspon al temps disponible i els estils també són representatius. 
+	
+	\subsection{Prova 4: Grup gran amb Temps Limitat}
+	
+	\paragraph{Objectiu:} 
+	Aquesta prova busca comprovar si el sistema és capaç d’adaptar-se a una visita curta. S’analitza si el sistema prioritza obres d'interès per l'usuari i optimitza el recorregut.
+	
+	\paragraph{Descripció del cas:} 
+	
+	\begin{itemize}
+		\item \textbf{Nombre de persones:} 10.
+		\item \textbf{Hi ha nens?} No.
+		\item \textbf{Durada de la visita:} 1 dia d’1 hora.
+		\item \textbf{Coneixement d’art:} Alt (6 museus visitats).
+		\item \textbf{Preferències:} Art modern i un autor del mateix estil: Pablo Picasso.
+	\end{itemize}
+	
+	\paragraph{Sortida esperada:}
+	El sistema hauria de seleccionar una ruta amb obres imprescindibles i sales properes. Es verifica que s’optimitzi el temps sense perdre qualitat en l’experiència, perquè la sortida ha de ser de molt poques obres degut al temps de visita.
+	
+	\paragraph{Sortida obtinguda:}
+	La ruta resultant correspon amb el que s'esperava: molt poques obres (exactament 6) perquè el temps de la visita és molt limitant i totes les obres pertanyen a l'estil d'interès de la visita i també inclou algunes obres del seu artista preferit.
+	
+	\subsection{Prova 5: Grup Petit amb Preferències variades}
+	
+	\paragraph{Objectiu:} 
+	Aquest joc de prova examina com el sistema gestiona una visita amb un grup petit d’adults amb coneixement baix i una preferència pel Renaixement i un autor que no és de la mateixa època. Es verifica si el sistema ofereix un itinerari en el qual apareguin tant l'època com l'estil.
+	
+	\paragraph{Descripció del cas:} 
+	
+	\begin{itemize}
+		\item \textbf{Nombre de persones:} 3.
+		\item \textbf{Hi ha nens?} No.
+		\item \textbf{Durada de la visita:} 1 dia de 3 hores.
+		\item \textbf{Coneixement d’art:} Baix (1 museu visitat).
+		\item \textbf{Preferències:} Renaixement i Wassily Kandinsky (Art Modern).
+	\end{itemize}
+	
+	\paragraph{Sortida esperada:}
+	El sistema hauria de recomanar obres icòniques del Renaixement i de Wassily Kandinsky. També hauria d’ajustar el recorregut a un nivell de complexitat baix.
+	
+	\paragraph{Sortida obtinguda:}
+	La ruta proposada inclou totes les obres del Renaixement i totes les obres de l'autor demanat: Wassily Kandinsky. A més, com encara es disposa de més temps després d'haver visitat totes aquestes obres, també s'inclouen obres d'altres estils i artistes. La complexitat de les obres i la quantitat d'elles, també és l'esperada pel tipus de grup i la durada de la visita.
+	
+	\subsection{Prova 6: Visita molt llarga}
+	
+	\paragraph{Objectiu:} 
+	Aquest cas busca analitzar com el sistema tracta una visita amb molt temps. En aquest cas, serà una visita individual, per tant, el temps per obra és encara més baix. Es comprova si el sistema pot gestionar una visita que requereix tantes obres.
+	
+	\paragraph{Descripció del cas:} 
+	
+	\begin{itemize}
+		\item \textbf{Nombre de persones:} 1.
+		\item \textbf{Hi ha nens?} No.
+		\item \textbf{Durada de la visita:} 3 dia de 6 hores.
+		\item \textbf{Coneixement d’art:} Mitjà (4 museus visitats).
+		\item \textbf{Preferències:} cap.
+	\end{itemize}
+	
+	\paragraph{Sortida esperada:}
+	El sistema hauria de crear un itinerari amb moltes obres, a ser possible variades, és a dir, que el visitant passi gairebé per totes les sales, tenint en compte que el recorregut sigui coherent i el recorregut es faci en ordre. Donat el tipus de visita i el seu temps, és d'esperar que el recorregut inclogui totes les obres del museu.
+	
+	\paragraph{Sortida obtinguda:}
+	En aquest cas, com la visita era tant llarga i individual (requereix de menys temps per visitar cada obra, així que en pot visitar més), la ruta proposada inclou totes les obres del museu. Per tant, també obtenim un resultat esperat.
+	
 \end{document}
