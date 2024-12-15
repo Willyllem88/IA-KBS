@@ -440,48 +440,47 @@
     (bind ?duracion-museo-max (* ?tiempo-por-obra 75)) ; tiempo total para ver todas las 75 obras del museo
 
     
-    ; el tiempo de visita es superior al de visitar el museo entero 
-    (if (or (> ?duracion-total ?duracion-museo-max) (eq ?duracion-total ?duracion-museo-max)) then   
-        (bind ?lista-tiempo (find-all-instances ((?obra ObraDeArte)) TRUE) ) ; Recomendar visitar todo el museo porque tienen tiempo de sobras
-       
-       ; No tienen tiempo a ver todo el museo
-       else (if (> ?duracion-ruta ?duracion-total) then             ; Si sobra tiempo, elimnamos tantas obras como sea necesario
-            (bind ?diferencia (- ?duracion-ruta ?duracion-total))
-            (while (> ?diferencia 0) do
 
-                ; Eliminar la obra más compleja o menos compleja dependiendo del tipo de visitante
-                (if (eq ?conocimiento "bajo") then
-                    (bind ?obra-a-eliminar (obra-mas-compleja ?lista-tiempo))
-                else
-                    (bind ?obra-a-eliminar (obra-menos-compleja ?lista-tiempo))
-                )
-                (bind ?lista-tiempo (delete-member$ ?lista-tiempo ?obra-a-eliminar))
-                (bind ?diferencia (- ?diferencia ?tiempo-por-obra)) ; tiempo-por-obra -> 15 
+     (if (> ?duracion-ruta ?duracion-total) then             ; Si sobra tiempo, elimnamos tantas obras como sea necesario
+        (bind ?diferencia (- ?duracion-ruta ?duracion-total))
+        (while (> ?diferencia 0) do
+
+            ; Eliminar la obra más compleja o menos compleja dependiendo del tipo de visitante
+            (if (eq ?conocimiento "bajo") then
+                (bind ?obra-a-eliminar (obra-mas-compleja ?lista-tiempo))
+            else
+                (bind ?obra-a-eliminar (obra-menos-compleja ?lista-tiempo))
             )
-            (bind ?duracion-ruta (* (length$ ?lista-tiempo) ?tiempo-por-obra)); tiempo-por-obra -> 15 minutos por obra
+            (bind ?lista-tiempo (delete-member$ ?lista-tiempo ?obra-a-eliminar))
+            (bind ?diferencia (- ?diferencia ?tiempo-por-obra)) ; tiempo-por-obra -> 15 
+        )
+        (bind ?duracion-ruta (* (length$ ?lista-tiempo) ?tiempo-por-obra)); tiempo-por-obra -> 15 minutos por obra
 
-        ; Si falta tiempo, añadimos tantas obras como sea necesario
-        else
-            (bind ?diferencia (- ?duracion-total ?duracion-ruta))
-            (bind ?obras (find-all-instances ((?obra ObraDeArte)) TRUE))
-            (while (> ?diferencia 0) do
-                ; Añadir la obra más compleja o menos compleja dependiendo del tipo de visitante
-                (if (eq ?conocimiento "bajo") then
-                    (bind ?obra (obra-menos-compleja ?obras))
-                else
-                    (bind ?obra (obra-mas-compleja ?obras))
-                )
+    ; Si falta tiempo, añadimos tantas obras como sea necesario
+    else
+        (bind ?diferencia (- ?duracion-total ?duracion-ruta))
+        (bind ?obras (find-all-instances ((?obra ObraDeArte)) TRUE))
+        (while (> ?diferencia 0) do
+            ; Añadir la obra más compleja o menos compleja dependiendo del tipo de visitante
+            (if (eq ?conocimiento "bajo") then
+                (bind ?obra (obra-menos-compleja ?obras))
+            else
+                (bind ?obra (obra-mas-compleja ?obras))
+            )
 
-                ; Añadir la obra a la lista refinada, si no está ya
-                (if (not (member$ ?obra ?lista-tiempo)) then
-                    (bind ?lista-tiempo (insert$ ?lista-tiempo 1 ?obra))
-                    (bind ?diferencia (- ?diferencia ?tiempo-por-obra)); tiempo-por-obra -> 15 minutos por obra
+            ; Añadir la obra a la lista refinada, si no está ya
+            (if (not (member$ ?obra ?lista-tiempo)) then
+                (bind ?lista-tiempo (insert$ ?lista-tiempo 1 ?obra))
+                (bind ?diferencia (- ?diferencia ?tiempo-por-obra)); tiempo-por-obra -> 15 minutos por obra
 
-                )
-                (bind ?obras (delete-member$ ?obras ?obra))
+            )
+            (bind ?obras (delete-member$ ?obras ?obra))
+            (if (eq (length$ ?obras) 0) then    ; El tiempo disponible para su visita es superior al de visitar todo el museo, visitan todas las obras
+                (break)
             )
         )
     )
+    
 
     (assert (lista-final ?lista-tiempo))
 )
