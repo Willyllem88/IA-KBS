@@ -527,9 +527,10 @@
 	\end{itemize}
 	
 	\paragraph{Sortida esperada:}
-	El sistema hauria de recomanar una ruta que cobreixi obres importants del museu, distribuint el temps en diferents sales, de diferents autors i èpoques. Sent un grup gran, que requereix un major temps per visitar cada obra, s'espera que en total tinguin unes 12 obres proposades per cadascun dels dies. També s’espera que l’itinerari eviti moviments innecessaris entre sales.
+	El sistema hauria de recomanar una ruta que cobreixi obres importants del museu, distribuint el temps en diferents sales, de diferents autors i èpoques. Sent un grup gran, que requereix un major temps per visitar cada obra, s'espera que en total tinguin unes 18 obres proposades per cadascun dels dies. També s’espera que l’itinerari eviti moviments innecessaris entre sales.
 	
-	\paragraph{Sortida obtinguda:} FALTAAAAA
+	\paragraph{Sortida obtinguda:} 
+	Amb la sortida obtinguda podem veure com, efectivament, la ruta proposada inclou tota la varietat d'estils que hi ha al museu i la llargada, i també gran varietat d'autors. I, per altra banda, la dificultat del recorregut també correspon al que esperàvem.
 	
 	
 	\subsection{Prova 3: Visita Grupal amb Preferències Barroques}
@@ -638,5 +639,862 @@
 		\item \textbf{Interacció amb dades en temps real}: Recollir dades dels visitants mentre fan la visita per adaptar la ruta en temps real, proposant canvis de sala o modificant la priorització d'obres.
 		\item \textbf{Instanciar un museu real}: En comptes d'utilitzar un museu fictici amb només 75 obres, replicar-ne un real.
 	\end{itemize}
+	
+	\newpage
+	\section{Annexos: Resultats dels Jocs de Prova}
+	\subsection{Prova 1: Visita Familiar amb Nens}
+	\paragraph{Entrada:}
+	
+	\begin{verbatim}
+		5
+		si
+		1
+		3
+		1
+		0
+		0
+	\end{verbatim}
+	
+	\paragraph{Sortida esperada:}
+	\begin{verbatim}
+		 =!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
+		RECOMENDACIONES DE RUTAS POR EL MUSEO                     
+		=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
+		
+		RUTA PARA NIÑOS: Perfecta para familias con actividades interactivas y obras accesibles para los más pequeños, sin tanta complejidad.
+		
+		Ya hemos calculado cuál es la ruta que más se adaptará a usted. Verá a continuación una lista de salas con las obras que le recomendamos visitar en cada una de ellas. Esperamos que le guste la selección. Véala a continuación:
+		
+		
+		[Sala4]:
+		- Obra: [ImpresiónSolNaciente]
+		Autor: [ClaudeMonet]
+		Estilo: [ArteModerno]
+		- Obra: [MujerConSombrilla]
+		Autor: [ClaudeMonet]
+		Estilo: [ArteModerno]
+		- Obra: [Nenúfares]
+		Autor: [ClaudeMonet]
+		Estilo: [ArteModerno]
+		
+		[Sala6]:
+		- Obra: [Cleopatra]
+		Autor: [ArtemisiaGentileschi]
+		Estilo: [Barroco]
+		- Obra: [JudithYSuDoncella]
+		Autor: [ArtemisiaGentileschi]
+		Estilo: [Barroco]
+		
+		[Sala1]:
+		- Obra: [David]
+		Autor: [MiguelAngel]
+		Estilo: [Renacimiento]
+		- Obra: [ElHombreDeVitruvio]
+		Autor: [LeonardoDaVinci]
+		Estilo: [Renacimiento]
+		- Obra: [LaDamaDelArmiño]
+		Autor: [LeonardoDaVinci]
+		Estilo: [Renacimiento]
+		- Obra: [Moisés]
+		Autor: [MiguelAngel]
+		Estilo: [Renacimiento]
+		
+		[Sala3]:
+		- Obra: [CisnesReflejandoElefantes]
+		Autor: [SalvadorDalí]
+		Estilo: [ArteModerno]
+		- Obra: [LaPersistenciaDeLaMemoria]
+		Autor: [SalvadorDalí]
+		Estilo: [ArteModerno]
+		- Obra: [LosGirasoles]
+		Autor: [VincentVanGogh]
+		Estilo: [ArteModerno]
+		- Obra: [SueñoCausadoPorElVueloDeUnaAbeja]
+		Autor: [SalvadorDalí]
+		Estilo: [ArteModerno]
+		
+		[Sala8]:
+		- Obra: [DavidDonatello]
+		Autor: [Donatello]
+		Estilo: [Renacimiento]
+		- Obra: [Habacuc]
+		Autor: [Donatello]
+		Estilo: [Renacimiento]
+		- Obra: [LaVirgenDelLibro]
+		Autor: [SandroBotticelli]
+		Estilo: [Renacimiento]
+		- Obra: [PenitenteMagdalena]
+		Autor: [Donatello]
+		Estilo: [Renacimiento]
+		- Obra: [SanJorge]
+		Autor: [Donatello]
+		Estilo: [Renacimiento]
+	\end{verbatim}
+	
+	\subsection{Prova 2: Grup Gran d’Adults}
+	\paragraph{Entrada:}
+	\begin{verbatim}
+		15
+		no
+		2
+		3
+		3
+		0
+		0
+	\end{verbatim}
+	
+		
+	\paragraph{Sortida esperada:}
+	\begin{verbatim}
+		 =!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
+		RECOMENDACIONES DE RUTAS POR EL MUSEO                     
+		=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
+		
+		RUTA GENERAL: Recorre las exposiciones más destacadas para un paseo relajado y variado en estilos y autores, ideal para todos los niveles de conocimiento.
+		
+		Ya hemos calculado cuál es la ruta que más se adaptará a usted. Verá a continuación una lista de salas con las obras que le recomendamos visitar en cada una de ellas. Esperamos que le guste la selección. Véala a continuación:
+		
+		
+		[Sala4]:
+		- Obra: [Nenúfares]
+		Autor: [ClaudeMonet]
+		Estilo: [ArteModerno]
+		
+		[Sala5]:
+		- Obra: [ComposiciónVII]
+		Autor: [WassilyKandinsky]
+		Estilo: [ArteModerno]
+		- Obra: [ComposiciónVIII]
+		Autor: [WassilyKandinsky]
+		Estilo: [ArteModerno]
+		
+		[Sala9]:
+		- Obra: [Danae]
+		Autor: [RembrandtVanRijn]
+		Estilo: [Barroco]
+		- Obra: [ElRegresoDelHijopródigo]
+		Autor: [RembrandtVanRijn]
+		Estilo: [Barroco]
+		- Obra: [LaLecciónDeAnatomíaDelDr.Tulp]
+		Autor: [RembrandtVanRijn]
+		Estilo: [Barroco]
+		- Obra: [LaRondaDeNoche]
+		Autor: [RembrandtVanRijn]
+		Estilo: [Barroco]
+		
+		[Sala1]:
+		- Obra: [ElRetabloDeSantaMaríaDelPopolo]
+		Autor: [Rafael]
+		Estilo: [Renacimiento]
+		- Obra: [LaCreaciónDeAdán]
+		Autor: [MiguelAngel]
+		Estilo: [Renacimiento]
+		- Obra: [LaMadonnaSixtina]
+		Autor: [Rafael]
+		Estilo: [Renacimiento]
+		- Obra: [LaMonaLisa]
+		Autor: [LeonardoDaVinci]
+		Estilo: [Renacimiento]
+		- Obra: [LaPiedad]
+		Autor: [MiguelAngel]
+		Estilo: [Renacimiento]
+		- Obra: [LaTransfiguración]
+		Autor: [Rafael]
+		Estilo: [Renacimiento]
+		
+		[Sala2]:
+		- Obra: [CristoCrucificado]
+		Autor: [DiegoVelázquez]
+		Estilo: [Barroco]
+		- Obra: [ElDescendimientoDeLaCruz]
+		Autor: [PeterPaulRubens]
+		Estilo: [Barroco]
+		- Obra: [ElJardínDelAmor]
+		Autor: [PeterPaulRubens]
+		Estilo: [Barroco]
+		- Obra: [ElJuicioDeParis]
+		Autor: [PeterPaulRubens]
+		Estilo: [Barroco]
+		- Obra: [ElTriumfoDeBaco]
+		Autor: [DiegoVelázquez]
+		Estilo: [Barroco]
+		- Obra: [JudithDecapitandoAHolofernes]
+		Autor: [Caravaggio]
+		Estilo: [Barroco]
+		- Obra: [LaAdoraciónDeLosMagos]
+		Autor: [PeterPaulRubens]
+		Estilo: [Barroco]
+		- Obra: [LaCenaDeEmaús]
+		Autor: [Caravaggio]
+		Estilo: [Barroco]
+		- Obra: [LaFraguaDeVulcano]
+		Autor: [DiegoVelázquez]
+		Estilo: [Barroco]
+		- Obra: [LaRendiciónDeBreda]
+		Autor: [DiegoVelázquez]
+		Estilo: [Barroco]
+		- Obra: [LaVocaciónDeSanMateo]
+		Autor: [Caravaggio]
+		Estilo: [Barroco]
+		- Obra: [LasMeninas]
+		Autor: [DiegoVelázquez]
+		Estilo: [Barroco]
+		- Obra: [LasTresGracias]
+		Autor: [PeterPaulRubens]
+		Estilo: [Barroco]
+		
+		[Sala3]:
+		- Obra: [Guernica]
+		Autor: [PabloPicasso]
+		Estilo: [ArteModerno]
+		- Obra: [LaNocheEstrellada]
+		Autor: [VincentVanGogh]
+		Estilo: [ArteModerno]
+		- Obra: [LaPersistenciaDeLaMemoria]
+		Autor: [SalvadorDalí]
+		Estilo: [ArteModerno]
+		- Obra: [LesDemoisellesDAvignon]
+		Autor: [PabloPicasso]
+		Estilo: [ArteModerno]
+		
+		[Sala7]:
+		- Obra: [ElJuicioFinal]
+		Autor: [MiguelAngel]
+		Estilo: [Renacimiento]
+		- Obra: [LaEscuelaDeAtenas]
+		Autor: [Rafael]
+		Estilo: [Renacimiento]
+		- Obra: [LaUltimaCena]
+		Autor: [LeonardoDaVinci]
+		Estilo: [Renacimiento]
+		
+		[Sala8]:
+		- Obra: [ElNacimientoDeVenus]
+		Autor: [SandroBotticelli]
+		Estilo: [Renacimiento]
+		- Obra: [LaPrimavera]
+		Autor: [SandroBotticelli]
+		Estilo: [Renacimiento]
+		- Obra: [PalasYElCentauro]
+		Autor: [SandroBotticelli]
+		Estilo: [Renacimiento]
+		
+	\end{verbatim}
+	
+	\subsection{Prova 3: Visita Grupal amb Preferències Barroques}
+	\paragraph{Entrada:}
+	\begin{verbatim}
+		10
+		no
+		2
+		3
+		7
+		1
+		0
+	\end{verbatim}
+
+	\paragraph{Sortida esperada:}
+	\begin{verbatim}
+		 =!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
+		RECOMENDACIONES DE RUTAS POR EL MUSEO                     
+		=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
+		
+		RUTA BARROCA: Ideal para quienes disfrutan de la grandiosidad y el dramatismo. Disfrutarás de obras maestras de gran impacto visual del barroco.
+		
+		Ya hemos calculado cuál es la ruta que más se adaptará a usted. Verá a continuación una lista de salas con las obras que le recomendamos visitar en cada una de ellas. Esperamos que le guste la selección. Véala a continuación:
+		
+		
+		[Sala4]:
+		- Obra: [Nenúfares]
+		Autor: [ClaudeMonet]
+		Estilo: [ArteModerno]
+		
+		[Sala5]:
+		- Obra: [ComposiciónVII]
+		Autor: [WassilyKandinsky]
+		Estilo: [ArteModerno]
+		
+		[Sala6]:
+		- Obra: [AutorretratoComoAlegoríaDeLaPintura]
+		Autor: [ArtemisiaGentileschi]
+		Estilo: [Barroco]
+		- Obra: [Cleopatra]
+		Autor: [ArtemisiaGentileschi]
+		Estilo: [Barroco]
+		- Obra: [JudithYSuDoncella]
+		Autor: [ArtemisiaGentileschi]
+		Estilo: [Barroco]
+		- Obra: [Lucrecia]
+		Autor: [ArtemisiaGentileschi]
+		Estilo: [Barroco]
+		- Obra: [SusanaYLosAncianos]
+		Autor: [ArtemisiaGentileschi]
+		Estilo: [Barroco]
+		
+		[Sala9]:
+		- Obra: [AutorretratoConDosCírculos]
+		Autor: [RembrandtVanRijn]
+		Estilo: [Barroco]
+		- Obra: [Danae]
+		Autor: [RembrandtVanRijn]
+		Estilo: [Barroco]
+		- Obra: [ElRegresoDelHijopródigo]
+		Autor: [RembrandtVanRijn]
+		Estilo: [Barroco]
+		- Obra: [LaLecciónDeAnatomíaDelDr.Tulp]
+		Autor: [RembrandtVanRijn]
+		Estilo: [Barroco]
+		- Obra: [LaRondaDeNoche]
+		Autor: [RembrandtVanRijn]
+		Estilo: [Barroco]
+		
+		[Sala1]:
+		- Obra: [ElRetabloDeSantaMaríaDelPopolo]
+		Autor: [Rafael]
+		Estilo: [Renacimiento]
+		- Obra: [LaCreaciónDeAdán]
+		Autor: [MiguelAngel]
+		Estilo: [Renacimiento]
+		- Obra: [LaTransfiguración]
+		Autor: [Rafael]
+		Estilo: [Renacimiento]
+		
+		[Sala2]:
+		- Obra: [CristoCrucificado]
+		Autor: [DiegoVelázquez]
+		Estilo: [Barroco]
+		- Obra: [DavidConLaCabezaDeGoliat]
+		Autor: [Caravaggio]
+		Estilo: [Barroco]
+		- Obra: [ElDescendimientoDeLaCruz]
+		Autor: [PeterPaulRubens]
+		Estilo: [Barroco]
+		- Obra: [ElJardínDelAmor]
+		Autor: [PeterPaulRubens]
+		Estilo: [Barroco]
+		- Obra: [ElJuicioDeParis]
+		Autor: [PeterPaulRubens]
+		Estilo: [Barroco]
+		- Obra: [ElTriumfoDeBaco]
+		Autor: [DiegoVelázquez]
+		Estilo: [Barroco]
+		- Obra: [JudithDecapitandoAHolofernes]
+		Autor: [Caravaggio]
+		Estilo: [Barroco]
+		- Obra: [LaAdoraciónDeLosMagos]
+		Autor: [PeterPaulRubens]
+		Estilo: [Barroco]
+		- Obra: [LaCenaDeEmaús]
+		Autor: [Caravaggio]
+		Estilo: [Barroco]
+		- Obra: [LaFraguaDeVulcano]
+		Autor: [DiegoVelázquez]
+		Estilo: [Barroco]
+		- Obra: [LaIncredulidadDeSantoTomás]
+		Autor: [Caravaggio]
+		Estilo: [Barroco]
+		- Obra: [LaRendiciónDeBreda]
+		Autor: [DiegoVelázquez]
+		Estilo: [Barroco]
+		- Obra: [LaVocaciónDeSanMateo]
+		Autor: [Caravaggio]
+		Estilo: [Barroco]
+		- Obra: [LasMeninas]
+		Autor: [DiegoVelázquez]
+		Estilo: [Barroco]
+		- Obra: [LasTresGracias]
+		Autor: [PeterPaulRubens]
+		Estilo: [Barroco]
+		
+		[Sala3]:
+		- Obra: [Guernica]
+		Autor: [PabloPicasso]
+		Estilo: [ArteModerno]
+		- Obra: [LesDemoisellesDAvignon]
+		Autor: [PabloPicasso]
+		Estilo: [ArteModerno]
+		
+		[Sala7]:
+		- Obra: [ElJuicioFinal]
+		Autor: [MiguelAngel]
+		Estilo: [Renacimiento]
+		- Obra: [LaEscuelaDeAtenas]
+		Autor: [Rafael]
+		Estilo: [Renacimiento]
+		- Obra: [LaUltimaCena]
+		Autor: [LeonardoDaVinci]
+		Estilo: [Renacimiento]
+		
+		[Sala8]:
+		- Obra: [LaPrimavera]
+		Autor: [SandroBotticelli]
+		Estilo: [Renacimiento]
+		
+	\end{verbatim}
+	
+	\subsection{Prova 4: Grup gran amb Temps Limitat}
+	\paragraph{Entrada:}
+	\begin{verbatim}
+		10
+		no
+		1
+		1
+		6
+		3
+		7
+	\end{verbatim}
+
+	\paragraph{Sortida esperada:}
+	\begin{verbatim}
+		 =!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
+		RECOMENDACIONES DE RUTAS POR EL MUSEO                     
+		=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
+		
+		RUTA MODERNISTA: Enfocada en obras innovadoras y vanguardistas, ideal para amantes del arte contemporáneo con interés en la experimentación.
+		
+		Ya hemos calculado cuál es la ruta que más se adaptará a usted. Verá a continuación una lista de salas con las obras que le recomendamos visitar en cada una de ellas. Esperamos que le guste la selección. Véala a continuación:
+		
+		
+		[Sala4]:
+		- Obra: [Nenúfares]
+		Autor: [ClaudeMonet]
+		Estilo: [ArteModerno]
+		
+		[Sala5]:
+		- Obra: [Amarillo-Rojo-Azul]
+		Autor: [WassilyKandinsky]
+		Estilo: [ArteModerno]
+		- Obra: [ComposiciónVII]
+		Autor: [WassilyKandinsky]
+		Estilo: [ArteModerno]
+		- Obra: [ComposiciónVIII]
+		Autor: [WassilyKandinsky]
+		Estilo: [ArteModerno]
+		
+		[Sala3]:
+		- Obra: [Guernica]
+		Autor: [PabloPicasso]
+		Estilo: [ArteModerno]
+		- Obra: [LesDemoisellesDAvignon]
+		Autor: [PabloPicasso]
+		Estilo: [ArteModerno]
+	\end{verbatim}
+	
+	
+	\subsection{Prova 5: Grup Petit amb Preferències variades}
+	\paragraph{Entrada:}
+	\begin{verbatim}
+		3
+		no
+		1
+		3
+		1
+		2
+		14
+	\end{verbatim}
+
+
+	\paragraph{Sortida esperada:}
+	\begin{verbatim}
+		 =!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
+		RECOMENDACIONES DE RUTAS POR EL MUSEO                     
+		=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
+		
+		RUTA GENERAL: Recorre las exposiciones más destacadas para un paseo relajado y variado en estilos y autores, ideal para todos los niveles de conocimiento.
+		
+		Ya hemos calculado cuál es la ruta que más se adaptará a usted. Verá a continuación una lista de salas con las obras que le recomendamos visitar en cada una de ellas. Esperamos que le guste la selección. Véala a continuación:
+		
+		
+		[Sala5]:
+		- Obra: [Amarillo-Rojo-Azul]
+		Autor: [WassilyKandinsky]
+		Estilo: [ArteModerno]
+		- Obra: [ComposiciónVII]
+		Autor: [WassilyKandinsky]
+		Estilo: [ArteModerno]
+		- Obra: [ComposiciónVIII]
+		Autor: [WassilyKandinsky]
+		Estilo: [ArteModerno]
+		- Obra: [CuadradoConCírculosConcéntricos]
+		Autor: [WassilyKandinsky]
+		Estilo: [ArteModerno]
+		- Obra: [Improvisación28]
+		Autor: [WassilyKandinsky]
+		Estilo: [ArteModerno]
+		
+		[Sala1]:
+		- Obra: [Anunciación]
+		Autor: [LeonardoDaVinci]
+		Estilo: [Renacimiento]
+		- Obra: [David]
+		Autor: [MiguelAngel]
+		Estilo: [Renacimiento]
+		- Obra: [ElHombreDeVitruvio]
+		Autor: [LeonardoDaVinci]
+		Estilo: [Renacimiento]
+		- Obra: [ElRetabloDeSantaMaríaDelPopolo]
+		Autor: [Rafael]
+		Estilo: [Renacimiento]
+		- Obra: [LaCreaciónDeAdán]
+		Autor: [MiguelAngel]
+		Estilo: [Renacimiento]
+		- Obra: [LaDamaDelArmiño]
+		Autor: [LeonardoDaVinci]
+		Estilo: [Renacimiento]
+		- Obra: [LaMadonnaDelJilguero]
+		Autor: [Rafael]
+		Estilo: [Renacimiento]
+		- Obra: [LaMadonnaSixtina]
+		Autor: [Rafael]
+		Estilo: [Renacimiento]
+		- Obra: [LaMonaLisa]
+		Autor: [LeonardoDaVinci]
+		Estilo: [Renacimiento]
+		- Obra: [LaPiedad]
+		Autor: [MiguelAngel]
+		Estilo: [Renacimiento]
+		- Obra: [LaTransfiguración]
+		Autor: [Rafael]
+		Estilo: [Renacimiento]
+		- Obra: [Moisés]
+		Autor: [MiguelAngel]
+		Estilo: [Renacimiento]
+		
+		[Sala2]:
+		- Obra: [ElDescendimientoDeLaCruz]
+		Autor: [PeterPaulRubens]
+		Estilo: [Barroco]
+		- Obra: [JudithDecapitandoAHolofernes]
+		Autor: [Caravaggio]
+		Estilo: [Barroco]
+		- Obra: [LasMeninas]
+		Autor: [DiegoVelázquez]
+		Estilo: [Barroco]
+		
+		[Sala3]:
+		- Obra: [Guernica]
+		Autor: [PabloPicasso]
+		Estilo: [ArteModerno]
+		- Obra: [LaNocheEstrellada]
+		Autor: [VincentVanGogh]
+		Estilo: [ArteModerno]
+		- Obra: [LaPersistenciaDeLaMemoria]
+		Autor: [SalvadorDalí]
+		Estilo: [ArteModerno]
+		
+		[Sala7]:
+		- Obra: [ElJuicioFinal]
+		Autor: [MiguelAngel]
+		Estilo: [Renacimiento]
+		- Obra: [LaEscuelaDeAtenas]
+		Autor: [Rafael]
+		Estilo: [Renacimiento]
+		- Obra: [LaUltimaCena]
+		Autor: [LeonardoDaVinci]
+		Estilo: [Renacimiento]
+		
+		[Sala8]:
+		- Obra: [DavidDonatello]
+		Autor: [Donatello]
+		Estilo: [Renacimiento]
+		- Obra: [ElFestínDeHerodes]
+		Autor: [Donatello]
+		Estilo: [Renacimiento]
+		- Obra: [ElNacimientoDeVenus]
+		Autor: [SandroBotticelli]
+		Estilo: [Renacimiento]
+		- Obra: [Habacuc]
+		Autor: [Donatello]
+		Estilo: [Renacimiento]
+		- Obra: [LaCalumniaDeApeles]
+		Autor: [SandroBotticelli]
+		Estilo: [Renacimiento]
+		- Obra: [LaPrimavera]
+		Autor: [SandroBotticelli]
+		Estilo: [Renacimiento]
+		- Obra: [LaVirgenDelLibro]
+		Autor: [SandroBotticelli]
+		Estilo: [Renacimiento]
+		- Obra: [PalasYElCentauro]
+		Autor: [SandroBotticelli]
+		Estilo: [Renacimiento]
+		- Obra: [PenitenteMagdalena]
+		Autor: [Donatello]
+		Estilo: [Renacimiento]
+		- Obra: [SanJorge]
+		Autor: [Donatello]
+		Estilo: [Renacimiento]
+		
+		
+	\end{verbatim}
+	
+	\subsection{Prova 6: Visita molt llarga}
+	\paragraph{Entrada:}
+	\begin{verbatim}
+		1
+		3
+		6
+		4
+		0
+		0
+	\end{verbatim}
+
+	\paragraph{Sortida esperada:}
+	\begin{verbatim}
+		 =!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
+		RECOMENDACIONES DE RUTAS POR EL MUSEO                     
+		=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
+		
+		RUTA GENERAL: Recorre las exposiciones más destacadas para un paseo relajado y variado en estilos y autores, ideal para todos los niveles de conocimiento.
+		
+		Ya hemos calculado cuál es la ruta que más se adaptará a usted. Verá a continuación una lista de salas con las obras que le recomendamos visitar en cada una de ellas. Esperamos que le guste la selección. Véala a continuación:
+		
+		
+		[Sala4]:
+		- Obra: [ElEstanqueDeNenúfares]
+		Autor: [ClaudeMonet]
+		Estilo: [ArteModerno]
+		- Obra: [ImpresiónSolNaciente]
+		Autor: [ClaudeMonet]
+		Estilo: [ArteModerno]
+		- Obra: [LaCatedralDeRuanEfectoDeSol]
+		Autor: [ClaudeMonet]
+		Estilo: [ArteModerno]
+		- Obra: [MujerConSombrilla]
+		Autor: [ClaudeMonet]
+		Estilo: [ArteModerno]
+		- Obra: [Nenúfares]
+		Autor: [ClaudeMonet]
+		Estilo: [ArteModerno]
+		
+		[Sala5]:
+		- Obra: [Amarillo-Rojo-Azul]
+		Autor: [WassilyKandinsky]
+		Estilo: [ArteModerno]
+		- Obra: [ComposiciónVII]
+		Autor: [WassilyKandinsky]
+		Estilo: [ArteModerno]
+		- Obra: [ComposiciónVIII]
+		Autor: [WassilyKandinsky]
+		Estilo: [ArteModerno]
+		- Obra: [CuadradoConCírculosConcéntricos]
+		Autor: [WassilyKandinsky]
+		Estilo: [ArteModerno]
+		- Obra: [Improvisación28]
+		Autor: [WassilyKandinsky]
+		Estilo: [ArteModerno]
+		
+		[Sala6]:
+		- Obra: [AutorretratoComoAlegoríaDeLaPintura]
+		Autor: [ArtemisiaGentileschi]
+		Estilo: [Barroco]
+		- Obra: [Cleopatra]
+		Autor: [ArtemisiaGentileschi]
+		Estilo: [Barroco]
+		- Obra: [JudithYSuDoncella]
+		Autor: [ArtemisiaGentileschi]
+		Estilo: [Barroco]
+		- Obra: [Lucrecia]
+		Autor: [ArtemisiaGentileschi]
+		Estilo: [Barroco]
+		- Obra: [SusanaYLosAncianos]
+		Autor: [ArtemisiaGentileschi]
+		Estilo: [Barroco]
+		
+		[Sala9]:
+		- Obra: [AutorretratoConDosCírculos]
+		Autor: [RembrandtVanRijn]
+		Estilo: [Barroco]
+		- Obra: [Danae]
+		Autor: [RembrandtVanRijn]
+		Estilo: [Barroco]
+		- Obra: [ElRegresoDelHijopródigo]
+		Autor: [RembrandtVanRijn]
+		Estilo: [Barroco]
+		- Obra: [LaLecciónDeAnatomíaDelDr.Tulp]
+		Autor: [RembrandtVanRijn]
+		Estilo: [Barroco]
+		- Obra: [LaRondaDeNoche]
+		Autor: [RembrandtVanRijn]
+		Estilo: [Barroco]
+		
+		[Sala1]:
+		- Obra: [Anunciación]
+		Autor: [LeonardoDaVinci]
+		Estilo: [Renacimiento]
+		- Obra: [David]
+		Autor: [MiguelAngel]
+		Estilo: [Renacimiento]
+		- Obra: [ElHombreDeVitruvio]
+		Autor: [LeonardoDaVinci]
+		Estilo: [Renacimiento]
+		- Obra: [ElRetabloDeSantaMaríaDelPopolo]
+		Autor: [Rafael]
+		Estilo: [Renacimiento]
+		- Obra: [LaCreaciónDeAdán]
+		Autor: [MiguelAngel]
+		Estilo: [Renacimiento]
+		- Obra: [LaDamaDelArmiño]
+		Autor: [LeonardoDaVinci]
+		Estilo: [Renacimiento]
+		- Obra: [LaMadonnaDelJilguero]
+		Autor: [Rafael]
+		Estilo: [Renacimiento]
+		- Obra: [LaMadonnaSixtina]
+		Autor: [Rafael]
+		Estilo: [Renacimiento]
+		- Obra: [LaMonaLisa]
+		Autor: [LeonardoDaVinci]
+		Estilo: [Renacimiento]
+		- Obra: [LaPiedad]
+		Autor: [MiguelAngel]
+		Estilo: [Renacimiento]
+		- Obra: [LaTransfiguración]
+		Autor: [Rafael]
+		Estilo: [Renacimiento]
+		- Obra: [Moisés]
+		Autor: [MiguelAngel]
+		Estilo: [Renacimiento]
+		
+		[Sala2]:
+		- Obra: [CristoCrucificado]
+		Autor: [DiegoVelázquez]
+		Estilo: [Barroco]
+		- Obra: [DavidConLaCabezaDeGoliat]
+		Autor: [Caravaggio]
+		Estilo: [Barroco]
+		- Obra: [ElDescendimientoDeLaCruz]
+		Autor: [PeterPaulRubens]
+		Estilo: [Barroco]
+		- Obra: [ElJardínDelAmor]
+		Autor: [PeterPaulRubens]
+		Estilo: [Barroco]
+		- Obra: [ElJuicioDeParis]
+		Autor: [PeterPaulRubens]
+		Estilo: [Barroco]
+		- Obra: [ElTriumfoDeBaco]
+		Autor: [DiegoVelázquez]
+		Estilo: [Barroco]
+		- Obra: [JudithDecapitandoAHolofernes]
+		Autor: [Caravaggio]
+		Estilo: [Barroco]
+		- Obra: [LaAdoraciónDeLosMagos]
+		Autor: [PeterPaulRubens]
+		Estilo: [Barroco]
+		- Obra: [LaCenaDeEmaús]
+		Autor: [Caravaggio]
+		Estilo: [Barroco]
+		- Obra: [LaFraguaDeVulcano]
+		Autor: [DiegoVelázquez]
+		Estilo: [Barroco]
+		- Obra: [LaIncredulidadDeSantoTomás]
+		Autor: [Caravaggio]
+		Estilo: [Barroco]
+		- Obra: [LaRendiciónDeBreda]
+		Autor: [DiegoVelázquez]
+		Estilo: [Barroco]
+		- Obra: [LaVocaciónDeSanMateo]
+		Autor: [Caravaggio]
+		Estilo: [Barroco]
+		- Obra: [LasMeninas]
+		Autor: [DiegoVelázquez]
+		Estilo: [Barroco]
+		- Obra: [LasTresGracias]
+		Autor: [PeterPaulRubens]
+		Estilo: [Barroco]
+		
+		[Sala3]:
+		- Obra: [AutorretratoConOrejaVendada]
+		Autor: [VincentVanGogh]
+		Estilo: [ArteModerno]
+		- Obra: [CampoDeTrigoConCuervos]
+		Autor: [VincentVanGogh]
+		Estilo: [ArteModerno]
+		- Obra: [CisnesReflejandoElefantes]
+		Autor: [SalvadorDalí]
+		Estilo: [ArteModerno]
+		- Obra: [CristoDeSanJuanDeLaCruz]
+		Autor: [SalvadorDalí]
+		Estilo: [ArteModerno]
+		- Obra: [ElGranMasturbador]
+		Autor: [SalvadorDalí]
+		Estilo: [ArteModerno]
+		- Obra: [ElGuitarristaViejo]
+		Autor: [PabloPicasso]
+		Estilo: [ArteModerno]
+		- Obra: [Guernica]
+		Autor: [PabloPicasso]
+		Estilo: [ArteModerno]
+		- Obra: [LaHabitaciónEnArlés]
+		Autor: [VincentVanGogh]
+		Estilo: [ArteModerno]
+		- Obra: [LaMujerQueLlora]
+		Autor: [PabloPicasso]
+		Estilo: [ArteModerno]
+		- Obra: [LaNocheEstrellada]
+		Autor: [VincentVanGogh]
+		Estilo: [ArteModerno]
+		- Obra: [LaPersistenciaDeLaMemoria]
+		Autor: [SalvadorDalí]
+		Estilo: [ArteModerno]
+		- Obra: [LesDemoisellesDAvignon]
+		Autor: [PabloPicasso]
+		Estilo: [ArteModerno]
+		- Obra: [LosGirasoles]
+		Autor: [VincentVanGogh]
+		Estilo: [ArteModerno]
+		- Obra: [RetratoDeDoraMaar]
+		Autor: [PabloPicasso]
+		Estilo: [ArteModerno]
+		- Obra: [SueñoCausadoPorElVueloDeUnaAbeja]
+		Autor: [SalvadorDalí]
+		Estilo: [ArteModerno]
+		
+		[Sala7]:
+		- Obra: [ElJuicioFinal]
+		Autor: [MiguelAngel]
+		Estilo: [Renacimiento]
+		- Obra: [LaEscuelaDeAtenas]
+		Autor: [Rafael]
+		Estilo: [Renacimiento]
+		- Obra: [LaUltimaCena]
+		Autor: [LeonardoDaVinci]
+		Estilo: [Renacimiento]
+		
+		[Sala8]:
+		- Obra: [DavidDonatello]
+		Autor: [Donatello]
+		Estilo: [Renacimiento]
+		- Obra: [ElFestínDeHerodes]
+		Autor: [Donatello]
+		Estilo: [Renacimiento]
+		- Obra: [ElNacimientoDeVenus]
+		Autor: [SandroBotticelli]
+		Estilo: [Renacimiento]
+		- Obra: [Habacuc]
+		Autor: [Donatello]
+		Estilo: [Renacimiento]
+		- Obra: [LaCalumniaDeApeles]
+		Autor: [SandroBotticelli]
+		Estilo: [Renacimiento]
+		- Obra: [LaPrimavera]
+		Autor: [SandroBotticelli]
+		Estilo: [Renacimiento]
+		- Obra: [LaVirgenDelLibro]
+		Autor: [SandroBotticelli]
+		Estilo: [Renacimiento]
+		- Obra: [PalasYElCentauro]
+		Autor: [SandroBotticelli]
+		Estilo: [Renacimiento]
+		- Obra: [PenitenteMagdalena]
+		Autor: [Donatello]
+		Estilo: [Renacimiento]
+		- Obra: [SanJorge]
+		Autor: [Donatello]
+		Estilo: [Renacimiento]
+		
+		
+	\end{verbatim}
+	
 	
 \end{document}
