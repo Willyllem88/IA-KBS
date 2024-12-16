@@ -68,7 +68,6 @@
 		\item Implementar una solució en CLIPS que permeti simular visites segons les preferències i el temps disponible.
 		\item Avaluar la solució mitjançant casos de prova representatius que validin la qualitat de les rutes generades.
 	\end{enumerate}
-	Aquests objectius s’assoleixen seguint una metodologia incremental basada en prototipatge, amb èmfasi en la modularització i la justificació de les decisions preses.
 	
 	\subsection{Resultats Esperats}
 	
@@ -91,7 +90,7 @@
 	
 	La conceptualització d'aquest projecte es basa en la identificació, definició i descripció dels elements fonamentals que conformen el domini. Aquesta etapa és clau, ja que permet establir les bases conceptuals necessàries per al desenvolupament del sistema, garantint així una implementació coherent amb els objectius inicials. \\
 	
-	La interrelació entre aquests elements és fonamental, ja que el sistema ha de ser capaç de generar recomanacions personalitzades de rutes de visita tenint en compte les preferències dels visitants, les característiques de les obres d'art i la distribució de les sales. Per assolir aquest objectiu, s'han definit atributs específics per cada element que permeten capturar informació rellevant, com la complexitat d'una obra, la durada disponible de la visita o la preferència per certs estils artístics. Aquesta informació es recull de forma automàtica a través d'un conjunt de preguntes inicials, que pretenen conèixer el perfil del visitant i els seus interessos. \\
+	Les relacions entre aquests elements és fonamental, ja que el sistema ha de ser capaç de generar recomanacions personalitzades de rutes de visita tenint en compte les preferències dels visitants, les característiques de les obres d'art i la distribució de les sales. Per assolir aquest objectiu, s'han definit atributs específics per cada element que permeten emmagatzemar dades rellevants, com la complexitat d'una obra, la durada disponible de la visita o la preferència per certs estils artístics. Aquesta informació es recull de forma automàtica a través d'un conjunt de preguntes inicials, que pretenen conèixer el perfil del visitant i els seus interessos. \\
 	
 	Mitjançant la definició clara i precisa dels conceptes del domini, es redueixen les possibles ambigüitats del disseny i es faciliten els mecanismes de personalització de les rutes. \\
 		
@@ -316,7 +315,13 @@
 	
 	Posteriorment, hem convertit l’ontologia juntament amb les instàncies pertinents escollides a format CLIPS per poder integrar-la en un sistema basat en regles, que facilita la inferència automàtica de recomanacions. En aquest sistema, l’ontologia funciona com a base de coneixement, mentre que un conjunt de regles defineixen la lògica de recomanació per personalitzar les rutes en funció de les preferències dels visitants, les característiques de les sales i la disponibilitat d’obres. \\
 	
-	Aquest enfocament ens permet aprofitar els beneficis d’una representació formal del coneixement combinada amb la capacitat de raonament d’un sistema expert. A continuació, es descriuen les classes principals de l’ontologia, els seus atributs, les seves funcions dins del sistema i com es relacionen. \\
+	Aquest enfocament ens permet aprofitar els beneficis d’una representació formal del coneixement combinada amb la capacitat de raonament d’un sistema expert. A continuació, es descriuen les classes principals de l’ontologia, els seus atributs, les seves funcions dins del sistema i com es relacionen. Vegeu a continuació el diagrama de la ontologia: \\
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.75\linewidth]{images/ontologia.png}
+		\caption{Diagrama de la ontologia del SBC}
+	\end{figure}
 	
 	\subsubsection*{Artista}
 	Representa el concepte d'artista dins del sistema, el creador de les obres d'art que estan exhibides al museu. Aquesta classe inclou informació rellevant sobre cada artista, com ara el seu nom i les seves obres destacades que té exposades al museu. Els artistes estan connectats amb les seves obres a través de relacions específiques i tenen associats estils d'art.
@@ -610,5 +615,28 @@
 	
 	\paragraph{Sortida obtinguda:}
 	En aquest cas, com la visita era tant llarga i individual (requereix de menys temps per visitar cada obra, així que en pot visitar més), la ruta proposada inclou totes les obres del museu. Per tant, també obtenim un resultat esperat.
+	
+	\newpage
+	\section{Conclusions}
+	
+	El treball realitzat ha complert amb els objectius inicials, aconseguint implementar un Sistema Basat en el Coneixement (SBC) capaç de personalitzar rutes en museus. Aquest sistema ha demostrat ser efectiu en la generació de rutes que s'adapten a les preferències i característiques dels visitants, oferint una experiència personalitzada. La divisió modular del sistema ha permès un desenvolupament clar i escalable, facilitant la detecció i correcció d'errors en cada fase. \\ 
+	
+	Els casos de prova van mostrar que el sistema és capaç d'adaptar-se a diferents tipus de visitants i condicions de la visita, demostrant així la seva robustesa i flexibilitat. No obstant, s'ha detectat que la personalització podria millorar encara més considerant la complexitat de les obres de forma més detallada o ajustant el temps de visita per obra de manera dinàmica.
+	
+	\subsection{Coneixements Adquirits}
+	
+	Aquest treball ens ha permès adquirir entendre els SBCs de forma tant teòrica com pràctica, entenent també altres tipus, no només amb Associació Heurística. En l'àmbit teòric, hem aprés l'estructuració i el modelatge mitjançant ontologies, així com l'ús de regles de producció per inferir conclusions. A nivell pràctic, s'ha guanyat experiència amb eines com Protegé per a la creació d'ontologies i CLIPS per a la inferència basada en regles. Entenent ambdós formats, \texttt{CLIPS} i \texttt{Turtle Syntax}. \\
+	
+	\subsection{Futures Possibles Millores}
+	
+	Aquest projecte pot servir de base per a futures millores i desenvolupaments en l'àmbit de la personalització d'experiències culturals. Algunes possibles línies de treball futur inclouen:
+	
+	\begin{itemize}
+		\item \textbf{Millora de la personalització}: Ajustar de forma més precisa el temps dedicat a cada obra en funció del perfil del visitant (coneixement d'art, edat, etc.), la complexitat de les obres i les preferències d'interès. Que no només depengués del visitant, també de la obra visitada.
+		\item \textbf{Integració d'aprenentatge automàtic}: Incorporar tècniques d'aprenentatge automàtic per millorar la predicció de preferències en base a dades històriques de visitants.
+		\item \textbf{Desenvolupament d'una aplicació mòbil}: Crear una aplicació mòbil que permeti al visitant introduir les seves preferències i rebre la ruta personalitzada en temps real, amb opcions de reconfiguració sobre la marxa.
+		\item \textbf{Interacció amb dades en temps real}: Recollir dades dels visitants mentre fan la visita per adaptar la ruta en temps real, proposant canvis de sala o modificant la priorització d'obres.
+		\item \textbf{Instanciar un museu real}: En comptes d'utilitzar un museu fictici amb només 75 obres, replicar-ne un real.
+	\end{itemize}
 	
 \end{document}
