@@ -241,22 +241,23 @@
 	
 	\subsubsection{Refinament: Creació d'una solució concreta}
 	
-	Adaptem el recorregut, assegurant que la durada total de cada jornada no superi les hores disponibles. Finalment, el sistema genera una proposta completa i personalitzada per al visitant, amb una llista d'obres agrupades per sales. \\
+	Adaptem el recorregut, assegurant que la durada total de cada jornada no superi les hores disponibles i no es quedi curta si és possible. Finalment, el sistema genera una proposta completa i personalitzada per al visitant, amb una llista d'obres agrupades per sales. \\
 	
 	El procés d'adaptació del recorregut seleccionat a les preferències del visitant serà el següent:
 	\begin{itemize}
 		\item Afegir totes les obres de l'autor preferit pel visitant, si aquest té una preferència específica.
 		\item Afegir totes les obres de l'estil pictòric preferit del visitant, si en té.
+		\item Adaptar el temps dedicat a observar cada obra d'art en funció del tipus de grup, com més gran el grup més es trigarà i si té nens també.
 		\item Ajustar el temps de la següent manera: 
 		\begin{itemize}
 			\item Si el temps estimat de la ruta és superior al temps que el visitant vol destinar, eliminarem obres segons el seu grau de complexitat i el coneixement del visitant. Si el visitant té un coneixement elevat, es treuran les obres menys complexes; i a l'inrevés, si el coneixement és baix, es retiraran les obres més complexes.
-			\item Si el temps estimat de la ruta és inferior al temps disponible, afegirem obres seguint la mateixa regla que anteriorment. Si el visitant és expert en art, afegirem obres amb una complexitat elevada. I si no ho és, afegirem obres de complexitat reduïda.
+			\item Si el temps estimat de la ruta és inferior al temps disponible, afegirem obres seguint la mateixa regla que anteriorment. Si el visitant és expert en art, afegirem obres amb una complexitat elevada. I si no ho és, afegirem obres de complexitat reduïda. Així fins a cobrir el temps disponible o afegir totes les obres del museu si disposa del temps necessari.
 		\end{itemize}
 	\end{itemize}
 	
 	Un cop tenim la selecció final, es retornaran les obres ordenades per sales. D'aquesta manera, l'usuari podrà optimitzar el seu temps sense canviar de sala innecessàriament. \\
 	
-	Cal tenir en compte que, com a temps mitjà per obra, hem establert 15 minuts. En futures versions del sistema, seria interessant ajustar el temps dedicat a cada obra depenent de la seva complexitat i, a més, en funció de qui la visiti. No es triga el mateix a observar la Mona Lisa per part d'un nen petit que per part d'un expert en art, ja que aquest últim es fixarà en cada pinzellada.
+	Cal tenir en compte que, com a temps mitjà per obra, hem ajustat i establert a 2 minuts si és un individu, a 5 minuts si és un grup petit sense nens, a 10 minuts si és un grup petit amb nens o un grup gran sense nens i a 15 minuts si és un grup gran amb nens. En futures versions del sistema, seria interessant ajustar el temps dedicat a cada obra depenent de la seva complexitat també. No es triga el mateix a observar la Mona Lisa per part d'un nen petit que per part d'un expert en art, ja que aquest últim es fixarà en cada pinzellada.
 	
 	\subsection{Identificació de conceptes principals}
 	
@@ -471,7 +472,9 @@
 	Aquest mòdul ajusta la ruta inicial per adaptar-la millor a les necessitats del visitant:
 	\begin{itemize}
 		\item Afegir obres d'artistes i estils preferits no inclosos inicialment.
+		\item Modificar el temps dedicat a observar cada obra segons el tipus de grup 
 		\item Afegir o treure obres en funció del temps disponible i el seu coneixement.
+		
 	\end{itemize}
 	El resultat és una ruta final personalitzada i agrupada de forma lògica.
 	
@@ -485,7 +488,7 @@
 	\newpage
 	\section{Jocs de Prova}
 	
-	Per validar la funcionalitat i robustesa del sistema de personalització de visites al museu, hem dissenyat sis jocs de prova que cobreixen diferents escenaris. Cada cas està pensat per posar a prova aspectes específics del sistema, tenint en compte variables com el tipus de visitant, el temps disponible, el coneixement sobre art i les preferències temàtiques. En aquest apartat es descriu cada prova detalladament, es justifica el seu objectiu i es presenta la sortida esperada de forma genèrica.
+	Per validar la funcionalitat i robustesa del sistema de personalització de visites al museu, hem dissenyat sis jocs de prova que cobreixen diferents escenaris. Cada cas està pensat per posar a prova aspectes específics del sistema, tenint en compte variables com el tipus de visitant, el temps disponible, el coneixement sobre art i les preferències temàtiques. En aquest apartat es descriu cada prova detalladament, es justifica el seu objectiu i es presenta la sortida esperada de forma genèrica. El contingut detallat de les entrades i sortides de cada joc de prova es poden veure a l'annex\ref{sec:annex}.
 	
 	\subsection{Prova 1: Visita Familiar amb Nens}
 	
@@ -642,6 +645,7 @@
 	
 	\newpage
 	\section{Annexos: Resultats dels Jocs de Prova}
+	\label{sec:annex}
 	\subsection{Prova 1: Visita Familiar amb Nens}
 	\paragraph{Entrada:}
 	
