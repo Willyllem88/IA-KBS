@@ -3,7 +3,7 @@
 ;módulo MAIN, punto de inicio
 (defrule MAIN::inicio
 =>
-(printout t "Sea usted bienvenido al nustro sistema de recomendacions de rutas por el museo." crlf)
+(printout t "Sea usted bienvenido al nuestro sistema de recomendacions de rutas por el museo." crlf)
 (printout t"Para poder hacerle una visita que se adapte a usted lo mejor posble, responda a las siguentes preguntas." crlf)
 (focus recopilacion)
 )
@@ -158,13 +158,13 @@
             "pequeño"
     	else "grande")))
 
-    (printout t "Clasificación abstracta de la visita:" crlf)
-    (printout t "  Conocimiento: " ?coneixement crlf)
-    (printout t "  Duración de la visita: " ?duracion crlf)
-    (printout t "  Tipo de grupo: " ?tipo-grupo crlf)
-    (printout t "  Preferencia estilo: " ?preferencia-de-estilo crlf)
+    ;(printout t "Clasificación abstracta de la visita:" crlf)
+    ;(printout t "  Conocimiento: " ?coneixement crlf)
+    ;(printout t "  Duración de la visita: " ?duracion crlf)
+    ;(printout t "  Tipo de grupo: " ?tipo-grupo crlf)
+    ;(printout t "  Preferencia estilo: " ?preferencia-de-estilo crlf)
 
-    (printout t "DEBUG: Modificant la instància: " ?visita crlf)
+    ;(printout t "DEBUG: Modificant la instància: " ?visita crlf)
     ; Modificar la instancia de Visita
     (send [visita1] put-CONOCIMIENTO ?coneixement)
     (send [visita1] put-DURACIÓN ?duracion)
@@ -172,7 +172,7 @@
     (send [visita1] put-ESTILOPREFERIDO ?preferencia-de-estilo) 
 
     ;; Verificar que los atributos se han modificado de la instancia visita -> QUITAR CUANDO SE REVISE
-    (printout t "DEBUG: Comprobación de atributos modificados:" crlf)
+    ;(printout t "DEBUG: Comprobación de atributos modificados:" crlf)
     (printout t "  CONOCIMIENTO: " (send [visita1] get-CONOCIMIENTO) crlf)
     (printout t "  DURACIÓN: " (send [visita1] get-DURACIÓN) crlf)
     (printout t "  TIPOGRUPO: " (send [visita1] get-TIPOGRUPO) crlf)
@@ -330,9 +330,12 @@
             )
             ;Imprimir solo si hay obras de esa sala
             (if (> (length$ ?obras-por-sala) 0) then
-                    (printout t ?sal ":" crlf)
+                    (printout t crlf ?sal ":" crlf)
                 (foreach ?obrasala ?obras-por-sala
-                      (printout t "  - " ?obrasala crlf)
+                      (printout t "  - Obra: " ?obrasala crlf)
+                      (printout t "         Autor: " (send ?obrasala get-creada_por) crlf)
+                      (printout t "         Estilo: " (send ?obrasala get-obra_de_estilo) crlf)
+
                 )
             )
         )
