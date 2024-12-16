@@ -310,18 +310,18 @@
 	\newpage
 	\section{Formalització}
 	
-	\subsection{Desenvolupament de la ontologia}
+	\subsection{Desenvolupament de l'ontologia}
 	
 	Per a resoldre el problema plantejat de recomanació de rutes en un museu utilitzant sistemes basats en el coneixement, hem desenvolupat una ontologia que descriu els elements que hem considerat clau d’aquest entorn i com es relacionen, com ara artistes, obres d’art, estil, sales, museus i visites. Inicialment, aquesta ontologia es va implementar en Protégé, una eina àmpliament utilitzada per a la creació d’ontologies en el llenguatge OWL (Web Ontology Language). Aquesta fase ens ha permès estructurar els conceptes i relacions de manera formal i estandarditzada. \\
 	
 	Posteriorment, hem convertit l’ontologia juntament amb les instàncies pertinents escollides a format CLIPS per poder integrar-la en un sistema basat en regles, que facilita la inferència automàtica de recomanacions. En aquest sistema, l’ontologia funciona com a base de coneixement, mentre que un conjunt de regles defineixen la lògica de recomanació per personalitzar les rutes en funció de les preferències dels visitants, les característiques de les sales i la disponibilitat d’obres. \\
 	
-	Aquest enfocament ens permet aprofitar els beneficis d’una representació formal del coneixement combinada amb la capacitat de raonament d’un sistema expert. A continuació, es descriuen les classes principals de l’ontologia, els seus atributs, les seves funcions dins del sistema i com es relacionen. Vegeu a continuació el diagrama de la ontologia: \\
+	Aquest enfocament ens permet aprofitar els beneficis d’una representació formal del coneixement combinada amb la capacitat de raonament d’un sistema expert. A continuació, es descriuen les classes principals de l’ontologia, els seus atributs, les seves funcions dins del sistema i com es relacionen. Vegeu a continuació el diagrama de l'ontologia: \\
 	
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.75\linewidth]{images/ontologia.png}
-		\caption{Diagrama de la ontologia del SBC}
+		\caption{Diagrama de l'ontologia del SBC}
 	\end{figure}
 	
 	\subsubsection*{Artista}
@@ -376,7 +376,7 @@
 	\end{itemize}
 		
 	\subsubsection*{Visita}
-	Representa una instància d'interacció d'un visitant o grup amb el museu. Aquesta classe emmagatzema les dades que caracteritzen a la entitat visita que ve a visitar el museu, i també les seves preferències, permetent així personalitzar l'experiència al màxim perquè puguin aprofitar la visita al museu en base a les dades recopilades. Els atributs (dades dels visitants) en minúscules s'extreuen a la part de recopilació mitjançant preguntes i els atributs en majúscules es deriven dels altres atributs.\\
+	Representa una instància d'interacció d'un visitant o grup amb el museu. Aquesta classe emmagatzema les dades que caracteritzen a l'entitat visita que ve a visitar el museu, i també les seves preferències, permetent així personalitzar l'experiència al màxim perquè puguin aprofitar la visita al museu en base a les dades recopilades. Els atributs (dades dels visitants) en minúscules s'extreuen a la part de recopilació mitjançant preguntes i els atributs en majúscules es deriven dels altres atributs.\\
 	Atributs de la classe:
 	\begin{itemize}
 		\item \texttt{preferencia\_artista}: Preferències del visitant sobre algun artista del museu, si és que en té.
@@ -385,8 +385,8 @@
 		\item \texttt{CONOCIMIENTO}: Grau de coneixement sobre art del visitant.
 		\item \texttt{DURACIÓN}: Durada total de la visita.
 		\item \texttt{ESTILOPREFERIDO}: Estil artístic favorit del visitant.
-		\item \texttt{TIPOGRUPO}: Tipus de grup i la seva mida, si es individual, petit o gran.
-		\item \texttt{esFamilia}: Indica si la visita és d’un grup familiar i té nens si no es individual el grup.
+		\item \texttt{TIPOGRUPO}: Tipus de grup i la seva mida, si és individual, petit o gran.
+		\item \texttt{esFamilia}: Indica si la visita és d’un grup familiar i té nens si no és individual el grup.
 		\item \texttt{nDias}: Nombre de dies dedicats a la visita.
 		\item \texttt{nMuseosVisitados}: Nombre de museus visitats pel grup o individu durant l'últim any. Ens serveix per saber quant de coneixement en art té el grup.
 	 	\item \texttt{nPersonas}: Nombre total de persones al grup. Per determinar el tipus de grup.
@@ -625,18 +625,18 @@
 	
 	El treball realitzat ha complert amb els objectius inicials, aconseguint implementar un Sistema Basat en el Coneixement (SBC) capaç de personalitzar rutes en museus. Aquest sistema ha demostrat ser efectiu en la generació de rutes que s'adapten a les preferències i característiques dels visitants, oferint una experiència personalitzada. La divisió modular del sistema ha permès un desenvolupament clar i escalable, facilitant la detecció i correcció d'errors en cada fase. \\ 
 	
-	Els casos de prova van mostrar que el sistema és capaç d'adaptar-se a diferents tipus de visitants i condicions de la visita, demostrant així la seva robustesa i flexibilitat. No obstant, s'ha detectat que la personalització podria millorar encara més considerant la complexitat de les obres de forma més detallada o ajustant el temps de visita per obra de manera dinàmica.
+	Els casos de prova van mostrar que el sistema és capaç d'adaptar-se a diferents tipus de visitants i condicions de la visita, demostrant així la seva robustesa i flexibilitat. No obstant això, s'ha detectat que la personalització podria millorar encara més considerant la complexitat de les obres de forma més detallada o ajustant el temps de visita per obra de manera dinàmica.
 	
 	\subsection{Coneixements Adquirits}
 	
-	Aquest treball ens ha permès adquirir entendre els SBCs de forma tant teòrica com pràctica, entenent també altres tipus, no només amb Associació Heurística. En l'àmbit teòric, hem aprés l'estructuració i el modelatge mitjançant ontologies, així com l'ús de regles de producció per inferir conclusions. A nivell pràctic, s'ha guanyat experiència amb eines com Protegé per a la creació d'ontologies i CLIPS per a la inferència basada en regles. Entenent ambdós formats, \texttt{CLIPS} i \texttt{Turtle Syntax}. \\
+	Aquest treball ens ha permès adquirir entendre els SBCs de forma tant teòrica com pràctica, entenent també altres tipus, no només amb Associació Heurística. En l'àmbit teòric, hem après l'estructuració i el modelatge mitjançant ontologies, així com l'ús de regles de producció per inferir conclusions. A nivell pràctic, s'ha guanyat experiència amb eines com Protegé per a la creació d'ontologies i CLIPS per a la inferència basada en regles. Entenent ambdós formats, \texttt{CLIPS} i \texttt{Turtle Syntax}. \\
 	
 	\subsection{Futures Possibles Millores}
 	
 	Aquest projecte pot servir de base per a futures millores i desenvolupaments en l'àmbit de la personalització d'experiències culturals. Algunes possibles línies de treball futur inclouen:
 	
 	\begin{itemize}
-		\item \textbf{Millora de la personalització}: Ajustar de forma més precisa el temps dedicat a cada obra en funció del perfil del visitant (coneixement d'art, edat, etc.), la complexitat de les obres i les preferències d'interès. Que no només depengués del visitant, també de la obra visitada.
+		\item \textbf{Millora de la personalització}: Ajustar de forma més precisa el temps dedicat a cada obra en funció del perfil del visitant (coneixement d'art, edat, etc.), la complexitat de les obres i les preferències d'interès. Que no només depengués del visitant, també de l'obra visitada.
 		\item \textbf{Integració d'aprenentatge automàtic}: Incorporar tècniques d'aprenentatge automàtic per millorar la predicció de preferències en base a dades històriques de visitants.
 		\item \textbf{Desenvolupament d'una aplicació mòbil}: Crear una aplicació mòbil que permeti al visitant introduir les seves preferències i rebre la ruta personalitzada en temps real, amb opcions de reconfiguració sobre la marxa.
 		\item \textbf{Interacció amb dades en temps real}: Recollir dades dels visitants mentre fan la visita per adaptar la ruta en temps real, proposant canvis de sala o modificant la priorització d'obres.
@@ -659,16 +659,12 @@
 		0
 	\end{verbatim}
 	
-	\paragraph{Sortida esperada:}
-	\begin{verbatim}
-		 =!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
-		RECOMENDACIONES DE RUTAS POR EL MUSEO                     
-		=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
+	\paragraph{Sortida:\\}
 		
 		RUTA PARA NIÑOS: Perfecta para familias con actividades interactivas y obras accesibles para los más pequeños, sin tanta complejidad.
 		
 		Ya hemos calculado cuál es la ruta que más se adaptará a usted. Verá a continuación una lista de salas con las obras que le recomendamos visitar en cada una de ellas. Esperamos que le guste la selección. Véala a continuación:
-		
+			\begin{verbatim}
 		
 		[Sala4]:
 		- Obra: [ImpresiónSolNaciente]
@@ -748,17 +744,14 @@
 	\end{verbatim}
 	
 		
-	\paragraph{Sortida esperada:}
-	\begin{verbatim}
-		 =!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
-		RECOMENDACIONES DE RUTAS POR EL MUSEO                     
-		=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
+	\paragraph{Sortida:\\}
 		
 		RUTA GENERAL: Recorre las exposiciones más destacadas para un paseo relajado y variado en estilos y autores, ideal para todos los niveles de conocimiento.
 		
 		Ya hemos calculado cuál es la ruta que más se adaptará a usted. Verá a continuación una lista de salas con las obras que le recomendamos visitar en cada una de ellas. Esperamos que le guste la selección. Véala a continuación:
 		
-		
+		\begin{verbatim}
+	
 		[Sala4]:
 		- Obra: [Nenúfares]
 		Autor: [ClaudeMonet]
@@ -897,16 +890,12 @@
 		0
 	\end{verbatim}
 
-	\paragraph{Sortida esperada:}
-	\begin{verbatim}
-		 =!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
-		RECOMENDACIONES DE RUTAS POR EL MUSEO                     
-		=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
+	\paragraph{Sortida:\\}
 		
 		RUTA BARROCA: Ideal para quienes disfrutan de la grandiosidad y el dramatismo. Disfrutarás de obras maestras de gran impacto visual del barroco.
 		
 		Ya hemos calculado cuál es la ruta que más se adaptará a usted. Verá a continuación una lista de salas con las obras que le recomendamos visitar en cada una de ellas. Esperamos que le guste la selección. Véala a continuación:
-		
+		\begin{verbatim}
 		
 		[Sala4]:
 		- Obra: [Nenúfares]
@@ -1048,16 +1037,13 @@
 		7
 	\end{verbatim}
 
-	\paragraph{Sortida esperada:}
-	\begin{verbatim}
-		 =!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
-		RECOMENDACIONES DE RUTAS POR EL MUSEO                     
-		=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
+	\paragraph{Sortida:\\}
 		
 		RUTA MODERNISTA: Enfocada en obras innovadoras y vanguardistas, ideal para amantes del arte contemporáneo con interés en la experimentación.
 		
 		Ya hemos calculado cuál es la ruta que más se adaptará a usted. Verá a continuación una lista de salas con las obras que le recomendamos visitar en cada una de ellas. Esperamos que le guste la selección. Véala a continuación:
 		
+		\begin{verbatim}
 		
 		[Sala4]:
 		- Obra: [Nenúfares]
@@ -1098,16 +1084,13 @@
 	\end{verbatim}
 
 
-	\paragraph{Sortida esperada:}
-	\begin{verbatim}
-		 =!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
-		RECOMENDACIONES DE RUTAS POR EL MUSEO                     
-		=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
+	\paragraph{Sortida:\\}
 		
 		RUTA GENERAL: Recorre las exposiciones más destacadas para un paseo relajado y variado en estilos y autores, ideal para todos los niveles de conocimiento.
 		
 		Ya hemos calculado cuál es la ruta que más se adaptará a usted. Verá a continuación una lista de salas con las obras que le recomendamos visitar en cada una de ellas. Esperamos que le guste la selección. Véala a continuación:
 		
+		\begin{verbatim}
 		
 		[Sala5]:
 		- Obra: [Amarillo-Rojo-Azul]
@@ -1243,16 +1226,12 @@
 		0
 	\end{verbatim}
 
-	\paragraph{Sortida esperada:}
-	\begin{verbatim}
-		 =!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
-		RECOMENDACIONES DE RUTAS POR EL MUSEO                     
-		=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!= 
-		
+	\paragraph{Sortida:\\}
 		RUTA GENERAL: Recorre las exposiciones más destacadas para un paseo relajado y variado en estilos y autores, ideal para todos los niveles de conocimiento.
 		
 		Ya hemos calculado cuál es la ruta que más se adaptará a usted. Verá a continuación una lista de salas con las obras que le recomendamos visitar en cada una de ellas. Esperamos que le guste la selección. Véala a continuación:
 		
+		\begin{verbatim}
 		
 		[Sala4]:
 		- Obra: [ElEstanqueDeNenúfares]
